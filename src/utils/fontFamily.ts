@@ -6,10 +6,10 @@ export const getFontFamily = (
 ) => {
   switch (weight) {
     case 'normal':
-      return isRTL ? Fonts.MONTSERRAT : Fonts.RUBIK;
+      return isRTL ? Fonts.RUBIK : Fonts.MONTSERRAT;
     case 'medium':
-      return isRTL ? Fonts.MONTSERRAT_MEDIUM : Fonts.RUBIK_MEDIUM;
+      return isRTL ? Fonts.RUBIK_MEDIUM : Fonts.MONTSERRAT_MEDIUM;
     case 'bold':
-      return isRTL ? Fonts.MONTSERRAT_BOLD : Fonts.RUBIK_BOLD;
+      return isRTL ? Fonts.RUBIK_BOLD : Fonts.MONTSERRAT_BOLD;
   }
 };

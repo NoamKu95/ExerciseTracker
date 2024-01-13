@@ -9,7 +9,7 @@ interface WorkoutIconProps {
 
 const WorkoutIcon = ({size = 1, isFocused = false}: WorkoutIconProps) => {
   return (
-    <Svg width={size * 29} height={size * 29} viewBox="0 0 20 20" fill="none">
+    <Svg width={size * 29} height={size * 29} viewBox="0 0 29 29" fill="none">
       <Path
         fill={isFocused ? colors.PRIMARY : colors.LIGHT_GRAY}
         fillRule="evenodd"

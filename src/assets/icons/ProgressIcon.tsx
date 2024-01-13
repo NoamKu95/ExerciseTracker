@@ -9,7 +9,7 @@ interface ProgressIconProps {
 
 const ProgressIcon = ({size = 1, isFocused = false}: ProgressIconProps) => {
   return (
-    <Svg width={size * 29} height={size * 29} viewBox="0 0 20 20" fill="none">
+    <Svg width={size * 29} height={size * 29} viewBox="0 0 29 29" fill="none">
       <Path
         fill={isFocused ? colors.PRIMARY : colors.LIGHT_GRAY}
         d="M8.201 20.45a1.05 1.05 0 1 0 2.1 0v-4.9a1.05 1.05 0 1 0-2.1 0v4.9ZM14.851 21.5c-.58 0-1.05-.47-1.05-1.05v-9.1a1.05 1.05 0 1 1 2.1 0v9.1c0 .58-.47 1.05-1.05 1.05ZM19.401 20.45a1.05 1.05 0 0 0 2.1 0V8.55a1.05 1.05 0 1 0-2.1 0v11.9Z"

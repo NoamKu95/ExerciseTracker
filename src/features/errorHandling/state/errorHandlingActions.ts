@@ -1,8 +1,11 @@
-import i18n from '../../../translations/i18n';
-import {setError} from './errorHandlingSlice';
-import {serverErrorMapping} from '../../../constants/errorMapping';
+// Models
 import {Error} from '../../../models/error';
 import {ServerErrorTypes} from '../../../models/error';
+import i18n from '../../../translations/i18n';
+// Constants
+import {serverErrorMapping} from '../../../constants/errorMapping';
+// Redux
+import {setError} from './errorHandlingSlice';
 
 export const generalErrorHandler = (error: Error) => {
   if (error.response?.data) {

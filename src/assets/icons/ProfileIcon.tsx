@@ -9,7 +9,7 @@ interface ProfileIconProps {
 
 const ProfileIcon = ({size = 1, isFocused = false}: ProfileIconProps) => {
   return (
-    <Svg width={size * 28} height={size * 29} viewBox="0 0 20 20" fill="none">
+    <Svg width={size * 28} height={size * 29} viewBox="0 0 28 29" fill="none">
       <Path
         fill={isFocused ? colors.PRIMARY : colors.LIGHT_GRAY}
         fillRule="evenodd"
