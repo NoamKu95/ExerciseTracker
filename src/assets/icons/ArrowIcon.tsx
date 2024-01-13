@@ -2,7 +2,7 @@ import React from 'react';
 import {Path, Svg} from 'react-native-svg';
 import {colors} from '../../constants/ui/colors';
 
-const Arrow = () => {
+const BackArrow = () => {
   return (
     <Svg width="10" height="17" viewBox="0 0 10 17" fill="none">
       <Path
@@ -16,4 +16,4 @@ const Arrow = () => {
   );
 };
 
-export default Arrow;
+export default BackArrow;

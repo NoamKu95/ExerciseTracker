@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, TextStyle, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 // Icons
-import ArrowIcon from '../assets/icons/ArrowIcon';
+import BackArrow from '../assets/icons/ArrowIcon';
 // UI
 import {colors} from '../constants/ui/colors';
 import {radiuses} from '../constants/ui/radiuses';
@@ -22,6 +22,8 @@ interface GenericButtonProps {
   fontSize?: number;
   lineHeight?: number;
   buttonType: 'primary' | 'secondary' | 'text';
+  onPress: () => void;
+  isDisabled?: boolean;
 }
 
 const GenericButton = ({
@@ -31,6 +33,8 @@ const GenericButton = ({
   fontSize = 18,
   lineHeight = isIOS() ? 0 : 25,
   buttonType,
+  onPress,
+  isDisabled = false,
 }: GenericButtonProps) => {
   const isRTL = useAppSelector(state => state.auth.isRTL);
   const fontFamily = getFontFamily(isRTL, 'bold');
@@ -51,30 +55,49 @@ const GenericButton = ({
     borderWidth: buttonType === 'secondary' ? 1 : 0,
     paddingVertical: spaces._16px,
     paddingHorizontal: spaces._24px,
+    opacity: isDisabled ? 0.5 : 1,
   };
 
   return (
-    <View style={[styles.buttonContainer, buttonContainerStyle]}>
+    <Pressable
+      style={[styles.buttonContainer, buttonContainerStyle]}
+      onPress={isDisabled ? null : onPress}>
       <Text
         allowFontScaling={false}
         style={[styles.text, textDynamicStyleObject]}>
         {text}
       </Text>
       {icon}
-    </View>
+    </Pressable>
   );
 };
 
-export const PrimaryButton = ({text}: {text: string}) => (
-  <GenericButton text={text} textColor={colors.WHITE} buttonType="primary" />
+export const PrimaryButton = ({
+  text,
+  onPress,
+  isDisabled,
+}: {
+  text: string;
+  onPress: () => void;
+  isDisabled?: boolean;
+}) => (
+  <GenericButton
+    text={text}
+    textColor={colors.WHITE}
+    buttonType="primary"
+    onPress={onPress}
+    isDisabled={isDisabled}
+  />
 );
 
 export const PrimaryButtonWithIcon = ({
   text,
   icon,
+  onPress,
 }: {
   text: string;
   icon: JSX.Element;
+  onPress: () => void;
 }) => {
   return (
     <GenericButton
@@ -82,24 +105,34 @@ export const PrimaryButtonWithIcon = ({
       textColor={colors.WHITE}
       icon={icon}
       buttonType="primary"
+      onPress={onPress}
     />
   );
 };
 
-export const SecondaryButton = ({text}: {text: string}) => (
+export const SecondaryButton = ({
+  text,
+  onPress,
+}: {
+  text: string;
+  onPress: () => void;
+}) => (
   <GenericButton
     text={text}
     textColor={colors.PRIMARY}
     buttonType="secondary"
+    onPress={onPress}
   />
 );
 
 export const SecondaryButtonWithIcon = ({
   text,
   icon,
+  onPress,
 }: {
   text: string;
   icon: JSX.Element;
+  onPress: () => void;
 }) => {
   return (
     <GenericButton
@@ -107,6 +140,7 @@ export const SecondaryButtonWithIcon = ({
       textColor={colors.WHITE}
       icon={icon}
       buttonType="secondary"
+      onPress={onPress}
     />
   );
 };
@@ -114,10 +148,19 @@ export const SecondaryButtonWithIcon = ({
 export const TextButton = ({
   text,
   textColor,
+  onPress,
 }: {
   text: string;
   textColor: string;
-}) => <GenericButton text={text} textColor={textColor} buttonType="text" />;
+  onPress: () => void;
+}) => (
+  <GenericButton
+    text={text}
+    textColor={textColor}
+    buttonType="text"
+    onPress={onPress}
+  />
+);
 
 export const BackwardsButton = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -127,7 +170,7 @@ export const BackwardsButton = () => {
       onPress={() => navigation.goBack()}
       style={styles.backButtonContainer}>
       <View style={styles.arrowIcon}>
-        <ArrowIcon />
+        <BackArrow />
       </View>
     </Pressable>
   );

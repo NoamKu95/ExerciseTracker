@@ -7,6 +7,7 @@ import {BoldText} from './Texts';
 import {BackwardsButton} from './Buttons';
 // UI
 import {spaces} from '../constants/ui/spaces';
+import {colors} from '../constants/ui/colors';
 // Utils
 import {FontSizes} from '../constants/ui/fonts';
 import {getFlexDirection, hp} from '../utils/styleUtil';
@@ -46,7 +47,7 @@ const ScreenLayout = ({
   const renderHeader = isBackButton ? renderHeaderWithBack : renderScreenHeader;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
@@ -61,17 +62,17 @@ const ScreenLayout = ({
 export default ScreenLayout;
 
 const styles = StyleSheet.create({
+  container: {
+    height: hp(100),
+  },
   scrollView: {
     flex: 1,
+    backgroundColor: colors.BACKGROUND,
+    paddingTop: statusBarHeight,
+    paddingHorizontal: spaces._24px,
   },
   scrollViewContent: {
     gap: spaces._36px,
-  },
-  container: {
-    paddingTop: statusBarHeight,
-    paddingHorizontal: spaces._24px,
-    flex: 1,
-    height: hp(100),
   },
   headerContainer: {
     flexDirection: getFlexDirection(),
