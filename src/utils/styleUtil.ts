@@ -27,3 +27,8 @@ export const getIconDirection = (): '180deg' | '0deg' => {
   const isRTL = true; // store.getState().auth.isRTL;
   return isRTL ? '180deg' : '0deg';
 };
+
+export const getSelfAlign = (): 'flex-end' | 'flex-start' => {
+  const isRTL = true; // store.getState().auth.isRTL;
+  return isRTL ? 'flex-end' : 'flex-start';
+};

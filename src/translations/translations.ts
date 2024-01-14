@@ -20,7 +20,7 @@ export interface Translation {
       title: string;
     };
   };
-  modals: {
+  bottomSheets: {
     exercise: {
       chooseBodyArea: string;
       chooseExercise: string;
@@ -30,6 +30,16 @@ export interface Translation {
       filterByDates: string;
       filterByExercise: string;
     };
+    datePicker: {
+      day: string;
+      month: string;
+      year: string;
+    };
+  };
+  modals: {
+    saveWorkout: string;
+    letsSaveWorkout: string;
+    findWorkoutAt: string;
   };
   commonlyUsed: {
     actionButton: {

@@ -24,6 +24,8 @@ interface GenericButtonProps {
   buttonType: 'primary' | 'secondary' | 'text';
   onPress: () => void;
   isDisabled?: boolean;
+  minWidth?: number;
+  textAlign?: 'left' | 'right' | 'center';
 }
 
 const GenericButton = ({
@@ -35,6 +37,7 @@ const GenericButton = ({
   buttonType,
   onPress,
   isDisabled = false,
+  minWidth,
 }: GenericButtonProps) => {
   const isRTL = useAppSelector(state => state.auth.isRTL);
   const fontFamily = getFontFamily(isRTL, 'bold');
@@ -54,8 +57,9 @@ const GenericButton = ({
     borderRadius: radiuses._50px,
     borderWidth: buttonType === 'secondary' ? 1 : 0,
     paddingVertical: spaces._16px,
-    paddingHorizontal: spaces._24px,
+    paddingHorizontal: buttonType === 'text' ? spaces._4px : spaces._24px,
     opacity: isDisabled ? 0.5 : 1,
+    minWidth: minWidth ? minWidth : 160,
   };
 
   return (
@@ -148,17 +152,21 @@ export const SecondaryButtonWithIcon = ({
 export const TextButton = ({
   text,
   textColor,
+  fontSize,
   onPress,
 }: {
   text: string;
   textColor: string;
+  fontSize: number;
   onPress: () => void;
 }) => (
   <GenericButton
     text={text}
     textColor={textColor}
+    fontSize={fontSize}
     buttonType="text"
     onPress={onPress}
+    minWidth={50}
   />
 );
 

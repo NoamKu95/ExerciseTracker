@@ -38,7 +38,7 @@ const GenericText = ({
   const fontFamily = getFontFamily(isRTL, fontWeight);
 
   const dynamicStyleObject: TextStyle = {
-    color: color ? color : colors.BLACK,
+    color: color ? color : colors.MAIN_TEXT,
     fontSize: size,
     lineHeight: lineHeight,
     textAlign: textAlign ? textAlign : getTextAlign(),
