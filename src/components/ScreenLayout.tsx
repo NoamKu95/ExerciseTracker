@@ -16,7 +16,7 @@ import {statusBarHeight} from '../utils/platformUtil';
 interface ScreenLayoutProps {
   title?: string;
   isBackButton?: boolean;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 const ScreenLayout = ({
   title,

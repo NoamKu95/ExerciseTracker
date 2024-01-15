@@ -29,6 +29,8 @@ export interface Translation {
       filterByPeriod: string;
       filterByDates: string;
       filterByExercise: string;
+      savedExercise: string;
+      unsavedExercise: string;
     };
     datePicker: {
       day: string;
@@ -45,6 +47,11 @@ export interface Translation {
     actionButton: {
       save: string;
     };
+  };
+  times: {
+    last7Days: string;
+    last2Weeks: string;
+    lastMonth: string;
   };
   errors: {
     server: {

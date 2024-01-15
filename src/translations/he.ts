@@ -33,6 +33,8 @@ const Hebrew: Translation = {
       filterByPeriod: 'סינון לפי תקופה:',
       filterByDates: 'סינון לפי תאריכים:',
       filterByExercise: 'סינון לפי סוג אימון:',
+      savedExercise: 'אימון שמור',
+      unsavedExercise: 'אימון שאינו שמור',
     },
     datePicker: {
       day: 'יום',
@@ -50,6 +52,11 @@ const Hebrew: Translation = {
     actionButton: {
       save: 'שמירה',
     },
+  },
+  times: {
+    last7Days: '7 ימים אחרונים',
+    last2Weeks: 'שבועיים אחרונים',
+    lastMonth: 'חודש אחרון',
   },
   errors: {
     server: {
