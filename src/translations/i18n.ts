@@ -1,13 +1,13 @@
-import {I18n} from 'i18n-js';
 import {I18nManager, NativeModules, Platform} from 'react-native';
+import {I18n} from 'i18n-js';
 import he from './he';
-// import en from './en';
+import en from './en';
 
 const HE = 'he';
-// const EN = 'en';
+const EN = 'en';
 
 const i18n = new I18n({
-  // en,
+  en,
   he,
 });
 i18n.enableFallback = true;

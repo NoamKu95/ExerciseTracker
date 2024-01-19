@@ -3,13 +3,12 @@ import {Path, Svg} from 'react-native-svg';
 import {colors} from '../../constants/ui/colors';
 
 interface ProfileIconProps {
-  size?: number;
   isFocused?: boolean;
 }
 
-const ProfileIcon = ({size = 1, isFocused = false}: ProfileIconProps) => {
+const ProfileIcon = ({isFocused = false}: ProfileIconProps) => {
   return (
-    <Svg width={size * 28} height={size * 29} viewBox="0 0 28 29" fill="none">
+    <Svg width="28" height="29" viewBox="0 0 28 29" fill="none">
       <Path
         fill={isFocused ? colors.PRIMARY : colors.GRAY}
         fillRule="evenodd"

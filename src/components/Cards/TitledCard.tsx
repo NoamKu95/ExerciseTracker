@@ -12,30 +12,30 @@ import {shadowStyles} from '../../constants/ui/shadows';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 interface TitledCardProps {
-  rightIcon?: JSX.Element;
+  icon?: JSX.Element;
   title: string;
-  leftTitleElement?: JSX.Element;
+  secondaryTitleElement?: JSX.Element;
   children: JSX.Element[] | JSX.Element | string;
 }
 
 const TitledCard = ({
-  rightIcon,
+  icon,
   title,
-  leftTitleElement,
+  secondaryTitleElement,
   children,
 }: TitledCardProps) => {
   const renderCardTitle = () => {
     return (
       <View style={styles.titleContainer}>
         <View style={styles.titleIconContainer}>
-          {rightIcon}
+          {icon}
           <BoldText
             children={title}
             size={FontSizes.regular}
             color={colors.WHITE}
           />
         </View>
-        {leftTitleElement}
+        {secondaryTitleElement}
       </View>
     );
   };
@@ -44,7 +44,11 @@ const TitledCard = ({
     return (
       <View style={styles.cardBody}>
         {typeof children === 'string' ? (
-          <RegularText children={children} size={18} color={colors.MAIN_TEXT} />
+          <RegularText
+            children={children}
+            size={FontSizes.regular}
+            color={colors.MAIN_TEXT}
+          />
         ) : (
           children
         )}

@@ -3,25 +3,29 @@ import {View, StyleSheet, Pressable} from 'react-native';
 import Modal from 'react-native-modal';
 // Components
 import {PrimaryButton, TextButton} from '../Buttons';
+// Icons
+import CloseIcon from '../../assets/icons/CloseIcon';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {colors} from '../../constants/ui/colors';
 import {radiuses} from '../../constants/ui/radiuses';
-// Icons
-import CloseIcon from '../../assets/icons/CloseIcon';
 // Utils
 import {getSelfAlign} from '../../utils/styleUtil';
 
 interface CenterModalProps {
   isVisible: boolean;
   icon: JSX.Element;
+
   actionButtonText?: string;
   onActionButtonPress?: () => void;
+  isActionButtonDisabled?: boolean;
+
   textButtonText?: string;
   onTextButtonPress?: () => void;
-  isActionButtonDisabled?: boolean;
+
   isCloseButton?: boolean;
   onCloseButtonPress?: () => void;
+
   children?: JSX.Element[];
 }
 
@@ -30,9 +34,9 @@ const CenterModal = ({
   icon,
   actionButtonText,
   onActionButtonPress,
+  isActionButtonDisabled = false,
   textButtonText,
   onTextButtonPress,
-  isActionButtonDisabled = false,
   isCloseButton = true,
   onCloseButtonPress,
   children,

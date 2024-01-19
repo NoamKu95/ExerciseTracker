@@ -28,8 +28,25 @@ const LanguagePicker = () => {
   };
 
   const onLanguageSelected = (langCode: SupportedLanguages) => {
-    // dispatch(setLanguage(langCode));
+    dispatch(setLanguage(langCode));
     setIsDropdownOpen(false);
+  };
+
+  const renderDropdownList = () => {
+    return (
+      <View style={[styles.dropdownContainer, shadowStyles.softShadow]}>
+        {languages.map((languageOption, index) => {
+          return (
+            <LanguageSelectionRow
+              key={index}
+              language={languageOption}
+              isSelected={languageOption.code === language}
+              onPress={() => onLanguageSelected(languageOption.code)}
+            />
+          );
+        })}
+      </View>
+    );
   };
 
   return (
@@ -42,23 +59,12 @@ const LanguagePicker = () => {
           </MediumText>
         </TouchableOpacity>
       </View>
-      {isDropdownOpen && (
-        <View style={[styles.dropdownContainer, shadowStyles.softShadow]}>
-          {languages.map((languageOption, index) => {
-            return (
-              <LanguageSelectionRow
-                key={index}
-                language={languageOption}
-                isSelected={languageOption.code === language}
-                onPress={() => onLanguageSelected(languageOption.code)}
-              />
-            );
-          })}
-        </View>
-      )}
+      {isDropdownOpen && renderDropdownList()}
     </View>
   );
 };
+
+export default LanguagePicker;
 
 const styles = StyleSheet.create({
   container: {
@@ -89,5 +95,3 @@ const styles = StyleSheet.create({
     borderRadius: radiuses._16px,
   },
 });
-
-export default LanguagePicker;

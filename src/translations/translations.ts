@@ -40,8 +40,13 @@ export interface Translation {
   };
   modals: {
     saveWorkout: string;
-    letsSaveWorkout: string;
-    findWorkoutAt: string;
+    saveText1: string;
+    saveText2: string;
+    saveBtnText: string;
+    removeWorkout: string;
+    removeText1: string;
+    removeText2: string;
+    removeBtnText: string;
   };
   commonlyUsed: {
     actionButton: {
@@ -54,6 +59,7 @@ export interface Translation {
     lastMonth: string;
   };
   errors: {
+    genericError: string;
     server: {
       apiError: string;
       badRequestError: string;

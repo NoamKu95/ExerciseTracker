@@ -20,7 +20,7 @@ export const ErrorHandlingSlice = createSlice({
     setError: (
       state,
       action: PayloadAction<{
-        type?: ServerErrorTypes | AppErrorTypes;
+        type: ServerErrorTypes | AppErrorTypes;
         message: string;
       }>,
     ) => {

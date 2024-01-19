@@ -3,13 +3,12 @@ import {Path, Svg} from 'react-native-svg';
 import {colors} from '../../constants/ui/colors';
 
 interface WorkoutIconProps {
-  size?: number;
   isFocused?: boolean;
 }
 
-const WorkoutIcon = ({size = 1, isFocused = false}: WorkoutIconProps) => {
+const WorkoutIcon = ({isFocused = false}: WorkoutIconProps) => {
   return (
-    <Svg width={size * 29} height={size * 29} viewBox="0 0 29 29" fill="none">
+    <Svg width="29" height="29" viewBox="0 0 29 29" fill="none">
       <Path
         fill={isFocused ? colors.PRIMARY : colors.GRAY}
         fillRule="evenodd"

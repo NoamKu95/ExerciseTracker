@@ -1,6 +1,8 @@
 import {Translation} from './translations';
 
-const Hebrew: Translation = {
+export const EN = 'en';
+
+const English: Translation = {
   appName: 'trainTracker',
   tabs: {
     Home: 'בית',
@@ -76,4 +78,4 @@ const Hebrew: Translation = {
   },
 };
 
-export default Hebrew;
+export default English;

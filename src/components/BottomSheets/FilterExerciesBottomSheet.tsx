@@ -22,7 +22,15 @@ import {
   hp,
 } from '../../utils/styleUtil';
 
-const FilterWorkoutsHistoryBottomSheet = () => {
+interface FilterWorkoutsHistoryProps {
+  onSavePressed: () => void;
+  onCloseSheet: () => void;
+}
+
+const FilterWorkoutsHistoryBottomSheet = ({
+  onSavePressed,
+  onCloseSheet,
+}: FilterWorkoutsHistoryProps) => {
   const [selectedTimePeriod, setSelectedTimePeriod] = useState<string | null>();
   const [selectedExerciseType, setSelectedExerciseType] = useState<
     string | null
@@ -111,9 +119,9 @@ const FilterWorkoutsHistoryBottomSheet = () => {
   return (
     <BottomSheetLayout
       height={hp(65)}
-      handleSave={() => {}}
+      handleSave={onSavePressed}
       isVisible={true}
-      toggleBottomSheet={() => {}}>
+      toggleBottomSheet={onCloseSheet}>
       <View style={styles.contentContainer}>
         {renderTimePeriodChips()}
         {renderDatePickers()}
