@@ -2,7 +2,7 @@ import {TimePeriod} from '../models/timePeriod';
 import i18n from '../translations/i18n';
 import {getNowTimestamp, getXDaysAgoTimestamp} from '../utils/dateUtil';
 
-export const defaultTimePeriods: TimePeriod[] = [
+export const timePeriodsForFiltering: TimePeriod[] = [
   {
     name: i18n.t('times.last7Days'),
     startTime: getXDaysAgoTimestamp(7),
@@ -15,7 +15,7 @@ export const defaultTimePeriods: TimePeriod[] = [
   },
   {
     name: i18n.t('times.lastMonth'),
-    startTime: new Date(), // TODO - define what last month is
+    startTime: getXDaysAgoTimestamp(30),
     endTime: getNowTimestamp(),
   },
 ];

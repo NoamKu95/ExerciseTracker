@@ -8,12 +8,13 @@ import BackArrow from '../assets/icons/ArrowIcon';
 import {colors} from '../constants/ui/colors';
 import {radiuses} from '../constants/ui/radiuses';
 import {spaces} from '../constants/ui/spaces';
+// Redux
+import {useAppSelector} from '../store/store';
 // Utils
 import {getFlexDirection, getIconDirection} from '../utils/styleUtil';
 import {getFontFamily} from '../utils/fontFamily';
 import {isIOS} from '../utils/platformUtil';
-// Redux
-import {useAppSelector} from '../store/store';
+import {ButtonTypes} from '../constants/enums';
 
 interface GenericButtonProps {
   text: string;
@@ -21,7 +22,7 @@ interface GenericButtonProps {
   icon?: JSX.Element;
   fontSize?: number;
   lineHeight?: number;
-  buttonType: 'primary' | 'secondary' | 'text';
+  buttonType: ButtonTypes;
   onPress: () => void;
   isDisabled?: boolean;
   minWidth?: number;
@@ -51,13 +52,14 @@ const GenericButton = ({
 
   const buttonContainerStyle: TextStyle = {
     backgroundColor:
-      buttonType === 'primary' ? colors.PRIMARY : colors.TRANSPARENT,
+      buttonType === ButtonTypes.PRIMARY ? colors.PRIMARY : colors.TRANSPARENT,
     borderColor:
-      buttonType === 'secondary' ? colors.PRIMARY : colors.TRANSPARENT,
-    borderRadius: radiuses._50px,
-    borderWidth: buttonType === 'secondary' ? 1 : 0,
-    paddingVertical: spaces._16px,
-    paddingHorizontal: buttonType === 'text' ? spaces._4px : spaces._24px,
+      buttonType === ButtonTypes.SECONDARY
+        ? colors.PRIMARY
+        : colors.TRANSPARENT,
+    borderWidth: buttonType === ButtonTypes.SECONDARY ? 1 : 0,
+    paddingHorizontal:
+      buttonType === ButtonTypes.TEXT ? spaces._4px : spaces._24px,
     opacity: isDisabled ? 0.5 : 1,
     minWidth: minWidth ? minWidth : 160,
   };
@@ -88,7 +90,7 @@ export const PrimaryButton = ({
   <GenericButton
     text={text}
     textColor={colors.WHITE}
-    buttonType="primary"
+    buttonType={ButtonTypes.PRIMARY}
     onPress={onPress}
     isDisabled={isDisabled}
   />
@@ -108,7 +110,7 @@ export const PrimaryButtonWithIcon = ({
       text={text}
       textColor={colors.WHITE}
       icon={icon}
-      buttonType="primary"
+      buttonType={ButtonTypes.PRIMARY}
       onPress={onPress}
     />
   );
@@ -124,7 +126,7 @@ export const SecondaryButton = ({
   <GenericButton
     text={text}
     textColor={colors.PRIMARY}
-    buttonType="secondary"
+    buttonType={ButtonTypes.SECONDARY}
     onPress={onPress}
   />
 );
@@ -164,7 +166,7 @@ export const TextButton = ({
     text={text}
     textColor={textColor}
     fontSize={fontSize}
-    buttonType="text"
+    buttonType={ButtonTypes.TEXT}
     onPress={onPress}
     minWidth={50}
   />
@@ -190,6 +192,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: spaces._10px,
+    paddingVertical: spaces._16px,
+    borderRadius: radiuses._50px,
   },
   text: {
     textAlign: 'center',

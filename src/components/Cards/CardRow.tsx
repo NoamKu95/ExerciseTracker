@@ -12,7 +12,7 @@ import {colors} from '../../constants/ui/colors';
 import {radiuses} from '../../constants/ui/radiuses';
 import {FontSizes} from '../../constants/ui/fonts';
 // Models
-import {CardRowModel} from '../../models/cardRow';
+import {CardRowModel} from '../../models/ui/cardRow';
 // Redux
 import {useAppSelector} from '../../store/store';
 // Utils
@@ -40,8 +40,6 @@ const CardRow = ({row, isLast = false}: CardRowProps) => {
           <RegularText children={row.infoText} size={FontSizes.regular} />
         </View>
       );
-    } else {
-      return null;
     }
   };
 

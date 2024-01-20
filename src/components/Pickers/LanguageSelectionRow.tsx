@@ -31,7 +31,7 @@ const LanguageSelectionRow = ({
         </View>
       </View>
 
-      <View style={styles.nameContainer}>
+      <View style={styles.textContainer}>
         <MediumText size={FontSizes.medium} color={colors.BLACK}>
           {language.name}
         </MediumText>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: radiuses._8px,
     backgroundColor: colors.PRIMARY,
   },
-  nameContainer: {
+  textContainer: {
     flex: 1,
     justifyContent: 'center',
   },

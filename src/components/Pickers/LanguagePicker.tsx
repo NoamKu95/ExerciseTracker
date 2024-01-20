@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 // Components
 import LanguageSelectionRow from './LanguageSelectionRow';
 import {MediumText} from '../Texts';
@@ -12,9 +12,14 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 import {shadowStyles} from '../../constants/ui/shadows';
 // Constants
-import {SupportedLanguages, languages} from '../../constants/languages';
+import {
+  Language,
+  SupportedLanguages,
+  languages,
+} from '../../constants/languages';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
+import {setLanguage} from '../../features/auth/state/authSlice';
 // Utils
 import {hp, wp} from '../../utils/styleUtil';
 
@@ -22,10 +27,6 @@ const LanguagePicker = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const language = useAppSelector(state => state.auth.language);
   const dispatch = useAppDispatch();
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
   const onLanguageSelected = (langCode: SupportedLanguages) => {
     dispatch(setLanguage(langCode));
@@ -35,24 +36,39 @@ const LanguagePicker = () => {
   const renderDropdownList = () => {
     return (
       <View style={[styles.dropdownContainer, shadowStyles.softShadow]}>
-        {languages.map((languageOption, index) => {
-          return (
-            <LanguageSelectionRow
-              key={index}
-              language={languageOption}
-              isSelected={languageOption.code === language}
-              onPress={() => onLanguageSelected(languageOption.code)}
-            />
-          );
-        })}
+        <FlatList
+          data={languages}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderLanguageRow}
+          keyExtractor={item => item.name}
+        />
       </View>
+    );
+  };
+
+  const renderLanguageRow = ({
+    item,
+    index,
+  }: {
+    item: Language;
+    index: number;
+  }) => {
+    return (
+      <LanguageSelectionRow
+        key={index}
+        language={item}
+        isSelected={item.code === language}
+        onPress={() => onLanguageSelected(item.code)}
+      />
     );
   };
 
   return (
     <View style={styles.container}>
       <View style={[styles.buttonContainer, shadowStyles.softShadow]}>
-        <TouchableOpacity style={styles.button} onPress={toggleDropdown}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
           <ChevronDown />
           <MediumText size={FontSizes.large} color={colors.BLACK}>
             {language.toUpperCase()}

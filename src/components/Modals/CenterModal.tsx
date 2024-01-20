@@ -61,8 +61,6 @@ const CenterModal = ({
           )}
         </View>
       );
-    } else {
-      return null;
     }
   };
 

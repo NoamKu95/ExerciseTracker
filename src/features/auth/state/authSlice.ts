@@ -1,7 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+// Constants
 import {SupportedLanguages} from '../../../constants/languages';
-import i18n from '../../../translations/i18n';
-import {HE} from '../../../translations/he';
+import i18n, {HE} from '../../../translations/i18n';
 // Utils
 import isRightToLeft from '../../../utils/langDirection';
 
@@ -37,4 +37,4 @@ export const AuthSlice = createSlice({
   },
 });
 
-export const {login, logout} = AuthSlice.actions;
+export const {setLanguage, login, logout} = AuthSlice.actions;

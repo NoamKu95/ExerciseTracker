@@ -1,6 +1,6 @@
 import i18n from '../translations/i18n';
 
-export const exercisesChips: string[] = [
+export const exercisesTypes: string[] = [
   i18n.t('bottomSheets.filtering.savedExercise'),
   i18n.t('bottomSheets.filtering.unsavedExercise'),
 ];

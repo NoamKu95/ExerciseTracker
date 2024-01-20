@@ -21,7 +21,7 @@ interface BottomSheetLayoutProps {
   height?: number;
   handleSave: () => void;
   isVisible: boolean;
-  toggleBottomSheet: () => void;
+  onCloseSheetPressed: () => void;
 }
 
 const BottomSheetLayout = ({
@@ -29,12 +29,12 @@ const BottomSheetLayout = ({
   height = hp(50),
   handleSave,
   isVisible,
-  toggleBottomSheet,
+  onCloseSheetPressed,
 }: BottomSheetLayoutProps) => {
   const renderActionButtons = () => {
     return (
       <View style={styles.actionButtons}>
-        <Pressable onPress={toggleBottomSheet}>
+        <Pressable onPress={onCloseSheetPressed}>
           <CloseIcon />
         </Pressable>
         <TextButton
@@ -52,8 +52,8 @@ const BottomSheetLayout = ({
       isVisible={isVisible}
       style={styles.bottomModal}
       swipeDirection={['down']}
-      onSwipeComplete={toggleBottomSheet}
-      onBackdropPress={toggleBottomSheet}>
+      onSwipeComplete={onCloseSheetPressed}
+      onBackdropPress={onCloseSheetPressed}>
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>
         <View style={[styles.modalContent, {height}]}>
           {renderActionButtons()}

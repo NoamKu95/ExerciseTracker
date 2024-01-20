@@ -1,5 +1,5 @@
-import store from '../store/store';
 import {Dimensions} from 'react-native';
+import store from '../store/store';
 
 export const hp = (percent: number) => {
   return Dimensions.get('screen').height * (percent / 100);
@@ -15,6 +15,8 @@ export const getTextAlign = (): 'left' | 'right' => {
 };
 
 export const getWritingDirection = (): 'rtl' | 'ltr' => {
+  // const isRTL = store.getState().auth.isRTL;
+  // return isRTL ? 'rtl' : 'ltr';
   return 'rtl';
 };
 

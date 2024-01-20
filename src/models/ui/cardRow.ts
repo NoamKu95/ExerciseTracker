@@ -1,4 +1,4 @@
-import {RootStackParamList} from '../constants/screens';
+import {RootStackParamList} from '../../constants/screens';
 
 export interface CardRowModel {
   text: string;
