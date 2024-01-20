@@ -1,9 +1,11 @@
 import {Action, ThunkAction, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {ErrorHandlingSlice} from '../features/errorHandling/state/errorHandlingSlice';
+import {AuthSlice} from '../features/auth/state/authSlice';
 
 const store = configureStore({
   reducer: {
+    auth: AuthSlice.reducer,
     errorHandling: ErrorHandlingSlice.reducer,
   },
 });

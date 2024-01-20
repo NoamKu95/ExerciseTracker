@@ -1,22 +1,23 @@
+import {I18nManager, NativeModules} from 'react-native';
 import {I18n} from 'i18n-js';
-import {I18nManager, NativeModules, Platform} from 'react-native';
 import he from './he';
-// import en from './en';
+import en from './en';
+import {isIOS} from '../utils/platformUtil';
 
-const HE = 'he';
-// const EN = 'en';
+export const HE = 'he';
+export const EN = 'en';
 
 const i18n = new I18n({
-  // en,
+  en,
   he,
 });
 i18n.enableFallback = true;
 
 export const findLng = () => {
   let lng = HE;
-  if (Platform.OS === 'android') {
+  if (!isIOS()) {
     lng = I18nManager.getConstants().localeIdentifier ?? HE;
-  } else if (Platform.OS === 'ios') {
+  } else {
     lng = NativeModules?.SettingsManager?.settings?.AppleLanguages[0];
   }
   if (isHebrew(lng)) {

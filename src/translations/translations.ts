@@ -20,7 +20,7 @@ export interface Translation {
       title: string;
     };
   };
-  modals: {
+  bottomSheets: {
     exercise: {
       chooseBodyArea: string;
       chooseExercise: string;
@@ -29,14 +29,37 @@ export interface Translation {
       filterByPeriod: string;
       filterByDates: string;
       filterByExercise: string;
+      savedExercise: string;
+      unsavedExercise: string;
     };
+    datePicker: {
+      day: string;
+      month: string;
+      year: string;
+    };
+  };
+  modals: {
+    saveWorkout: string;
+    saveText1: string;
+    saveText2: string;
+    saveBtnText: string;
+    removeWorkout: string;
+    removeText1: string;
+    removeText2: string;
+    removeBtnText: string;
   };
   commonlyUsed: {
     actionButton: {
       save: string;
     };
   };
+  times: {
+    last7Days: string;
+    last2Weeks: string;
+    lastMonth: string;
+  };
   errors: {
+    genericError: string;
     server: {
       apiError: string;
       badRequestError: string;

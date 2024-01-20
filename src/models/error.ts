@@ -10,7 +10,8 @@ export enum ServerErrorTypes {
 }
 
 export enum AppErrorTypes {
-  NETWORK_ERROR = 'NetworkError,',
+  NETWORK_ERROR = 'NetworkError',
+  LOCAL_STORAGE_ERROR = 'LocalStorageInteractionError',
 }
 
 export interface ErrorData {
