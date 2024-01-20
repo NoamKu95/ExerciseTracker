@@ -44,18 +44,16 @@ const CardRow = ({row, isLast = false}: CardRowProps) => {
   };
 
   return (
-    <>
-      <Pressable
-        style={[
-          styles(isRTL).rowContainer,
-          isLast ? styles().lastRow : styles().bottomBorder,
-        ]}
-        onPress={handlePress}>
-        <RegularText size={FontSizes.regular}>{row.text}</RegularText>
-        {row.path && <ArrowIcon />}
-        {row.infoText && renderInfoView()}
-      </Pressable>
-    </>
+    <Pressable
+      style={[
+        styles(isRTL).rowContainer,
+        isLast ? styles().lastRow : styles().bottomBorder,
+      ]}
+      onPress={handlePress}>
+      <RegularText size={FontSizes.regular}>{row.text}</RegularText>
+      {row.path && <ArrowIcon />}
+      {row.infoText && renderInfoView()}
+    </Pressable>
   );
 };
 
