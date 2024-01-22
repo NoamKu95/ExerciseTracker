@@ -99,10 +99,12 @@ export const PrimaryButton = ({
 export const PrimaryButtonWithIcon = ({
   text,
   icon,
+  isDisabled,
   onPress,
 }: {
   text: string;
   icon: JSX.Element;
+  isDisabled: boolean;
   onPress: () => void;
 }) => {
   return (
@@ -112,6 +114,7 @@ export const PrimaryButtonWithIcon = ({
       icon={icon}
       buttonType={ButtonTypes.PRIMARY}
       onPress={onPress}
+      isDisabled={isDisabled}
     />
   );
 };

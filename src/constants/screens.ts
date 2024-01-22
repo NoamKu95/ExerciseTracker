@@ -25,3 +25,14 @@ export const Screens: {
   ONBOARDING: 'Onboarding',
   TABS: 'Tabs',
 };
+
+// REGISTRATION STACK
+export type RegistrationStackParamList = {
+  RegistrationDetails: undefined;
+};
+
+export const RegistrationScreens: {
+  REGISTRATION_DETAILS: keyof RegistrationStackParamList;
+} = {
+  REGISTRATION_DETAILS: 'RegistrationDetails',
+};

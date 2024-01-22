@@ -7,6 +7,17 @@ export interface Translation {
     Profile: string;
   };
   screens: {
+    register: {
+      hey: string;
+      welcome: string;
+      someDetails: string;
+      letsGo: string;
+      name: string;
+      email: string;
+      password: string;
+      repassword: string;
+      dontWorry: string;
+    };
     home: {
       title: string;
     };
@@ -67,6 +78,12 @@ export interface Translation {
       internalServerError: string;
       notFoundError: string;
       unauthorizedError: string;
+    };
+    validation: {
+      invalidName: string;
+      invalidEmail: string;
+      invalidPassword: string;
+      unmatchingPasswords: string;
     };
   };
 }

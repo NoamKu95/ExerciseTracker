@@ -50,7 +50,6 @@ const ScreenLayout = ({
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}>
         {title && renderHeader()}
         {children}
@@ -70,9 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.BACKGROUND,
     paddingTop: statusBarHeight,
     paddingHorizontal: spaces._24px,
-  },
-  scrollViewContent: {
-    gap: spaces._36px,
   },
   headerContainer: {
     flexDirection: getFlexDirection(),

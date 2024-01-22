@@ -23,7 +23,8 @@ export const findLng = () => {
   if (isHebrew(lng)) {
     return HE;
   }
-  return lng;
+  return HE;
+  // return lng;
 };
 
 const isHebrew = (lng: string) => {
