@@ -16,7 +16,6 @@ import {FontSizes} from '../constants/ui/fonts';
 // Utils
 import {isIOS} from '../utils/platformUtil';
 import {
-  confirmPasswords,
   isRegistrationDataValid,
   validateEmail,
   validateFullName,
@@ -32,18 +31,12 @@ const RegistrationScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
 
   useEffect(() => {
-    const validationResponse = isRegistrationDataValid(
-      name,
-      email,
-      password,
-      confirmedPassword,
-    );
+    const validationResponse = isRegistrationDataValid(name, email, password);
     setIsAllInputsValid(validationResponse);
-  }, [name, email, password, confirmedPassword]);
+  }, [name, email, password]);
 
   const handleRegisterPress = () => {
     // TODO: send request and navigate
@@ -80,56 +73,24 @@ const RegistrationScreen = () => {
           label={i18n.t('screens.register.name')}
           value={name}
           onChangeText={setName}
-          error={
-            name && !validateFullName(name)
-              ? i18n.t('errors.validation.invalidName')
-              : undefined
-          }
+          validateInput={validateFullName}
+          errorText={i18n.t('errors.validation.invalidName')}
         />
         <AppTextInput
           label={i18n.t('screens.register.email')}
           value={email}
           onChangeText={setEmail}
-          error={
-            email && !validateEmail(email)
-              ? i18n.t('errors.validation.invalidEmail')
-              : undefined
-          }
+          validateInput={validateEmail}
+          errorText={i18n.t('errors.validation.invalidEmail')}
         />
-      </View>
-    );
-  };
-
-  const renderPasswordTextFields = () => {
-    return (
-      <View style={styles.passwordsContainer}>
-        <View style={styles.passwordInput}>
-          <AppTextInput
-            label={i18n.t('screens.register.password')}
-            value={password}
-            secureTextEntry
-            onChangeText={setPassword}
-            error={
-              password && !validatePassword(password)
-                ? i18n.t('errors.validation.invalidPassword')
-                : undefined
-            }
-          />
-        </View>
-        <View style={styles.passwordInput}>
-          <AppTextInput
-            label={i18n.t('screens.register.repassword')}
-            value={confirmedPassword}
-            secureTextEntry
-            onChangeText={setConfirmedPassword}
-            error={
-              confirmedPassword &&
-              !confirmPasswords(password, confirmedPassword)
-                ? i18n.t('errors.validation.unmatchingPasswords')
-                : undefined
-            }
-          />
-        </View>
+        <AppTextInput
+          label={i18n.t('screens.register.password')}
+          value={password}
+          isCensored={true}
+          onChangeText={setPassword}
+          validateInput={validatePassword}
+          errorText={i18n.t('errors.validation.invalidPassword')}
+        />
       </View>
     );
   };
@@ -159,7 +120,6 @@ const RegistrationScreen = () => {
             {renderHero()}
             {renderTexts()}
             {renderDetailsTextFields()}
-            {renderPasswordTextFields()}
             <RegularText
               children={i18n.t('screens.register.dontWorry')}
               size={FontSizes.small}
@@ -183,6 +143,7 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: colors.BACKGROUND,
+    width: wp(100),
   },
   mainContainer: {
     paddingHorizontal: spaces._24px,
@@ -192,6 +153,7 @@ const styles = StyleSheet.create({
   hero: {
     ...StyleSheet.absoluteFillObject,
     height: hp(25),
+    opacity: 0.1,
   },
   inputsContainer: {gap: spaces._24px},
   textsContainer: {

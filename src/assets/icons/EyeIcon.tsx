@@ -40,7 +40,7 @@ const EyeIcon = ({isTextVisible}: EyeIconProps) => {
     );
   };
 
-  return isTextVisible ? renderDisabledEye() : renderEnabledEye();
+  return isTextVisible ? renderEnabledEye() : renderDisabledEye();
 };
 
 export default EyeIcon;
