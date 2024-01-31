@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, KeyboardAvoidingView, StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {ScrollView} from 'react-native-gesture-handler';
 // Constants
 import i18n from '../translations/i18n';
-import {RegistrationStackParamList} from '../constants/screens';
 // Components
 import {PrimaryButtonWithIcon} from '../components/Buttons';
 import {BoldText, RegularText} from '../components/Texts';
@@ -26,16 +23,11 @@ import {
   validatePassword,
 } from '../utils/validators';
 // Redux
-import {useAppDispatch, useAppSelector} from '../store/store';
+import {useAppSelector} from '../store/store';
 import {getFlexDirection, hp, wp} from '../utils/styleUtil';
 import {registrationHeroImage} from '../constants/ui/images';
 
 const RegistrationScreen = () => {
-  const navigation =
-    useNavigation<
-      StackNavigationProp<RegistrationStackParamList, 'RegistrationDetails'>
-    >();
-  const dispatch = useAppDispatch();
   const isLoading = useAppSelector(state => state.auth.isLoading);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -54,8 +46,7 @@ const RegistrationScreen = () => {
   }, [name, email, password, confirmedPassword]);
 
   const handleRegisterPress = () => {
-    // await dispatch(registerUser(registrationObject));
-    // navigation.navigate(HOMEPAGE);
+    // TODO: send request and navigate
   };
 
   const renderHero = () => {
@@ -158,26 +149,26 @@ const RegistrationScreen = () => {
 
   return (
     <>
-      {/* <KeyboardAvoidingView
+      <KeyboardAvoidingView
         behavior={isIOS() ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}> */}
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.mainContainer}>
-          {renderHero()}
-          {renderTexts()}
-          {renderDetailsTextFields()}
-          {renderPasswordTextFields()}
-          <RegularText
-            children={i18n.t('screens.register.dontWorry')}
-            size={FontSizes.small}
-            textAlign="center"
-          />
-          {renderActionButton()}
-        </View>
-      </ScrollView>
-      {/* </KeyboardAvoidingView> */}
+        style={styles.keyboardAvoidingView}>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.mainContainer}>
+            {renderHero()}
+            {renderTexts()}
+            {renderDetailsTextFields()}
+            {renderPasswordTextFields()}
+            <RegularText
+              children={i18n.t('screens.register.dontWorry')}
+              size={FontSizes.small}
+              textAlign="center"
+            />
+            {renderActionButton()}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </>
   );
 };

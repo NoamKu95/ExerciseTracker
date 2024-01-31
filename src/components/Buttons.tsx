@@ -44,7 +44,7 @@ const GenericButton = ({
   const fontFamily = getFontFamily(isRTL, 'bold');
 
   const textDynamicStyleObject: TextStyle = {
-    color: textColor || colors.PRIMARY,
+    color: textColor || colors.WHITE,
     fontSize: fontSize,
     lineHeight: lineHeight,
     fontFamily: fontFamily,
@@ -60,7 +60,7 @@ const GenericButton = ({
     borderWidth: buttonType === ButtonTypes.SECONDARY ? 1 : 0,
     paddingHorizontal:
       buttonType === ButtonTypes.TEXT ? spaces._4px : spaces._24px,
-    opacity: isDisabled ? 0.5 : 1,
+    opacity: isDisabled ? 0.7 : 1,
     minWidth: minWidth ? minWidth : 160,
   };
 

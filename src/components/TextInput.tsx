@@ -34,7 +34,7 @@ const AppTextInput = ({
   const [isTextVisible, setIsTextVisible] = useState(!secureTextEntry);
 
   useEffect(() => {
-    labelPosition.value = isFocused || value ? hp(0.5) : hp(2.5);
+    labelPosition.value = isFocused || value ? hp(1) : hp(3);
   }, [isFocused, value]);
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -48,6 +48,16 @@ const AppTextInput = ({
       ),
     };
   });
+
+  const renderEyeIcon = () => {
+    return (
+      <Pressable
+        style={styles.hidePasswordButton}
+        onPress={() => setIsTextVisible(!isTextVisible)}>
+        <EyeIcon isTextVisible={isTextVisible} />
+      </Pressable>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -66,13 +76,7 @@ const AppTextInput = ({
           secureTextEntry={!isTextVisible}
           maxLength={30}
         />
-        {secureTextEntry && (
-          <Pressable
-            style={styles.hidePasswordButton}
-            onPress={() => setIsTextVisible(!isTextVisible)}>
-            <EyeIcon isTextVisible={isTextVisible} />
-          </Pressable>
-        )}
+        {secureTextEntry && renderEyeIcon()}
       </View>
       {error && (
         <View style={styles.errorContainer}>
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     color: colors.SECONDARY_TEXT,
   },
   input: {
-    height: hp(5.5),
+    height: hp(6),
     borderColor: colors.TRANSPARENT,
     fontSize: FontSizes.medium,
     color: colors.MAIN_TEXT,
