@@ -2,21 +2,29 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
 import {SupportedLanguages} from '../../../constants/languages';
 import i18n, {HE} from '../../../translations/i18n';
+// Models
+import {User} from '../../../models/core/user';
+// Redux
+import {loginUser, registerUser} from './authActions';
 // Utils
-import isRightToLeft from '../../../utils/langDirection';
+import {isRightToLeft} from '../../../utils/language';
 
 export interface AuthState {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  language: SupportedLanguages;
   isRTL: boolean;
+  language: SupportedLanguages;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  user: User | null;
+  userToken: string | null;
 }
 
 const initialState: AuthState = {
-  isAuthenticated: false,
-  isLoading: false,
-  language: HE,
   isRTL: true,
+  language: HE,
+  isLoading: false,
+  isAuthenticated: false,
+  user: null,
+  userToken: null,
 };
 
 export const AuthSlice = createSlice({
@@ -34,6 +42,34 @@ export const AuthSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
+  },
+  extraReducers: builder => {
+    builder
+      // MARK: - Register
+      .addCase(registerUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(registerUser.fulfilled, state => {
+        state.isLoading = false;
+      })
+      // MARK: - Login
+      .addCase(loginUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<{user: User; accessToken: string}>) => {
+          state.isLoading = false;
+          state.user = action.payload.user;
+          state.userToken = action.payload.accessToken;
+        },
+      );
   },
 });
 
