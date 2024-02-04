@@ -27,7 +27,7 @@ const ScreenLayout = ({
     return (
       <View style={styles.headerContainer}>
         <View style={styles.titleTextContainer}>
-          <BoldText children={title} size={FontSizes.large} />
+          <BoldText children={title!} size={FontSizes.large} />
         </View>
       </View>
     );
@@ -38,7 +38,7 @@ const ScreenLayout = ({
       <View style={styles.headerContainer}>
         <BackwardsButton />
         <View style={styles.titleTextContainer}>
-          <BoldText children={title} size={FontSizes.medium} />
+          <BoldText children={title!} size={FontSizes.medium} />
         </View>
       </View>
     );

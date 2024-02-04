@@ -7,6 +7,7 @@ export enum ServerErrorTypes {
   API_ERROR = 'APIError',
   NOT_FOUND_ERROR = 'NotFoundError',
   UNAUTHORIZED_ERROR = 'UnauthorizedError',
+  TOKEN_EXPIRED = 'TokenExpired',
 }
 
 export enum AppErrorTypes {

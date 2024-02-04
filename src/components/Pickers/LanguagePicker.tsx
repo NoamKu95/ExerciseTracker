@@ -12,11 +12,7 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 import {shadowStyles} from '../../constants/ui/shadows';
 // Constants
-import {
-  Language,
-  SupportedLanguages,
-  languages,
-} from '../../constants/languages';
+import {Language, LanguageType, appLanguages} from '../../translations/i18n';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setLanguage} from '../../features/auth/state/authSlice';
@@ -28,7 +24,7 @@ const LanguagePicker = () => {
   const language = useAppSelector(state => state.auth.language);
   const dispatch = useAppDispatch();
 
-  const onLanguageSelected = (langCode: SupportedLanguages) => {
+  const onLanguageSelected = (langCode: LanguageType) => {
     dispatch(setLanguage(langCode));
     setIsDropdownOpen(false);
   };
@@ -37,7 +33,7 @@ const LanguagePicker = () => {
     return (
       <View style={[styles.dropdownContainer, shadowStyles.softShadow]}>
         <FlatList
-          data={languages}
+          data={appLanguages}
           showsVerticalScrollIndicator={false}
           renderItem={renderLanguageRow}
           keyExtractor={item => item.name}

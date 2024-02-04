@@ -8,7 +8,7 @@ import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
-import {Language} from '../../constants/languages';
+import {Language} from '../../translations/i18n';
 // Utils
 import {getFlexDirection, wp} from '../../utils/styleUtil';
 
