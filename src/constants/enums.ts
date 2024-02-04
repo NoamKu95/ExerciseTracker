@@ -1,4 +1,4 @@
-export enum ButtonTypes {
+export enum ButtonType {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TEXT = 'text',

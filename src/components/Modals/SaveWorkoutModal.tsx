@@ -1,7 +1,7 @@
 import React from 'react';
 // Components
-import {BoldText, RegularText} from '../Texts';
-import {PrimaryButton} from '../Buttons';
+import {BoldText, RegularText} from '../Base/Texts';
+import {PrimaryButton} from '../Base/Buttons';
 import CenterModal from './CenterModal';
 // Icons
 import FullHeartIcon from '../../assets/icons/FullHeartIcon';

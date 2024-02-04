@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Pressable} from 'react-native';
 import Modal from 'react-native-modal';
 // Components
-import {PrimaryButton, TextButton} from '../Buttons';
+import {PrimaryButton, TextButton} from '../Base/Buttons';
 // Icons
 import CloseIcon from '../../assets/icons/CloseIcon';
 // UI

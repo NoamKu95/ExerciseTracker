@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 // Components
-import {MediumText} from '../Texts';
+import {MediumText} from '../Base/Texts';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';

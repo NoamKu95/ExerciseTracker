@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 // Components
-import {BoldText} from '../Texts';
+import {BoldText} from '../Base/Texts';
 import Chip from '../Chip';
 import BottomSheetLayout from './BottomSheetLayout';
 // Icons

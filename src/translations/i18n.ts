@@ -33,9 +33,29 @@ const i18n = new I18n({
 });
 i18n.enableFallback = true;
 
+// MARK: - Utils
+export const isRightToLeft = (language: LanguageType): boolean => {
+  const rtlLanguages = [LanguageType.Hebrew];
+  return rtlLanguages.includes(language);
+};
+
+export const appLanguages: Language[] = [
+  {code: LanguageType.English, name: 'English', flag: FlagAmerica},
+  {code: LanguageType.Hebrew, name: 'עברית', flag: FlagIsrael},
+];
+
+const isHebrew = (lng: string): boolean => {
+  return (
+    lng.startsWith(Hebrew.HE) ||
+    lng.startsWith(Hebrew.WI) ||
+    lng.startsWith(Hebrew.IW) ||
+    lng.startsWith(Hebrew.HE_IL)
+  );
+};
+
 // MARK: - Find language
 export const getDeviceLng = (): LanguageType => {
-  let lng: string | undefined = LanguageType.Hebrew;
+  let lng: string = LanguageType.Hebrew;
 
   if (isIOS()) {
     lng = NativeModules?.SettingsManager?.settings?.AppleLanguages[0] ?? lng;
@@ -64,23 +84,3 @@ export const getLanguageType = (languageCode: string): LanguageType => {
 
 i18n.locale = getDeviceLng();
 export default i18n;
-
-// MARK: - Utils
-export const isHebrew = (lng: string) => {
-  return (
-    lng.startsWith(Hebrew.HE) ||
-    lng.startsWith(Hebrew.WI) ||
-    lng.startsWith(Hebrew.IW) ||
-    lng.startsWith(Hebrew.HE_IL)
-  );
-};
-
-export const isRightToLeft = (language: LanguageType): boolean => {
-  const rtlLanguages = [LanguageType.Hebrew];
-  return rtlLanguages.includes(language);
-};
-
-export const appLanguages: Language[] = [
-  {code: LanguageType.English, name: 'English', flag: FlagAmerica},
-  {code: LanguageType.Hebrew, name: 'עברית', flag: FlagIsrael},
-];

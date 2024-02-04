@@ -25,6 +25,11 @@ export const getFlexDirection = () => {
   return isRTL ? 'row-reverse' : 'row';
 };
 
+export const getOpposingFlexDirection = () => {
+  const isRTL = true; // store.getState().auth.isRTL;
+  return isRTL ? 'row' : 'row-reverse';
+};
+
 export const getIconDirection = (): '180deg' | '0deg' => {
   const isRTL = true; // store.getState().auth.isRTL;
   return isRTL ? '180deg' : '0deg';

@@ -9,6 +9,17 @@ const Hebrew: Translation = {
     Profile: 'פרופיל',
   },
   screens: {
+    register: {
+      hey: 'היי!',
+      welcome: 'וולקאם לאפליקציית האימונים החדשה שלך :)',
+      someDetails: 'לפני שנתחיל נשמח לקבל ממך כמה פרטים קטנים:',
+      letsGo: 'מילאתי, אפשר להמשיך',
+      name: 'שם מלא',
+      email: 'אימייל',
+      password: 'סיסמה',
+      repassword: 'סיסמה בשנית',
+      dontWorry: 'אין מה לדאוג - לא נבלבל לך במוח עם מיילים שיווקיים מיותרים',
+    },
     home: {
       title: '',
     },
@@ -73,6 +84,12 @@ const Hebrew: Translation = {
       notFoundError: '',
       unauthorizedError: '',
       tokenExpired: '',
+    },
+    validation: {
+      invalidName: 'שם לא תקין',
+      invalidEmail: 'כתובת אימייל לא תקינה',
+      invalidPassword: 'סיסמה לא תקינה',
+      unmatchingPasswords: 'סיסמה לא תואמת',
     },
   },
 };

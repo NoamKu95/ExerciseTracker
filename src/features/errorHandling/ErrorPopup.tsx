@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 // Components
-import {BoldText, MediumText} from '../../components/Texts';
+import {BoldText, MediumText} from '../../components/Base/Texts';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
