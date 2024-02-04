@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+// UI
 import {colors} from '../constants/ui/colors';
 import {spaces} from '../constants/ui/spaces';
 import {radiuses} from '../constants/ui/radiuses';

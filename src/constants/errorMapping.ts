@@ -12,4 +12,5 @@ export const serverErrorMapping = {
   [ServerErrorTypes.UNAUTHORIZED_ERROR]: i18n.t(
     'errors.server.unauthorizedError',
   ),
+  [ServerErrorTypes.TOKEN_EXPIRED]: i18n.t('error.server.tokenExpired'),
 };

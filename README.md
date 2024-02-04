@@ -1,6 +1,8 @@
 # Getting Started
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Configurations:
+1. Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+2. Add the relevant environment file into the _constants/config_ folder
 
 ## Step 1: Start the Metro Server
 

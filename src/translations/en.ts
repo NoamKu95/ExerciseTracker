@@ -11,6 +11,17 @@ const English: Translation = {
     Profile: 'פרופיל',
   },
   screens: {
+    register: {
+      hey: '',
+      welcome: '',
+      someDetails: '',
+      letsGo: '',
+      name: '',
+      email: '',
+      password: '',
+      repassword: '',
+      dontWorry: '',
+    },
     home: {
       title: '',
     },
@@ -74,6 +85,13 @@ const English: Translation = {
       internalServerError: '',
       notFoundError: '',
       unauthorizedError: '',
+      tokenExpired: '',
+    },
+    validation: {
+      invalidName: '',
+      invalidEmail: '',
+      invalidPassword: '',
+      unmatchingPasswords: '',
     },
   },
 };

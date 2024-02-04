@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 // Components
-import {BoldText, RegularText} from '../Texts';
+import {BoldText, RegularText} from '../Base/Texts';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';

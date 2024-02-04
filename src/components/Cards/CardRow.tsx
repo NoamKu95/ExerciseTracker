@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 // Components
-import {RegularText} from '../Texts';
+import {RegularText} from '../Base/Texts';
 // Icons
 import ArrowIcon from '../../assets/icons/ArrowIcon';
 // UI

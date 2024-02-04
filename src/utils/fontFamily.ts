@@ -11,5 +11,7 @@ export const getFontFamily = (
       return isRTL ? Fonts.RUBIK_MEDIUM : Fonts.MONTSERRAT_MEDIUM;
     case 'bold':
       return isRTL ? Fonts.RUBIK_BOLD : Fonts.MONTSERRAT_BOLD;
+    default:
+      return isRTL ? Fonts.RUBIK : Fonts.MONTSERRAT;
   }
 };

@@ -8,7 +8,7 @@ export const Fonts = {
 };
 
 export const fontsToLoad = {
-  [Fonts.MONTSERRAT]: require('../../assets/fonts/Montserrat-Regular.ttf'),
+  [Fonts.MONTSERRAT]: require('../../assets/fonts/Montserrat-Regular.otf'),
   [Fonts.RUBIK]: require('../../assets/fonts/Rubik-Regular.ttf'),
   [Fonts.RUBIK_MEDIUM]: require('../../assets/fonts/Rubik-Medium.ttf'),
   [Fonts.MONTSERRAT_MEDIUM]: require('../../assets/fonts/Montserrat-Medium.ttf'),

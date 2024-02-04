@@ -1,29 +1,34 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
-import {SupportedLanguages} from '../../../constants/languages';
-import i18n, {HE} from '../../../translations/i18n';
-// Utils
-import isRightToLeft from '../../../utils/langDirection';
+import i18n, {LanguageType, isRightToLeft} from '../../../translations/i18n';
+// Models
+import {User} from '../../../models/core/user';
+// Redux
+import {loginUser, refreshAccessToken, registerUser} from './authActions';
 
 export interface AuthState {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  language: SupportedLanguages;
   isRTL: boolean;
+  language: LanguageType;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  user: User | null;
+  userToken: string | null;
 }
 
 const initialState: AuthState = {
-  isAuthenticated: false,
-  isLoading: false,
-  language: HE,
   isRTL: true,
+  language: LanguageType.Hebrew,
+  isLoading: false,
+  isAuthenticated: false,
+  user: null,
+  userToken: null,
 };
 
 export const AuthSlice = createSlice({
   name: 'AuthSlice',
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<SupportedLanguages>) => {
+    setLanguage: (state, action: PayloadAction<LanguageType>) => {
       state.language = action.payload;
       i18n.locale = action.payload;
       state.isRTL = isRightToLeft(action.payload);
@@ -34,6 +39,50 @@ export const AuthSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
+  },
+  extraReducers: builder => {
+    builder
+      // MARK: - Register
+      .addCase(registerUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(registerUser.fulfilled, state => {
+        state.isLoading = false;
+      })
+
+      // MARK: - Login
+      .addCase(loginUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<{user: User; accessToken: string}>) => {
+          state.isLoading = false;
+          state.user = action.payload.user;
+          state.userToken = action.payload.accessToken;
+        },
+      )
+
+      // MARK: - Refresh Token
+      .addCase(refreshAccessToken.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(refreshAccessToken.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        refreshAccessToken.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.isLoading = false;
+          state.userToken = action.payload;
+        },
+      );
   },
 });
 
