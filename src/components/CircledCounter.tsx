@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
-import {BoldText} from './Texts';
+import {BoldText} from './Base/Texts';
 // UI
 import {FontSizes} from '../constants/ui/fonts';
 import {colors} from '../constants/ui/colors';

@@ -1,17 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
 // UI
-import {colors} from '../constants/ui/colors';
+import {colors} from '../../constants/ui/colors';
 // Redux
-import store from '../store/store';
+import store from '../../store/store';
 // Utils
-import {getFontFamily} from '../utils/fontFamily';
-import {isIOS} from '../utils/platformUtil';
+import {getFontFamily} from '../../utils/fontFamily';
+import {isIOS} from '../../utils/platformUtil';
 import {
   getFlexDirection,
   getTextAlign,
   getWritingDirection,
-} from '../utils/styleUtil';
+} from '../../utils/styleUtil';
 
 interface GenericTextProps {
   color?: string;

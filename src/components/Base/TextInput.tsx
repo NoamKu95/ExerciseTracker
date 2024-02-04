@@ -8,19 +8,19 @@ import Reanimated, {
 // Components
 import {MediumText} from './Texts';
 // Icons
-import EyeIcon from '../assets/icons/EyeIcon';
+import EyeIcon from '../../assets/icons/EyeIcon';
 // UI
-import {colors} from '../constants/ui/colors';
-import {spaces} from '../constants/ui/spaces';
-import {radiuses} from '../constants/ui/radiuses';
-import {FontSizes} from '../constants/ui/fonts';
+import {colors} from '../../constants/ui/colors';
+import {spaces} from '../../constants/ui/spaces';
+import {radiuses} from '../../constants/ui/radiuses';
+import {FontSizes} from '../../constants/ui/fonts';
 // Utils
 import {
   getFlexDirection,
   getOpposingFlexDirection,
   getSelfAlign,
   getTextAlign,
-} from '../utils/styleUtil';
+} from '../../utils/styleUtil';
 
 interface AppTextInputProps {
   label: string;

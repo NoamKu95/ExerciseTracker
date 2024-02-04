@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 // Components
 import LanguageSelectionRow from './LanguageSelectionRow';
-import {MediumText} from '../Texts';
+import {MediumText} from '../Base/Texts';
 // Icons
 import ChevronDown from '../../assets/icons/ChevronDown';
 // UI

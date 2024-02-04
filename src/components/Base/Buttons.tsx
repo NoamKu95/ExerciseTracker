@@ -12,19 +12,19 @@ import {StackNavigationProp} from '@react-navigation/stack';
 // Components
 import {BoldText} from './Texts';
 // Icons
-import BackArrow from '../assets/icons/ArrowIcon';
+import BackArrow from '../../assets/icons/ArrowIcon';
 // UI
-import {colors} from '../constants/ui/colors';
-import {radiuses} from '../constants/ui/radiuses';
-import {spaces} from '../constants/ui/spaces';
+import {colors} from '../../constants/ui/colors';
+import {radiuses} from '../../constants/ui/radiuses';
+import {spaces} from '../../constants/ui/spaces';
 // Utils
-import {getFlexDirection, getIconDirection} from '../utils/styleUtil';
-import {isIOS} from '../utils/platformUtil';
-import {ButtonType} from '../constants/enums';
+import {getFlexDirection, getIconDirection} from '../../utils/styleUtil';
+import {isIOS} from '../../utils/platformUtil';
+import {ButtonType} from '../../constants/enums';
 
 interface GenericButtonProps {
   text: string;
-  textColor?: string;
+  textColor: string;
   icon?: JSX.Element;
   fontSize?: number;
   lineHeight?: number;
@@ -46,19 +46,21 @@ const GenericButton = ({
   onPress,
   isDisabled = false,
   isLoading = false,
-  minWidth,
+  minWidth = 160,
 }: GenericButtonProps) => {
   const buttonContainerStyle: TextStyle = {
-    backgroundColor:
-      buttonType === ButtonType.PRIMARY ? colors.PRIMARY : colors.TRANSPARENT,
+    backgroundColor: isDisabled
+      ? colors.GRAY
+      : buttonType === ButtonType.PRIMARY
+      ? colors.PRIMARY
+      : colors.TRANSPARENT,
     borderColor:
       buttonType === ButtonType.SECONDARY ? colors.PRIMARY : colors.TRANSPARENT,
     borderWidth: buttonType === ButtonType.SECONDARY ? 1 : 0,
     paddingHorizontal:
       buttonType === ButtonType.TEXT ? spaces._4px : spaces._24px,
-    opacity: isDisabled ? 0.7 : 1,
-    minWidth: minWidth ? minWidth : 160,
-    // TODO - add disabled design
+    opacity: isDisabled ? 0.5 : 1,
+    minWidth,
   };
 
   return (

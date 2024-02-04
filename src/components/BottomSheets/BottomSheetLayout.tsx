@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Pressable, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import Modal from 'react-native-modal';
 // Components
-import {TextButton} from '../Buttons';
+import {TextButton} from '../Base/Buttons';
 // Icons
 import CloseIcon from '../../assets/icons/CloseIcon';
 // UI

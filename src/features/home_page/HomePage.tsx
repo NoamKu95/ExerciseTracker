@@ -1,7 +1,7 @@
 import React from 'react';
 // Components
-import ScreenLayout from '../../components/ScreenLayout';
-import {RegularText} from '../../components/Texts';
+import ScreenLayout from '../../components/Base/ScreenLayout';
+import {RegularText} from '../../components/Base/Texts';
 import {FontSizes} from '../../constants/ui/fonts';
 
 const HomeScreen = () => {

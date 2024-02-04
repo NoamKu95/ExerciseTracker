@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Image, KeyboardAvoidingView, StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {StyleSheet, View} from 'react-native';
 // Constants
 import i18n from '../translations/i18n';
 // Components
-import {PrimaryButtonWithIcon} from '../components/Buttons';
-import {BoldText, RegularText} from '../components/Texts';
-import AppTextInput from '../components/TextInput';
+import {BoldText, RegularText} from '../components/Base/Texts';
+import AppTextInput from '../components/Base/TextInput';
 // Icons
 import SparkleIcon from '../assets/icons/SparkleIcon';
 // UI
@@ -14,7 +12,7 @@ import {spaces} from '../constants/ui/spaces';
 import {colors} from '../constants/ui/colors';
 import {FontSizes} from '../constants/ui/fonts';
 // Utils
-import {isIOS} from '../utils/platformUtil';
+import {hp} from '../utils/styleUtil';
 import {
   isRegistrationDataValid,
   validateEmail,
@@ -23,8 +21,7 @@ import {
 } from '../utils/validators';
 // Redux
 import {useAppSelector} from '../store/store';
-import {getFlexDirection, hp, wp} from '../utils/styleUtil';
-import {registrationHeroImage} from '../constants/ui/images';
+import ScreenLayout from '../components/Base/ScreenLayout';
 
 const RegistrationScreen = () => {
   const isLoading = useAppSelector(state => state.auth.isLoading);
@@ -40,10 +37,6 @@ const RegistrationScreen = () => {
 
   const handleRegisterPress = () => {
     // TODO: send request and navigate
-  };
-
-  const renderHero = () => {
-    return <Image source={registrationHeroImage} style={styles.hero} />;
   };
 
   const renderTexts = () => {
@@ -95,40 +88,19 @@ const RegistrationScreen = () => {
     );
   };
 
-  const renderActionButton = () => {
-    return (
-      <View style={styles.actionButton}>
-        <PrimaryButtonWithIcon
-          text={i18n.t('screens.register.letsGo')}
-          icon={<SparkleIcon />}
-          onPress={handleRegisterPress}
-          isDisabled={!isAllInputsValid || isLoading}
-        />
-      </View>
-    );
-  };
-
   return (
     <>
-      <KeyboardAvoidingView
-        behavior={isIOS() ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}>
-        <ScrollView
-          style={styles.scrollView}
-          showsVerticalScrollIndicator={false}>
-          <View style={styles.mainContainer}>
-            {renderHero()}
-            {renderTexts()}
-            {renderDetailsTextFields()}
-            <RegularText
-              children={i18n.t('screens.register.dontWorry')}
-              size={FontSizes.small}
-              textAlign="center"
-            />
-            {renderActionButton()}
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+      <ScreenLayout
+        onPress={handleRegisterPress}
+        isButtonDisabled={!isAllInputsValid || isLoading}
+        buttonText={i18n.t('screens.register.letsGo')}
+        isLoading={isLoading}
+        icon={<SparkleIcon />}>
+        <>
+          {renderTexts()}
+          {renderDetailsTextFields()}
+        </>
+      </ScreenLayout>
     </>
   );
 };
@@ -136,15 +108,6 @@ const RegistrationScreen = () => {
 export default RegistrationScreen;
 
 const styles = StyleSheet.create({
-  keyboardAvoidingView: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: colors.BACKGROUND,
-    width: wp(100),
-  },
   mainContainer: {
     paddingHorizontal: spaces._24px,
     backgroundColor: colors.BACKGROUND,
@@ -155,23 +118,10 @@ const styles = StyleSheet.create({
     height: hp(25),
     opacity: 0.1,
   },
-  inputsContainer: {gap: spaces._24px},
+  inputsContainer: {
+    gap: spaces._24px,
+  },
   textsContainer: {
-    marginTop: hp(25), // TODO - why???
-    paddingTop: spaces._24px,
     gap: spaces._12px,
-  },
-  passwordsContainer: {
-    flexDirection: getFlexDirection(),
-    width: '100%',
-    justifyContent: 'space-between',
-  },
-  passwordInput: {
-    flexDirection: 'column',
-    width: wp(40),
-  },
-  actionButton: {
-    alignSelf: 'center',
-    paddingBottom: spaces._24px,
   },
 });

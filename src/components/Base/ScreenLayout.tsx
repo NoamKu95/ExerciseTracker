@@ -4,14 +4,15 @@ import {ScrollView} from 'react-native-gesture-handler';
 // Components
 import {BackwardsButton, PrimaryButton} from './Buttons';
 // UI
-import {spaces} from '../constants/ui/spaces';
-import {getFlexDirection, getSelfAlign, hp, wp} from '../utils/styleUtil';
+import {spaces} from '../../constants/ui/spaces';
+import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
 // Constants
-import {ButtonType} from '../constants/enums';
+import {ButtonType} from '../../constants/enums';
 // Utils
-import {isIOS} from '../utils/platformUtil';
-import {FontSizes} from '../constants/ui/fonts';
+import {isIOS} from '../../utils/platformUtil';
+import {FontSizes} from '../../constants/ui/fonts';
 import {BoldText} from './Texts';
+import {colors} from '../../constants/ui/colors';
 
 interface ScreenLayout1Props {
   children: JSX.Element;
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spaces._24px,
     gap: spaces._24px,
     height: '100%',
+    backgroundColor: colors.BACKGROUND,
     paddingBottom: hp(15),
   },
   headerContainer: {
