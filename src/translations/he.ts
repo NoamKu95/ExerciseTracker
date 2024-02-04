@@ -83,6 +83,7 @@ const Hebrew: Translation = {
       internalServerError: '',
       notFoundError: '',
       unauthorizedError: '',
+      tokenExpired: '',
     },
     validation: {
       invalidName: 'שם לא תקין',

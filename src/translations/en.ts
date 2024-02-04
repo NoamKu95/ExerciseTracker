@@ -85,6 +85,7 @@ const English: Translation = {
       internalServerError: '',
       notFoundError: '',
       unauthorizedError: '',
+      tokenExpired: '',
     },
     validation: {
       invalidName: '',

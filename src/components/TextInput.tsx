@@ -5,14 +5,22 @@ import Reanimated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {colors} from '../constants/ui/colors';
-import {FontSizes} from '../constants/ui/fonts';
-
-import EyeIcon from '../assets/icons/EyeIcon';
+// Components
 import {MediumText} from './Texts';
-import {getFlexDirection, hp} from '../utils/styleUtil';
+// Icons
+import EyeIcon from '../assets/icons/EyeIcon';
+// UI
+import {colors} from '../constants/ui/colors';
 import {spaces} from '../constants/ui/spaces';
 import {radiuses} from '../constants/ui/radiuses';
+import {FontSizes} from '../constants/ui/fonts';
+// Utils
+import {
+  getFlexDirection,
+  getOpposingFlexDirection,
+  getSelfAlign,
+  getTextAlign,
+} from '../utils/styleUtil';
 
 interface AppTextInputProps {
   label: string;
@@ -38,7 +46,7 @@ const AppTextInput = ({
   const [isErrorShown, setIsErrorShown] = useState(false);
 
   useEffect(() => {
-    labelPosition.value = isFocused || value ? hp(1) : hp(3);
+    labelPosition.value = isFocused || value ? 4 : 20;
   }, [isFocused, labelPosition, value]);
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -107,8 +115,9 @@ const AppTextInput = ({
             onBlur={() => setIsFocused(false)}
             onChangeText={handleTextChange}
             autoCapitalize="none"
-            secureTextEntry={!isTextVisible}
             maxLength={20}
+            textAlign={getTextAlign()}
+            secureTextEntry={!isTextVisible}
           />
           {isCensored && renderEyeIcon()}
         </View>
@@ -122,38 +131,40 @@ export default AppTextInput;
 
 const styles = StyleSheet.create({
   container: {
-    gap: spaces._4px,
+    marginVertical: spaces._10px,
   },
   mainContainer: {
     borderRadius: radiuses._16px,
     backgroundColor: colors.WHITE,
-    flexDirection: getFlexDirection(),
     paddingVertical: spaces._10px,
     paddingHorizontal: spaces._10px,
+    height: 56,
   },
   label: {
     position: 'absolute',
-    start: 14,
+    fontSize: FontSizes.medium,
     color: colors.SECONDARY_TEXT,
+    alignSelf: getSelfAlign(),
+    paddingHorizontal: spaces._12px,
   },
   inputContainer: {
     flexDirection: getFlexDirection(),
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%',
+    height: '100%',
   },
   input: {
-    height: hp(6),
     borderColor: colors.TRANSPARENT,
     fontSize: FontSizes.medium,
     color: colors.MAIN_TEXT,
+    alignSelf: getSelfAlign(),
     width: '90%',
+    height: 25,
   },
   errorContainer: {
-    alignSelf: 'flex-start',
-    flexDirection: getFlexDirection(),
+    flexDirection: getOpposingFlexDirection(),
     alignItems: 'center',
-    gap: spaces._4px,
+    marginTop: spaces._4px,
   },
   errorBorder: {
     borderWidth: 1,
