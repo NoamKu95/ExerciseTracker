@@ -74,6 +74,7 @@ const English: Translation = {
       internalServerError: '',
       notFoundError: '',
       unauthorizedError: '',
+      tokenExpired: '',
     },
   },
 };

@@ -1,10 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+// Models
 import {
   User,
   UserCredentials,
   RegistrationObject,
 } from '../../../models/core/user';
-import {registerRepo, loginRepo} from '../../../repo/authRepo';
+// Redux
+import {
+  registerRepo,
+  loginRepo,
+  refreshAccessTokenRepo,
+} from '../../../repo/authRepo';
 
 export const registerUser = createAsyncThunk<void, RegistrationObject>(
   'auth/registerUser',
@@ -27,3 +33,14 @@ export const loginUser = createAsyncThunk<
     throw error;
   }
 });
+
+export const refreshAccessToken = createAsyncThunk<string, void>(
+  'auth/refreshAccessToken',
+  async () => {
+    try {
+      return await refreshAccessTokenRepo();
+    } catch (error) {
+      throw error;
+    }
+  },
+);

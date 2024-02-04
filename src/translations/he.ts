@@ -72,6 +72,7 @@ const Hebrew: Translation = {
       internalServerError: '',
       notFoundError: '',
       unauthorizedError: '',
+      tokenExpired: '',
     },
   },
 };

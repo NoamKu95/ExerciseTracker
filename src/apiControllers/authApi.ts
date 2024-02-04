@@ -27,3 +27,11 @@ export const loginApi = async (
   const {accessToken, refreshToken, user} = response.data;
   return {accessToken, refreshToken, user};
 };
+
+export const refreshAccessTokenApi = async (
+  refreshToken: string,
+): Promise<{newAccessToken: string; newRefreshToken: string}> => {
+  const response = await axios.post(paths.REFRESH_ACCESS_TOKEN, refreshToken);
+  const {newAccessToken, newRefreshToken} = response.data;
+  return {newAccessToken, newRefreshToken};
+};

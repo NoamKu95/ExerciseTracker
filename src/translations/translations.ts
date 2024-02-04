@@ -67,6 +67,7 @@ export interface Translation {
       internalServerError: string;
       notFoundError: string;
       unauthorizedError: string;
+      tokenExpired: string;
     };
   };
 }

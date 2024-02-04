@@ -7,7 +7,6 @@ export const numOfBlockMinutes = 10;
 export const enum KeyChainKeys {
   ACCESS_TOKEN = 'accessToken',
   REFRESH_TOKEN = 'refreshToken',
-  PASSWORD = 'password',
 }
 
 export const saveToKeychain = async (
@@ -45,12 +44,4 @@ export const removeFromKeychain = async (key: KeyChainKeys): Promise<void> => {
   } catch (error) {
     logger.error(`Error removing ${key} from keychain`);
   }
-};
-
-export const saveUserTokens = async (
-  accessToken: string,
-  refreshToken: string,
-) => {
-  await saveToKeychain(KeyChainKeys.ACCESS_TOKEN, accessToken);
-  await saveToKeychain(KeyChainKeys.REFRESH_TOKEN, refreshToken);
 };

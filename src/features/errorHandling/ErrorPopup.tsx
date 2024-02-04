@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 // Components
 import {BoldText, MediumText} from '../../components/Texts';
-// ui
+// UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';

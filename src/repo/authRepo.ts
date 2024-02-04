@@ -1,5 +1,13 @@
-import {loginApi, registerApi} from '../apiControllers/authApi';
-import {KeyChainKeys, saveToKeychain} from '../managers/keychainManager';
+import {
+  loginApi,
+  refreshAccessTokenApi,
+  registerApi,
+} from '../apiControllers/authApi';
+import {
+  KeyChainKeys,
+  getFromKeychain,
+  saveToKeychain,
+} from '../managers/keychainManager';
 import {User, UserCredentials, RegistrationObject} from '../models/core/user';
 
 export const registerRepo = async (
@@ -16,6 +24,15 @@ export const loginRepo = async (
   const {accessToken, refreshToken, user} = await loginApi(credentials);
   await saveTokensToKeychain(accessToken, refreshToken);
   return {user, accessToken};
+};
+
+export const refreshAccessTokenRepo = async (): Promise<string> => {
+  const refreshToken = await getFromKeychain(KeyChainKeys.REFRESH_TOKEN);
+  const {newAccessToken, newRefreshToken} = await refreshAccessTokenApi(
+    refreshToken,
+  );
+  await saveTokensToKeychain(newAccessToken, newRefreshToken);
+  return newAccessToken;
 };
 
 const saveTokensToKeychain = async (

@@ -145,7 +145,7 @@ export const SecondaryButtonWithIcon = ({
       text={text}
       textColor={colors.WHITE}
       icon={icon}
-      buttonType="secondary"
+      buttonType={ButtonTypes.SECONDARY}
       onPress={onPress}
     />
   );

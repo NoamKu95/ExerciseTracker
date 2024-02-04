@@ -2,9 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {logger} from './loggingManager';
 
 export const enum LocalStorageKeys {
-  IS_FIRST_LOGIN = 'isFirstLogin',
   HAS_SEEN_ONBOARDING = 'hasSeenOnboarding',
-  IS_FIRST_APP_LOAD = 'isFirstAppLoad',
 }
 
 export const setItemInLocalStorage = async (

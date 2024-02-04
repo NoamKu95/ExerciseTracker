@@ -1,6 +1,11 @@
 import Axios from 'axios';
-import store from '../store/store';
+// Constants
 import envConfig from '../constants/config/config';
+// Models
+import {ServerErrorTypes} from '../models/error';
+// Redux
+import store from '../store/store';
+import {refreshAccessToken} from '../features/auth/state/authActions';
 import {generalErrorHandler} from '../features/errorHandling/state/errorHandlingActions';
 
 const axios = Axios.create();
@@ -26,10 +31,33 @@ axios.interceptors.request.use(async config => {
 
 // MARK: - Response
 axios.interceptors.response.use(
-  res => res,
+  async response => {
+    const originalRequest = response.config;
+    if (response.data.responseDescription === ServerErrorTypes.TOKEN_EXPIRED) {
+      try {
+        // Fetch new token & save to store and keychain
+        await store.dispatch(refreshAccessToken());
+
+        // Extract the new access token from the action payload
+        const newAccessToken = store.getState().auth.userToken;
+        if (!newAccessToken) {
+          throw new Error();
+        }
+
+        // Update the header for the original request
+        axios.defaults.headers.Authorization = `Bearer ${newAccessToken}`;
+        // Retry the original request with the new token
+        return axios(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return response;
+  },
   error => {
     store.dispatch(generalErrorHandler(error));
-    throw error;
+    return Promise.reject(error);
   },
 );
 

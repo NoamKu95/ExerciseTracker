@@ -1,17 +1,14 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
-import {SupportedLanguages} from '../../../constants/languages';
-import i18n, {HE} from '../../../translations/i18n';
+import i18n, {LanguageType, isRightToLeft} from '../../../translations/i18n';
 // Models
 import {User} from '../../../models/core/user';
 // Redux
-import {loginUser, registerUser} from './authActions';
-// Utils
-import {isRightToLeft} from '../../../utils/language';
+import {loginUser, refreshAccessToken, registerUser} from './authActions';
 
 export interface AuthState {
   isRTL: boolean;
-  language: SupportedLanguages;
+  language: LanguageType;
   isLoading: boolean;
   isAuthenticated: boolean;
   user: User | null;
@@ -20,7 +17,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isRTL: true,
-  language: HE,
+  language: LanguageType.Hebrew,
   isLoading: false,
   isAuthenticated: false,
   user: null,
@@ -31,7 +28,7 @@ export const AuthSlice = createSlice({
   name: 'AuthSlice',
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<SupportedLanguages>) => {
+    setLanguage: (state, action: PayloadAction<LanguageType>) => {
       state.language = action.payload;
       i18n.locale = action.payload;
       state.isRTL = isRightToLeft(action.payload);
@@ -55,6 +52,7 @@ export const AuthSlice = createSlice({
       .addCase(registerUser.fulfilled, state => {
         state.isLoading = false;
       })
+
       // MARK: - Login
       .addCase(loginUser.pending, state => {
         state.isLoading = true;
@@ -68,6 +66,21 @@ export const AuthSlice = createSlice({
           state.isLoading = false;
           state.user = action.payload.user;
           state.userToken = action.payload.accessToken;
+        },
+      )
+
+      // MARK: - Refresh Token
+      .addCase(refreshAccessToken.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(refreshAccessToken.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        refreshAccessToken.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.isLoading = false;
+          state.userToken = action.payload;
         },
       );
   },
