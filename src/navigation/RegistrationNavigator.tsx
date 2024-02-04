@@ -6,7 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import RegistrationScreen from '../features/RegistrationScreen';
 // UI
 import {colors} from '../constants/ui/colors';
-// Redux
+// Constants
 import {RegistrationScreens} from '../constants/screens';
 
 const Stack = createStackNavigator();

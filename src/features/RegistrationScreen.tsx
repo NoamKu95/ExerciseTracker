@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 // Constants
 import i18n from '../translations/i18n';
 // Components
+import ScreenLayout from '../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../components/Base/Texts';
 import AppTextInput from '../components/Base/TextInput';
 // Icons
@@ -21,7 +22,6 @@ import {
 } from '../utils/validators';
 // Redux
 import {useAppSelector} from '../store/store';
-import ScreenLayout from '../components/Base/ScreenLayout';
 
 const RegistrationScreen = () => {
   const isLoading = useAppSelector(state => state.auth.isLoading);
@@ -112,11 +112,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spaces._24px,
     backgroundColor: colors.BACKGROUND,
     gap: spaces._24px,
-  },
-  hero: {
-    ...StyleSheet.absoluteFillObject,
-    height: hp(25),
-    opacity: 0.1,
   },
   inputsContainer: {
     gap: spaces._24px,

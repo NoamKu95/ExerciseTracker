@@ -17,10 +17,12 @@ import BackArrow from '../../assets/icons/ArrowIcon';
 import {colors} from '../../constants/ui/colors';
 import {radiuses} from '../../constants/ui/radiuses';
 import {spaces} from '../../constants/ui/spaces';
+import {FontSizes} from '../../constants/ui/fonts';
+// Constants
+import {ButtonType} from '../../constants/enums';
 // Utils
 import {getFlexDirection, getIconDirection} from '../../utils/styleUtil';
 import {isIOS} from '../../utils/platformUtil';
-import {ButtonType} from '../../constants/enums';
 
 interface GenericButtonProps {
   text: string;
@@ -40,7 +42,7 @@ const GenericButton = ({
   text,
   textColor,
   icon,
-  fontSize = 18,
+  fontSize = FontSizes.regular,
   lineHeight = isIOS() ? 0 : 25,
   buttonType,
   onPress,
@@ -79,7 +81,7 @@ const GenericButton = ({
         <>
           <BoldText
             size={fontSize}
-            color={textColor || colors.WHITE}
+            color={textColor}
             lineHeight={lineHeight}
             children={text}
           />
@@ -137,10 +139,6 @@ const styles = StyleSheet.create({
     paddingVertical: spaces._16px,
     borderRadius: radiuses._50px,
     height: 56,
-  },
-  text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
   },
   backButtonContainer: {
     flexDirection: getFlexDirection(),
