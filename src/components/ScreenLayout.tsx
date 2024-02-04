@@ -1,44 +1,52 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 // Components
-import {BoldText} from './Texts';
-import {BackwardsButton} from './Buttons';
+import {BackwardsButton, PrimaryButton} from './Buttons';
 // UI
 import {spaces} from '../constants/ui/spaces';
-import {colors} from '../constants/ui/colors';
+import {getFlexDirection, getSelfAlign, hp, wp} from '../utils/styleUtil';
+// Constants
+import {ButtonType} from '../constants/enums';
 // Utils
+import {isIOS} from '../utils/platformUtil';
 import {FontSizes} from '../constants/ui/fonts';
-import {getFlexDirection, hp} from '../utils/styleUtil';
-import {statusBarHeight} from '../utils/platformUtil';
+import {BoldText} from './Texts';
 
-interface ScreenLayoutProps {
-  title?: string;
+interface ScreenLayout1Props {
+  children: JSX.Element;
+  screenTitle?: string;
   isBackButton?: boolean;
-  children: JSX.Element | JSX.Element[];
+  onPress?: () => void;
+  isButtonDisabled?: boolean;
+  buttonText?: string;
+  isLoading?: boolean;
+  icon?: JSX.Element;
 }
+
 const ScreenLayout = ({
-  title,
-  isBackButton = false,
   children,
-}: ScreenLayoutProps) => {
+  screenTitle,
+  isBackButton = false,
+  onPress,
+  isButtonDisabled = false,
+  buttonText,
+  isLoading = false,
+  icon,
+}: ScreenLayout1Props) => {
   const renderScreenHeader = () => {
     return (
-      <View style={styles.headerContainer}>
-        <View style={styles.titleTextContainer}>
-          <BoldText children={title!} size={FontSizes.large} />
-        </View>
+      <View style={[styles.headerContainer, {alignSelf: getSelfAlign()}]}>
+        <BoldText children={screenTitle!} size={FontSizes.large} />
       </View>
     );
   };
-
   const renderHeaderWithBack = () => {
     return (
       <View style={styles.headerContainer}>
         <BackwardsButton />
         <View style={styles.titleTextContainer}>
-          <BoldText children={title!} size={FontSizes.medium} />
+          <BoldText children={screenTitle!} size={FontSizes.medium} />
         </View>
       </View>
     );
@@ -47,38 +55,67 @@ const ScreenLayout = ({
   const renderHeader = isBackButton ? renderHeaderWithBack : renderScreenHeader;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <KeyboardAvoidingView
+      behavior={isIOS() ? 'padding' : 'height'}
+      style={styles.keyboardAvoidingView}>
+      {screenTitle && renderHeader()}
       <ScrollView
-        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}>
-        {title && renderHeader()}
-        {children}
+        <View style={styles.container}>{children}</View>
       </ScrollView>
-    </SafeAreaView>
+      {buttonText && onPress && (
+        <View style={styles.buttonContainer}>
+          <PrimaryButton
+            buttonType={ButtonType.PRIMARY}
+            text={buttonText}
+            onPress={onPress}
+            isDisabled={isButtonDisabled}
+            isLoading={isLoading}
+            icon={icon}
+          />
+        </View>
+      )}
+    </KeyboardAvoidingView>
   );
 };
 
 export default ScreenLayout;
 
 const styles = StyleSheet.create({
-  container: {
-    height: hp(100),
+  main: {
+    alignItems: 'center',
   },
-  scrollView: {
+  keyboardAvoidingView: {
     flex: 1,
-    backgroundColor: colors.BACKGROUND,
-    paddingTop: statusBarHeight,
+    alignItems: 'center',
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    width: wp(100),
+  },
+  container: {
+    paddingTop: spaces._24px,
     paddingHorizontal: spaces._24px,
+    gap: spaces._24px,
+    height: '100%',
+    paddingBottom: hp(15),
   },
   headerContainer: {
+    paddingTop: spaces._36px,
+    paddingHorizontal: spaces._24px,
     flexDirection: getFlexDirection(),
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: spaces._24px,
   },
   titleTextContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: hp(5),
   },
 });
