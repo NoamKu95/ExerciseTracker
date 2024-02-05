@@ -39,3 +39,8 @@ export const getSelfAlign = (): 'flex-end' | 'flex-start' => {
   const isRTL = true; // store.getState().auth.isRTL;
   return isRTL ? 'flex-end' : 'flex-start';
 };
+
+export const getOppositeSelfAlign = (): 'flex-end' | 'flex-start' => {
+  const isRTL = true; // store.getState().auth.isRTL;
+  return isRTL ? 'flex-start' : 'flex-end';
+};

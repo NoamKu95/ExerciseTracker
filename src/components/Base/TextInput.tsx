@@ -98,7 +98,7 @@ const AppTextInput = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.wrapperContainer}>
       <View
         style={[
           styles.mainContainer,
@@ -130,8 +130,8 @@ const AppTextInput = ({
 export default AppTextInput;
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: spaces._10px,
+  wrapperContainer: {
+    marginVertical: spaces._12px,
   },
   mainContainer: {
     borderRadius: radiuses._16px,
@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
   errorContainer: {
     flexDirection: getOpposingFlexDirection(),
     alignItems: 'center',
-    marginTop: spaces._4px,
   },
   errorBorder: {
     borderWidth: 1,
