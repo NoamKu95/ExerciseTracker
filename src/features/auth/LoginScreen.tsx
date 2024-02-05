@@ -61,7 +61,7 @@ const LoginScreen = () => {
 
   const renderForgotPassword = () => {
     return (
-      <View style={{alignSelf: getOppositeSelfAlign()}}>
+      <View style={styles.forgotPassContainer}>
         <TextButton
           buttonType={ButtonType.TEXT}
           text={i18n.t('screens.login.forgotPassword')}
@@ -133,6 +133,9 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     gap: spaces._0px,
+  },
+  forgotPassContainer: {
+    alignSelf: getOppositeSelfAlign(),
   },
   notRegisteredContainer: {
     alignSelf: 'center',

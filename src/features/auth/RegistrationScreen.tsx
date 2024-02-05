@@ -99,7 +99,9 @@ const RegistrationScreen = () => {
         <TextButton
           text={i18n.t('screens.register.loginHere')}
           fontSize={FontSizes.small}
-          onPress={() => {}}
+          onPress={() => {
+            // TODO - navigate to login
+          }}
         />
       </View>
     );
