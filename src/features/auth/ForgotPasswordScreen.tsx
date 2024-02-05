@@ -38,7 +38,7 @@ const ForgotPasswordScreen = () => {
   };
 
   const handleSendMailPress = () => {
-    // TODO: send request and navigate
+    // TODO: send request .then() update state
     setIsMailSent(true);
   };
 
@@ -97,15 +97,5 @@ export default ForgotPasswordScreen;
 const styles = StyleSheet.create({
   textsContainer: {
     gap: spaces._12px,
-  },
-  forgotPassContainer: {
-    alignSelf: getOppositeSelfAlign(),
-  },
-  notRegisteredContainer: {
-    alignSelf: 'center',
-    flexDirection: getFlexDirection(),
-    alignItems: 'baseline',
-    position: 'absolute',
-    bottom: hp(15),
   },
 });
