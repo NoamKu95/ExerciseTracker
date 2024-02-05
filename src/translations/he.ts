@@ -42,6 +42,14 @@ const Hebrew: Translation = {
     profile: {
       title: 'אזור אישי',
     },
+    forgotPassword: {
+      screenTitle: 'איפוס סיסמה',
+      didYouForget: 'ברחה לך הסיסמה מהראש?',
+      dontWorry: 'אין מה לדאוג, אפשר בקלות ובמהירות לג׳נרט סיסמה זמנית חדשה',
+      email: 'כתובת המייל איתה נרשמת',
+      checkInbox: 'שלחנו! זה הזמן לגשת למייל ואז להתחבר עם הסיסמה הזמנית',
+      sendPassword: 'שלחו לי סיסמה חדשה',
+    },
   },
   bottomSheets: {
     exercise: {

@@ -44,6 +44,14 @@ const English: Translation = {
     profile: {
       title: 'אזור אישי',
     },
+    forgotPassword: {
+      screenTitle: '',
+      didYouForget: '',
+      dontWorry: '',
+      email: '',
+      checkInbox: '',
+      sendPassword: '',
+    },
   },
   bottomSheets: {
     exercise: {

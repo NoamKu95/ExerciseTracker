@@ -28,6 +28,14 @@ export interface Translation {
       noAccountYet: string;
       registerHere: string;
     };
+    forgotPassword: {
+      screenTitle: string;
+      didYouForget: string;
+      dontWorry: string;
+      email: string;
+      checkInbox: string;
+      sendPassword: string;
+    };
     home: {
       title: string;
     };

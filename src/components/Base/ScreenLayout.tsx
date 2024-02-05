@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     paddingBottom: hp(15),
   },
   headerContainer: {
+    backgroundColor: colors.BACKGROUND,
     paddingTop: spaces._36px,
     paddingHorizontal: spaces._24px,
     flexDirection: getFlexDirection(),
