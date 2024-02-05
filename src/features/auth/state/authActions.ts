@@ -10,8 +10,11 @@ import {
   registerRepo,
   loginRepo,
   refreshAccessTokenRepo,
+  loginWithTokenRepo,
+  sendNewPasswordRepo,
 } from '../../../repo/authRepo';
 
+// MARK: - Register
 export const registerUser = createAsyncThunk<void, RegistrationObject>(
   'auth/registerUser',
   async registrationObject => {
@@ -23,6 +26,7 @@ export const registerUser = createAsyncThunk<void, RegistrationObject>(
   },
 );
 
+// MARK: - Login
 export const loginUser = createAsyncThunk<
   {user: User; accessToken: string},
   UserCredentials
@@ -34,6 +38,30 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+export const loginUserViaToken = createAsyncThunk<User, string>(
+  'auth/loginWithToken',
+  async accessToken => {
+    try {
+      return await loginWithTokenRepo(accessToken);
+    } catch (error) {
+      throw error;
+    }
+  },
+);
+
+// MARK: - Forgot Password
+export const sendNewPassword = createAsyncThunk<void, string>(
+  'auth/forgotPassword',
+  async email => {
+    try {
+      return await sendNewPasswordRepo(email);
+    } catch (error) {
+      throw error;
+    }
+  },
+);
+
+// MARK: - Refresh Token
 export const refreshAccessToken = createAsyncThunk<string, void>(
   'auth/refreshAccessToken',
   async () => {
