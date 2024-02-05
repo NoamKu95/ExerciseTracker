@@ -26,11 +26,11 @@ import {isIOS} from '../../utils/platformUtil';
 
 interface GenericButtonProps {
   text: string;
-  textColor: string;
+  textColor?: string;
   icon?: JSX.Element;
   fontSize?: number;
   lineHeight?: number;
-  buttonType: ButtonType;
+  buttonType?: ButtonType;
   onPress: () => void;
   isDisabled?: boolean;
   isLoading?: boolean;
@@ -40,35 +40,23 @@ interface GenericButtonProps {
 
 const GenericButton = ({
   text,
-  textColor,
+  textColor = colors.MAIN_TEXT,
   icon,
   fontSize = FontSizes.regular,
   lineHeight = isIOS() ? 0 : 25,
-  buttonType,
+  buttonType = ButtonType.PRIMARY,
   onPress,
   isDisabled = false,
   isLoading = false,
   minWidth = 160,
 }: GenericButtonProps) => {
-  const buttonContainerStyle: TextStyle = {
-    backgroundColor: isDisabled
-      ? colors.GRAY
-      : buttonType === ButtonType.PRIMARY
-      ? colors.PRIMARY
-      : colors.TRANSPARENT,
-    borderColor:
-      buttonType === ButtonType.SECONDARY ? colors.PRIMARY : colors.TRANSPARENT,
-    borderWidth: buttonType === ButtonType.SECONDARY ? 1 : 0,
-    paddingHorizontal:
-      buttonType === ButtonType.TEXT ? spaces._4px : spaces._24px,
-    opacity: isDisabled ? 0.5 : 1,
-    minWidth,
-  };
-
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.buttonContainer, buttonContainerStyle]}
+      style={[
+        styles.buttonContainer,
+        getButtonContainerStyle(buttonType, isDisabled, minWidth),
+      ]}
       disabled={isDisabled || isLoading}>
       {isLoading ? (
         <ActivityIndicator
@@ -130,15 +118,41 @@ export const BackwardsButton = () => {
   );
 };
 
+const getButtonContainerStyle = (
+  buttonType: ButtonType,
+  isDisabled: boolean,
+  minWidth: number,
+): TextStyle => {
+  return StyleSheet.create({
+    container: {
+      backgroundColor: isDisabled
+        ? colors.GRAY
+        : buttonType === ButtonType.PRIMARY
+        ? colors.PRIMARY
+        : colors.TRANSPARENT,
+      borderColor:
+        buttonType === ButtonType.SECONDARY
+          ? colors.PRIMARY
+          : colors.TRANSPARENT,
+      borderWidth: buttonType === ButtonType.SECONDARY ? 1 : 0,
+      paddingHorizontal:
+        buttonType === ButtonType.TEXT ? spaces._4px : spaces._24px,
+      paddingVertical:
+        buttonType === ButtonType.TEXT ? spaces._8px : spaces._16px,
+      opacity: isDisabled ? 0.5 : 1,
+      height: buttonType === ButtonType.TEXT ? null : 56,
+      minWidth,
+    },
+  }).container;
+};
+
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: getFlexDirection(),
     alignItems: 'center',
     justifyContent: 'center',
     gap: spaces._10px,
-    paddingVertical: spaces._16px,
     borderRadius: radiuses._50px,
-    height: 56,
   },
   backButtonContainer: {
     flexDirection: getFlexDirection(),

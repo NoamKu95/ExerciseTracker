@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 // Components
-import RegistrationScreen from '../features/RegistrationScreen';
+import RegistrationScreen from '../features/auth/RegistrationScreen';
 // UI
 import {colors} from '../constants/ui/colors';
 // Constants

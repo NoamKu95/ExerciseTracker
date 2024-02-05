@@ -21,6 +21,16 @@ const English: Translation = {
       password: '',
       repassword: '',
       dontWorry: '',
+      haveAccount: '',
+      loginHere: '',
+    },
+    login: {
+      title: '',
+      subtitle: '',
+      login: '',
+      forgotPassword: '',
+      noAccountYet: '',
+      registerHere: '',
     },
     home: {
       title: '',

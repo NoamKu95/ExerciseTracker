@@ -12,12 +12,12 @@ export const validatePassword = (password: string): boolean => {
 };
 
 export const isRegistrationDataValid = (
-  name: string,
   email: string,
   password: string,
+  name?: string,
 ) => {
-  const isNameValid = validateFullName(name);
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
+  const isNameValid = name ? validateFullName(name) : true;
   return isNameValid && isEmailValid && isPasswordValid;
 };

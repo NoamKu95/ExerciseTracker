@@ -17,6 +17,16 @@ export interface Translation {
       password: string;
       repassword: string;
       dontWorry: string;
+      haveAccount: string;
+      loginHere: string;
+    };
+    login: {
+      title: string;
+      subtitle: string;
+      login: string;
+      forgotPassword: string;
+      noAccountYet: string;
+      registerHere: string;
     };
     home: {
       title: string;

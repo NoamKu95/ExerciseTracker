@@ -84,9 +84,6 @@ const ScreenLayout = ({
 export default ScreenLayout;
 
 const styles = StyleSheet.create({
-  main: {
-    alignItems: 'center',
-  },
   keyboardAvoidingView: {
     flex: 1,
     alignItems: 'center',
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
     width: wp(100),
   },
   container: {
-    paddingTop: spaces._24px,
+    paddingTop: hp(10),
     paddingHorizontal: spaces._24px,
     gap: spaces._24px,
     height: '100%',

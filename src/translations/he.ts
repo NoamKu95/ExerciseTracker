@@ -19,6 +19,16 @@ const Hebrew: Translation = {
       password: 'סיסמה',
       repassword: 'סיסמה בשנית',
       dontWorry: 'אין מה לדאוג - לא נבלבל לך במוח עם מיילים שיווקיים מיותרים',
+      haveAccount: 'כבר יש לך חשבון?',
+      loginHere: 'יאללה להתחבר',
+    },
+    login: {
+      title: 'איזה כיף שחזרת!',
+      subtitle: 'לוגין קטן ונאפשר לך לחזור לתעד את האימונים שלך :)',
+      login: 'התחברות',
+      forgotPassword: 'שכחתי סיסמה',
+      noAccountYet: 'עדיין לא יצרת חשבון?',
+      registerHere: 'עושים את זה פה',
     },
     home: {
       title: '',
