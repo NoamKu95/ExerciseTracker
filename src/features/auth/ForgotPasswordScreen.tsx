@@ -13,11 +13,6 @@ import {spaces} from '../../constants/ui/spaces';
 import {colors} from '../../constants/ui/colors';
 import {FontSizes} from '../../constants/ui/fonts';
 // Utils
-import {
-  getFlexDirection,
-  getOppositeSelfAlign,
-  hp,
-} from '../../utils/styleUtil';
 import {validateEmail} from '../../utils/validators';
 // Redux
 import {useAppSelector} from '../../store/store';

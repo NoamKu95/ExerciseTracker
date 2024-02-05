@@ -62,7 +62,8 @@ const ScreenLayout = ({
       {screenTitle && renderHeader()}
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        bounces={false}>
         <View style={styles.container}>{children}</View>
       </ScrollView>
       {buttonText && onPress && (

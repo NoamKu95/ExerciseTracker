@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     color: colors.MAIN_TEXT,
     alignSelf: getSelfAlign(),
     width: '90%',
-    height: 25,
+    padding: 0,
   },
   errorContainer: {
     flexDirection: getOpposingFlexDirection(),
