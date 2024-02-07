@@ -4,7 +4,12 @@ import i18n, {LanguageType, isRightToLeft} from '../../../translations/i18n';
 // Models
 import {User} from '../../../models/core/user';
 // Redux
-import {loginUser, refreshAccessToken, registerUser} from './authActions';
+import {
+  loginUser,
+  refreshAccessToken,
+  registerUser,
+  sendNewPassword,
+} from './authActions';
 
 export interface AuthState {
   isRTL: boolean;
@@ -68,6 +73,17 @@ export const AuthSlice = createSlice({
           state.userToken = action.payload.accessToken;
         },
       )
+
+      // MARK: - Forgot Password
+      .addCase(sendNewPassword.pending, state => {
+        state.isRTL = true;
+      })
+      .addCase(sendNewPassword.rejected, state => {
+        state.isRTL = false;
+      })
+      .addCase(sendNewPassword.fulfilled, state => {
+        state.isRTL = false;
+      })
 
       // MARK: - Refresh Token
       .addCase(refreshAccessToken.pending, state => {
