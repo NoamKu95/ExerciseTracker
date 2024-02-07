@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 // Constants
 import i18n from '../../translations/i18n';
+import {RootStackParamList, Screens} from '../../constants/screens';
 import {ButtonType} from '../../constants/enums';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
@@ -21,26 +24,41 @@ import {
   hp,
 } from '../../utils/styleUtil';
 import {
-  isRegistrationDataValid,
+  isLoginDataValid,
   validateEmail,
   validatePassword,
 } from '../../utils/validators';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {loginUser} from './state/authActions';
+import {resetTo} from '../../navigation/RootNavigation';
 
 const LoginScreen = () => {
+  const dispatch = useAppDispatch();
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, 'Login'>>();
   const isLoading = useAppSelector(state => state.auth.isLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
 
   useEffect(() => {
-    const validationResponse = isRegistrationDataValid(email, password);
+    const validationResponse = isLoginDataValid(email, password);
     setIsAllInputsValid(validationResponse);
   }, [email, password]);
 
   const handleLoginPress = () => {
-    // TODO: send request and navigate
+    dispatch(
+      loginUser({
+        email,
+        password,
+      }),
+    )
+      .unwrap()
+      .then(() => resetTo(Screens.TABS))
+      .catch(
+        () => {}, // TODO - Error handling
+      );
   };
 
   const renderTexts = () => {
@@ -67,7 +85,7 @@ const LoginScreen = () => {
           text={i18n.t('screens.login.forgotPassword')}
           fontSize={FontSizes.small}
           onPress={() => {
-            // TODO - navigate to forgot password
+            navigation.navigate(Screens.FORGOT_PASSWORD);
           }}
         />
       </View>
@@ -85,7 +103,7 @@ const LoginScreen = () => {
           text={i18n.t('screens.login.registerHere')}
           fontSize={FontSizes.small}
           onPress={() => {
-            // TODO - navigate to registration
+            navigation.navigate(Screens.REGISTER);
           }}
         />
       </View>

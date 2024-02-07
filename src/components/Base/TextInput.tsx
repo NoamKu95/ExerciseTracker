@@ -165,6 +165,7 @@ const styles = (isRTL?: boolean) =>
       alignSelf: getSelfAlign(),
       width: '90%',
       height: 25,
+      padding: spaces._0px,
     },
     errorContainer: {
       flexDirection: getOpposingFlexDirection(),

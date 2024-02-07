@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import {resetTo} from '../../navigation/RootNavigation';
 // Constants
 import i18n from '../../translations/i18n';
+import {RootStackParamList, Screens} from '../../constants/screens';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
@@ -22,9 +26,13 @@ import {
   validatePassword,
 } from '../../utils/validators';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {registerUser} from './state/authActions';
 
 const RegistrationScreen = () => {
+  const dispatch = useAppDispatch();
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, 'Register'>>();
   const isLoading = useAppSelector(state => state.auth.isLoading);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,12 +40,24 @@ const RegistrationScreen = () => {
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
 
   useEffect(() => {
-    const validationResponse = isRegistrationDataValid(name, email, password);
+    const validationResponse = isRegistrationDataValid(email, password, name);
     setIsAllInputsValid(validationResponse);
-  }, [name, email, password]);
+  }, [email, password, name]);
 
   const handleRegisterPress = () => {
-    // TODO: send request and navigate
+    dispatch(
+      registerUser({
+        email,
+        password,
+        name,
+        languageName: '',
+      }),
+    )
+      .unwrap()
+      .then(() => resetTo(Screens.TABS))
+      .catch(
+        () => {}, // TODO - Error handling
+      );
   };
 
   const renderTexts = () => {
@@ -100,7 +120,7 @@ const RegistrationScreen = () => {
           text={i18n.t('screens.register.loginHere')}
           fontSize={FontSizes.small}
           onPress={() => {
-            // TODO - navigate to login
+            navigation.navigate(Screens.LOGIN);
           }}
         />
       </View>
@@ -110,7 +130,9 @@ const RegistrationScreen = () => {
   return (
     <>
       <ScreenLayout
-        onPress={handleRegisterPress}
+        onPress={() => {
+          handleRegisterPress();
+        }}
         isButtonDisabled={!isAllInputsValid || isLoading}
         buttonText={i18n.t('screens.register.letsGo')}
         isLoading={isLoading}
