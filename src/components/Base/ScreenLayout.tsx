@@ -57,7 +57,7 @@ const ScreenLayout = ({
 
   return (
     <KeyboardAvoidingView
-      behavior={isIOS() ? 'padding' : 'height'}
+      behavior={isIOS() ? 'padding' : undefined}
       style={styles.keyboardAvoidingView}>
       {screenTitle && renderHeader()}
       <ScrollView

@@ -13,7 +13,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={Screens.FORGOT_PASSWORD}>
+      <Stack.Navigator initialRouteName={Screens.REGISTER}>
         <Stack.Screen
           name={Screens.REGISTER}
           component={RegistrationStack}

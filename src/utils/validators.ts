@@ -14,10 +14,14 @@ export const validatePassword = (password: string): boolean => {
 export const isRegistrationDataValid = (
   email: string,
   password: string,
-  name?: string,
-) => {
+  name: string,
+): boolean => {
   const isEmailValid = validateEmail(email);
   const isPasswordValid = validatePassword(password);
-  const isNameValid = name ? validateFullName(name) : true;
+  const isNameValid = !!name && !!name.trim() && validateFullName(name);
   return isNameValid && isEmailValid && isPasswordValid;
+};
+
+export const isLoginDataValid = (email: string, password: string): boolean => {
+  return validateEmail(email) && validatePassword(password);
 };
