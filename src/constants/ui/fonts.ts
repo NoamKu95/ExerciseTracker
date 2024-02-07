@@ -1,19 +1,16 @@
-export const Fonts = {
-  RUBIK: 'rubik',
-  RUBIK_MEDIUM: 'rubik-medium',
-  MONTSERRAT: 'montserrat',
-  MONTSERRAT_MEDIUM: 'montserrat-medium',
-  MONTSERRAT_BOLD: 'montserrat-bold',
-  RUBIK_BOLD: 'rubik-bold',
-};
+import {isIOS} from '../../utils/platformUtil';
 
-export const fontsToLoad = {
-  [Fonts.MONTSERRAT]: require('../../assets/fonts/Montserrat-Regular.otf'),
-  [Fonts.RUBIK]: require('../../assets/fonts/Rubik-Regular.ttf'),
-  [Fonts.RUBIK_MEDIUM]: require('../../assets/fonts/Rubik-Medium.ttf'),
-  [Fonts.MONTSERRAT_MEDIUM]: require('../../assets/fonts/Montserrat-Medium.ttf'),
-  [Fonts.RUBIK_BOLD]: require('../../assets/fonts/Rubik-Bold.ttf'),
-  [Fonts.MONTSERRAT_BOLD]: require('../../assets/fonts/Montserrat-Bold.ttf'),
+export const fontFamilies = {
+  RUBIK: {
+    normal: isIOS() ? 'Rubik-Regular' : 'RubikRegular',
+    medium: isIOS() ? 'Rubik-Medium' : 'RubikMedium',
+    bold: isIOS() ? 'Rubik-Bold' : 'RubikBold',
+  },
+  MONTSERRAT: {
+    normal: isIOS() ? 'Montserrat-Regular' : 'MontserratRegular',
+    medium: isIOS() ? 'Montserrat-Medium' : 'MontserratMedium',
+    bold: isIOS() ? 'Montserrat-Bold' : 'MontserratBold',
+  },
 };
 
 export const FontSizes = {

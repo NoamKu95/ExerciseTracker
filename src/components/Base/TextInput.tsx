@@ -14,7 +14,10 @@ import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
 import {FontSizes} from '../../constants/ui/fonts';
+// Redux
+import {useAppSelector} from '../../store/store';
 // Utils
+import {getFontFamily} from '../../utils/fontFamily';
 import {
   getFlexDirection,
   getOpposingFlexDirection,
@@ -39,6 +42,7 @@ const AppTextInput = ({
   isCensored = false,
   errorText,
 }: AppTextInputProps) => {
+  const isRTL = useAppSelector(state => state.auth.isRTL);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
   const [isFocused, setIsFocused] = useState(false);
   const labelPosition = useSharedValue(20);
@@ -87,7 +91,7 @@ const AppTextInput = ({
   const renderError = () => {
     if (isErrorShown) {
       return (
-        <View style={styles.errorContainer}>
+        <View style={styles().errorContainer}>
           <MediumText size={FontSizes.small} color={colors.ERROR}>
             {errorText}
           </MediumText>
@@ -98,18 +102,18 @@ const AppTextInput = ({
   };
 
   return (
-    <View style={styles.wrapperContainer}>
+    <View style={styles().container}>
       <View
         style={[
-          styles.mainContainer,
-          isErrorShown ? styles.errorBorder : undefined,
+          styles().mainContainer,
+          isErrorShown ? styles().errorBorder : undefined,
         ]}>
-        <Reanimated.Text style={[styles.label, animatedStyles]}>
+        <Reanimated.Text style={[styles(isRTL).label, animatedStyles]}>
           {label}
         </Reanimated.Text>
-        <View style={styles.inputContainer}>
+        <View style={styles().inputContainer}>
           <TextInput
-            style={styles.input}
+            style={styles().input}
             value={value}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -129,44 +133,46 @@ const AppTextInput = ({
 
 export default AppTextInput;
 
-const styles = StyleSheet.create({
-  wrapperContainer: {
-    marginVertical: spaces._12px,
-  },
-  mainContainer: {
-    borderRadius: radiuses._16px,
-    backgroundColor: colors.WHITE,
-    paddingVertical: spaces._10px,
-    paddingHorizontal: spaces._10px,
-    height: 56,
-  },
-  label: {
-    position: 'absolute',
-    fontSize: FontSizes.medium,
-    color: colors.SECONDARY_TEXT,
-    alignSelf: getSelfAlign(),
-    paddingHorizontal: spaces._12px,
-  },
-  inputContainer: {
-    flexDirection: getFlexDirection(),
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: '100%',
-  },
-  input: {
-    borderColor: colors.TRANSPARENT,
-    fontSize: FontSizes.medium,
-    color: colors.MAIN_TEXT,
-    alignSelf: getSelfAlign(),
-    width: '90%',
-    padding: 0,
-  },
-  errorContainer: {
-    flexDirection: getOpposingFlexDirection(),
-    alignItems: 'center',
-  },
-  errorBorder: {
-    borderWidth: 1,
-    borderColor: colors.ERROR,
-  },
-});
+const styles = (isRTL?: boolean) =>
+  StyleSheet.create({
+    container: {
+      marginVertical: spaces._10px,
+    },
+    mainContainer: {
+      borderRadius: radiuses._16px,
+      backgroundColor: colors.WHITE,
+      paddingVertical: spaces._10px,
+      paddingHorizontal: spaces._10px,
+      height: 56,
+    },
+    label: {
+      position: 'absolute',
+      fontFamily: getFontFamily(isRTL ?? true, 'normal'),
+      color: colors.SECONDARY_TEXT,
+      alignSelf: getSelfAlign(),
+      paddingHorizontal: spaces._12px,
+    },
+    inputContainer: {
+      flexDirection: getFlexDirection(),
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: '100%',
+    },
+    input: {
+      borderColor: colors.TRANSPARENT,
+      fontSize: FontSizes.medium,
+      color: colors.MAIN_TEXT,
+      alignSelf: getSelfAlign(),
+      width: '90%',
+      height: 25,
+    },
+    errorContainer: {
+      flexDirection: getOpposingFlexDirection(),
+      alignItems: 'center',
+      marginTop: spaces._4px,
+    },
+    errorBorder: {
+      borderWidth: 1,
+      borderColor: colors.ERROR,
+    },
+  });
