@@ -1,15 +1,20 @@
 import {
-  loginApi,
-  refreshAccessTokenApi,
-  registerApi,
-} from '../apiControllers/authApi';
-import {
   KeyChainKeys,
   getFromKeychain,
   saveToKeychain,
 } from '../managers/keychainManager';
+// Constants
 import {User, UserCredentials, RegistrationObject} from '../models/core/user';
+// Redux
+import {
+  loginApi,
+  loginWithTokenApi,
+  refreshAccessTokenApi,
+  registerApi,
+  sendNewPasswordApi,
+} from '../apiControllers/authApi';
 
+// MARK: - Register
 export const registerRepo = async (
   registrationObject: RegistrationObject,
 ): Promise<void> => {
@@ -18,6 +23,7 @@ export const registerRepo = async (
   return;
 };
 
+// MARK: - Login
 export const loginRepo = async (
   credentials: UserCredentials,
 ): Promise<{user: User; accessToken: string}> => {
@@ -26,6 +32,19 @@ export const loginRepo = async (
   return {user, accessToken};
 };
 
+export const loginWithTokenRepo = async (
+  accessToken: string,
+): Promise<User> => {
+  const user = await loginWithTokenApi(accessToken);
+  return user;
+};
+
+// MARK: - Forgot Password
+export const sendNewPasswordRepo = async (email: string): Promise<void> => {
+  return await sendNewPasswordApi(email);
+};
+
+// MARK: - Refresh Token
 export const refreshAccessTokenRepo = async (): Promise<string> => {
   const refreshToken = await getFromKeychain(KeyChainKeys.REFRESH_TOKEN);
   const {newAccessToken, newRefreshToken} = await refreshAccessTokenApi(
