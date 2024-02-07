@@ -45,7 +45,6 @@ const GenericText = ({
     writingDirection: getWritingDirection(),
     letterSpacing: letterSpacing,
     textDecorationLine: underline ? 'underline' : 'none',
-    fontWeight: fontWeight as TextStyle['fontWeight'],
     fontFamily: fontFamily,
   };
 
