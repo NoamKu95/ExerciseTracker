@@ -7,16 +7,21 @@ import {Screens, RootStackParamList} from '../constants/screens';
 import RegistrationStack from './RegistrationNavigator';
 import LoginScreen from '../features/auth/LoginScreen';
 import ForgotPasswordScreen from '../features/auth/ForgotPasswordScreen';
-import HomeScreen from '../features/home_page/HomePage';
+import OnboardingScreen from '../features/auth/OnboardingScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={Screens.REGISTER}>
+      <Stack.Navigator initialRouteName={Screens.ONBOARDING}>
         <Stack.Screen
           name={Screens.REGISTER}
           component={RegistrationStack}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={Screens.ONBOARDING}
+          component={OnboardingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -27,11 +32,6 @@ const AppNavigator = () => {
         <Stack.Screen
           name={Screens.FORGOT_PASSWORD}
           component={ForgotPasswordScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={Screens.HOMEPAGE}
-          component={HomeScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

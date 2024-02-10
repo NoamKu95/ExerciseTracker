@@ -21,6 +21,11 @@ const Hebrew: Translation = {
       haveAccount: 'כבר יש לך חשבון?',
       loginHere: 'יאללה להתחבר',
     },
+    onboarding: {
+      title: 'כיף להכיר אותך {{userName}}',
+      subtitle: 'הנה בריף קצר על מה אפשר לעשות באפליקציה:',
+      actionBtn: 'מגניב, בואו נתחיל',
+    },
     login: {
       title: 'איזה כיף שחזרת!',
       subtitle: 'לוגין קטן ונאפשר לך לחזור לתעד את האימונים שלך :)',

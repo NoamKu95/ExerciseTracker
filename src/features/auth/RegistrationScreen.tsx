@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {resetTo} from '../../navigation/RootNavigation';
 // Constants
 import i18n from '../../translations/i18n';
 import {RootStackParamList, Screens} from '../../constants/screens';
 // Components
+import {resetTo} from '../../navigation/RootNavigation';
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
@@ -54,7 +54,7 @@ const RegistrationScreen = () => {
       }),
     )
       .unwrap()
-      .then(() => resetTo(Screens.TABS))
+      .then(() => resetTo(Screens.ONBOARDING))
       .catch(
         () => {}, // TODO - Error handling
       );

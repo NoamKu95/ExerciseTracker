@@ -23,6 +23,11 @@ const English: Translation = {
       haveAccount: 'Already have an account?',
       loginHere: "Let's Login",
     },
+    onboarding: {
+      title: 'Nice to meet you ${userName}',
+      subtitle: 'Here is a brief about what you can do in the app:',
+      actionBtn: "Cool, Let's Go",
+    },
     login: {
       title: 'Good to see you again!',
       subtitle: "A quick login and we'll let you dive right back in",

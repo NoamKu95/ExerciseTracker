@@ -19,6 +19,11 @@ export interface Translation {
       haveAccount: string;
       loginHere: string;
     };
+    onboarding: {
+      title: string;
+      subtitle: string;
+      actionBtn: string;
+    };
     login: {
       title: string;
       subtitle: string;
