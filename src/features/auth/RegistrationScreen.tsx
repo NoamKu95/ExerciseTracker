@@ -1,29 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import {resetTo} from '../../navigation/RootNavigation';
 // Constants
-import i18n from '../translations/i18n';
+import i18n from '../../translations/i18n';
+import {RootStackParamList, Screens} from '../../constants/screens';
 // Components
-import ScreenLayout from '../components/Base/ScreenLayout';
-import {BoldText, RegularText} from '../components/Base/Texts';
-import AppTextInput from '../components/Base/TextInput';
+import ScreenLayout from '../../components/Base/ScreenLayout';
+import {BoldText, RegularText} from '../../components/Base/Texts';
+import {TextButton} from '../../components/Base/Buttons';
+import AppTextInput from '../../components/Base/TextInput';
 // Icons
-import SparkleIcon from '../assets/icons/SparkleIcon';
+import SparkleIcon from '../../assets/icons/SparkleIcon';
 // UI
-import {spaces} from '../constants/ui/spaces';
-import {colors} from '../constants/ui/colors';
-import {FontSizes} from '../constants/ui/fonts';
+import {spaces} from '../../constants/ui/spaces';
+import {colors} from '../../constants/ui/colors';
+import {FontSizes} from '../../constants/ui/fonts';
 // Utils
-import {hp} from '../utils/styleUtil';
+import {getFlexDirection, hp} from '../../utils/styleUtil';
 import {
   isRegistrationDataValid,
   validateEmail,
   validateFullName,
   validatePassword,
-} from '../utils/validators';
+} from '../../utils/validators';
 // Redux
-import {useAppSelector} from '../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {registerUser} from './state/authActions';
 
 const RegistrationScreen = () => {
+  const dispatch = useAppDispatch();
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, 'Register'>>();
   const isLoading = useAppSelector(state => state.auth.isLoading);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -31,12 +40,24 @@ const RegistrationScreen = () => {
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
 
   useEffect(() => {
-    const validationResponse = isRegistrationDataValid(name, email, password);
+    const validationResponse = isRegistrationDataValid(email, password, name);
     setIsAllInputsValid(validationResponse);
-  }, [name, email, password]);
+  }, [email, password, name]);
 
   const handleRegisterPress = () => {
-    // TODO: send request and navigate
+    dispatch(
+      registerUser({
+        email,
+        password,
+        name,
+        languageName: '',
+      }),
+    )
+      .unwrap()
+      .then(() => resetTo(Screens.TABS))
+      .catch(
+        () => {}, // TODO - Error handling
+      );
   };
 
   const renderTexts = () => {
@@ -88,10 +109,30 @@ const RegistrationScreen = () => {
     );
   };
 
+  const renderAlreadyRegistered = () => {
+    return (
+      <View style={styles.haveAccContainer}>
+        <RegularText
+          children={i18n.t('screens.register.haveAccount')}
+          size={FontSizes.small}
+        />
+        <TextButton
+          text={i18n.t('screens.register.loginHere')}
+          fontSize={FontSizes.small}
+          onPress={() => {
+            navigation.navigate(Screens.LOGIN);
+          }}
+        />
+      </View>
+    );
+  };
+
   return (
     <>
       <ScreenLayout
-        onPress={handleRegisterPress}
+        onPress={() => {
+          handleRegisterPress();
+        }}
         isButtonDisabled={!isAllInputsValid || isLoading}
         buttonText={i18n.t('screens.register.letsGo')}
         isLoading={isLoading}
@@ -99,6 +140,7 @@ const RegistrationScreen = () => {
         <>
           {renderTexts()}
           {renderDetailsTextFields()}
+          {renderAlreadyRegistered()}
         </>
       </ScreenLayout>
     </>
@@ -114,9 +156,16 @@ const styles = StyleSheet.create({
     gap: spaces._24px,
   },
   inputsContainer: {
-    gap: spaces._24px,
+    gap: spaces._0px,
   },
   textsContainer: {
     gap: spaces._12px,
+  },
+  haveAccContainer: {
+    alignSelf: 'center',
+    flexDirection: getFlexDirection(),
+    alignItems: 'baseline',
+    position: 'absolute',
+    bottom: hp(15),
   },
 });

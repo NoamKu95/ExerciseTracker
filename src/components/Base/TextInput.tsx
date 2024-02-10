@@ -91,7 +91,7 @@ const AppTextInput = ({
   const renderError = () => {
     if (isErrorShown) {
       return (
-        <View style={styles.errorContainer}>
+        <View style={styles().errorContainer}>
           <MediumText size={FontSizes.small} color={colors.ERROR}>
             {errorText}
           </MediumText>
@@ -165,6 +165,7 @@ const styles = (isRTL?: boolean) =>
       alignSelf: getSelfAlign(),
       width: '90%',
       height: 25,
+      padding: spaces._0px,
     },
     errorContainer: {
       flexDirection: getOpposingFlexDirection(),

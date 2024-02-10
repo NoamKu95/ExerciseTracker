@@ -17,8 +17,17 @@ const Hebrew: Translation = {
       name: 'שם מלא',
       email: 'אימייל',
       password: 'סיסמה',
-      repassword: 'סיסמה בשנית',
       dontWorry: 'אין מה לדאוג - לא נבלבל לך במוח עם מיילים שיווקיים מיותרים',
+      haveAccount: 'כבר יש לך חשבון?',
+      loginHere: 'יאללה להתחבר',
+    },
+    login: {
+      title: 'איזה כיף שחזרת!',
+      subtitle: 'לוגין קטן ונאפשר לך לחזור לתעד את האימונים שלך :)',
+      login: 'התחברות',
+      forgotPassword: 'שכחתי סיסמה',
+      noAccountYet: 'עדיין לא יצרת חשבון?',
+      registerHere: 'עושים את זה פה',
     },
     home: {
       title: '',
@@ -31,6 +40,14 @@ const Hebrew: Translation = {
     },
     profile: {
       title: 'אזור אישי',
+    },
+    forgotPassword: {
+      screenTitle: 'איפוס סיסמה',
+      didYouForget: 'ברחה לך הסיסמה מהראש?',
+      dontWorry: 'אין מה לדאוג, אפשר בקלות ובמהירות לג׳נרט סיסמה זמנית חדשה',
+      email: 'כתובת המייל איתה נרשמת',
+      checkInbox: 'שלחנו! זה הזמן לגשת למייל ואז להתחבר עם הסיסמה הזמנית',
+      sendPassword: 'שלחו לי סיסמה חדשה',
     },
   },
   bottomSheets: {
