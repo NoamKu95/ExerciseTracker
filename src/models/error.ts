@@ -11,6 +11,7 @@ export enum ServerErrorTypes {
 }
 
 export enum AppErrorTypes {
+  INITIALIZATION = 'InitializationError',
   NETWORK_ERROR = 'NetworkError',
   LOCAL_STORAGE_ERROR = 'LocalStorageInteractionError',
 }

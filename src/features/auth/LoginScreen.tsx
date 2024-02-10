@@ -17,6 +17,10 @@ import SparkleIcon from '../../assets/icons/SparkleIcon';
 import {spaces} from '../../constants/ui/spaces';
 import {colors} from '../../constants/ui/colors';
 import {FontSizes} from '../../constants/ui/fonts';
+// Redux
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {loginUser} from './state/authActions';
+import {resetTo} from '../../navigation/RootNavigation';
 // Utils
 import {
   getFlexDirection,
@@ -28,10 +32,6 @@ import {
   validateEmail,
   validatePassword,
 } from '../../utils/validators';
-// Redux
-import {useAppDispatch, useAppSelector} from '../../store/store';
-import {loginUser} from './state/authActions';
-import {resetTo} from '../../navigation/RootNavigation';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();

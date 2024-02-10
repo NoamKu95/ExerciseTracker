@@ -9,6 +9,11 @@ const Hebrew: Translation = {
     Profile: 'פרופיל',
   },
   screens: {
+    splash: {
+      title: 'השם של האפליקציה',
+      subtitle: 'משפט מחץ כלשהו או סלוגן',
+      actionBtn: 'בואו נתחיל',
+    },
     register: {
       hey: 'היי!',
       welcome: 'וולקאם לאפליקציית האימונים החדשה שלך :)',
@@ -34,6 +39,14 @@ const Hebrew: Translation = {
       noAccountYet: 'עדיין לא יצרת חשבון?',
       registerHere: 'עושים את זה פה',
     },
+    forgotPassword: {
+      screenTitle: 'איפוס סיסמה',
+      didYouForget: 'ברחה לך הסיסמה מהראש?',
+      dontWorry: 'אין מה לדאוג, אפשר בקלות ובמהירות לג׳נרט סיסמה זמנית חדשה',
+      email: 'כתובת המייל איתה נרשמת',
+      checkInbox: 'שלחנו! זה הזמן לגשת למייל ואז להתחבר עם הסיסמה הזמנית',
+      sendPassword: 'שלחו לי סיסמה חדשה',
+    },
     home: {
       title: '',
     },
@@ -46,13 +59,10 @@ const Hebrew: Translation = {
     profile: {
       title: 'אזור אישי',
     },
-    forgotPassword: {
-      screenTitle: 'איפוס סיסמה',
-      didYouForget: 'ברחה לך הסיסמה מהראש?',
-      dontWorry: 'אין מה לדאוג, אפשר בקלות ובמהירות לג׳נרט סיסמה זמנית חדשה',
-      email: 'כתובת המייל איתה נרשמת',
-      checkInbox: 'שלחנו! זה הזמן לגשת למייל ואז להתחבר עם הסיסמה הזמנית',
-      sendPassword: 'שלחו לי סיסמה חדשה',
+    noInternet: {
+      title: 'אופס, אין חיבור אינטרנט!',
+      subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',
+      btnAction: 'שננסה שוב?',
     },
   },
   bottomSheets: {
@@ -98,6 +108,7 @@ const Hebrew: Translation = {
   },
   errors: {
     genericError: '',
+    initialization: '',
     server: {
       apiError: '',
       badRequestError: '',

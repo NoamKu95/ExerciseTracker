@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-// Constants
-import {onboardingImages} from '../../constants/ui/images';
-import i18n from '../../translations/i18n';
-import {Screens} from '../../constants/screens';
-import {spaces} from '../../constants/ui/spaces';
-import {colors} from '../../constants/ui/colors';
-import {FontSizes} from '../../constants/ui/fonts';
-import {resetTo} from '../../navigation/RootNavigation';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import CarouselDot from '../../components/CarouselDot';
-// Utils
-import {getFlexDirection, hp, wp} from '../../utils/styleUtil';
+// UI
+import {spaces} from '../../constants/ui/spaces';
+import {colors} from '../../constants/ui/colors';
+import {FontSizes} from '../../constants/ui/fonts';
+// Constants
+import i18n from '../../translations/i18n';
+import {Screens} from '../../constants/screens';
+import {onboardingImages} from '../../constants/ui/images';
+import {resetTo} from '../../navigation/RootNavigation';
 // Redux
 import {useAppSelector} from '../../store/store';
+// Utils
+import {getFlexDirection, hp, wp} from '../../utils/styleUtil';
 
 const OnboardingScreen = () => {
-  const isRTL = useAppSelector(state => state.auth.isRTL);
-  const userName = 'noam'; //useAppSelector(state => state.auth.user?.fullName);
+  const userName = useAppSelector(state => state.auth.user?.fullName);
   const [imgIndex, setImgIndex] = useState(0);
 
   const renderTexts = () => {

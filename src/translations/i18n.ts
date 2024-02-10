@@ -63,11 +63,11 @@ export const getDeviceLng = (): LanguageType => {
     lng = I18nManager.getConstants().localeIdentifier ?? lng;
   }
 
-  if (lng && isHebrew(lng)) {
+  if (isHebrew(lng)) {
     return LanguageType.Hebrew;
   } else {
     const languageCode = lng?.substring(0, 2);
-    return languageCode ? getLanguageType(languageCode) : LanguageType.Hebrew;
+    return getLanguageType(languageCode);
   }
 };
 

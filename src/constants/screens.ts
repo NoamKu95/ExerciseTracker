@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Login: undefined;
   ForgotPassword: undefined;
   Tabs: undefined;
+  NoInternet: undefined;
 };
 
 export const Screens: {
@@ -14,6 +15,7 @@ export const Screens: {
   LOGIN: keyof RootStackParamList;
   FORGOT_PASSWORD: keyof RootStackParamList;
   TABS: keyof RootStackParamList;
+  NO_INTERNET: keyof RootStackParamList;
 } = {
   SPLASH: 'Splash',
   REGISTER: 'Register',
@@ -21,6 +23,7 @@ export const Screens: {
   LOGIN: 'Login',
   FORGOT_PASSWORD: 'ForgotPassword',
   TABS: 'Tabs',
+  NO_INTERNET: 'NoInternet',
 };
 
 // REGISTRATION STACK
