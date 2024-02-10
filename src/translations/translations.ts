@@ -15,7 +15,6 @@ export interface Translation {
       name: string;
       email: string;
       password: string;
-      repassword: string;
       dontWorry: string;
       haveAccount: string;
       loginHere: string;

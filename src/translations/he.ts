@@ -17,7 +17,6 @@ const Hebrew: Translation = {
       name: 'שם מלא',
       email: 'אימייל',
       password: 'סיסמה',
-      repassword: 'סיסמה בשנית',
       dontWorry: 'אין מה לדאוג - לא נבלבל לך במוח עם מיילים שיווקיים מיותרים',
       haveAccount: 'כבר יש לך חשבון?',
       loginHere: 'יאללה להתחבר',

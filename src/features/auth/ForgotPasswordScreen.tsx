@@ -15,9 +15,11 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Utils
 import {validateEmail} from '../../utils/validators';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {sendNewPassword} from './state/authActions';
 
 const ForgotPasswordScreen = () => {
+  const dispatch = useAppDispatch();
   const isLoading = useAppSelector(state => state.auth.isLoading);
   const [email, setEmail] = useState('');
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
@@ -33,8 +35,12 @@ const ForgotPasswordScreen = () => {
   };
 
   const handleSendMailPress = () => {
-    // TODO: send request .then() update state
-    setIsMailSent(true);
+    dispatch(sendNewPassword(email))
+      .unwrap()
+      .then(() => setIsMailSent(true))
+      .catch(
+        () => {}, // TODO - Error handling
+      );
   };
 
   const renderTexts = () => {
