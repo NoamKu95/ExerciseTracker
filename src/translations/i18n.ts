@@ -83,4 +83,5 @@ export const getLanguageType = (languageCode: string): LanguageType => {
 };
 
 i18n.locale = getDeviceLng();
+I18nManager.forceRTL(isHebrew(i18n.locale));
 export default i18n;

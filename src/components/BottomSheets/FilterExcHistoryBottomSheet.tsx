@@ -15,12 +15,7 @@ import {exercisesTypes} from '../../data/exerciseTypes';
 // Models
 import {TimePeriod} from '../../models/timePeriod';
 // Utils
-import {
-  getFlexDirection,
-  getSelfAlign,
-  getTextAlign,
-  hp,
-} from '../../utils/styleUtil';
+import {getFlexDirection, getSelfAlign, hp} from '../../utils/styleUtil';
 
 interface FilterExcHistoryBottomSheetProps {
   onSavePressed: () => void;
@@ -44,7 +39,6 @@ const FilterExcHistoryBottomSheet = ({
         <BoldText
           children={i18n.t('bottomSheets.filtering.filterByPeriod')}
           size={FontSizes.regular}
-          textAlign={getTextAlign()}
         />
         <View style={styles.chipsContainer}>
           <FlatList
@@ -82,7 +76,6 @@ const FilterExcHistoryBottomSheet = ({
         <BoldText
           children={i18n.t('bottomSheets.filtering.filterByDates')}
           size={FontSizes.regular}
-          textAlign={getTextAlign()}
         />
         {/* TODO - add text inputs. once chosen - deselect time chips */}
       </>
@@ -95,7 +88,6 @@ const FilterExcHistoryBottomSheet = ({
         <BoldText
           children={i18n.t('bottomSheets.filtering.filterByExercise')}
           size={FontSizes.regular}
-          textAlign={getTextAlign()}
         />
         <View style={styles.chipsContainer}>
           <FlatList

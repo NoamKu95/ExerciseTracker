@@ -7,11 +7,7 @@ import store from '../../store/store';
 // Utils
 import {getFontFamily} from '../../utils/fontFamily';
 import {isIOS} from '../../utils/platformUtil';
-import {
-  getFlexDirection,
-  getTextAlign,
-  getWritingDirection,
-} from '../../utils/styleUtil';
+import {getFlexDirection, getWritingDirection} from '../../utils/styleUtil';
 
 interface GenericTextProps {
   color?: string;
@@ -41,7 +37,7 @@ const GenericText = ({
     color: color ? color : colors.MAIN_TEXT,
     fontSize: size,
     lineHeight: lineHeight,
-    textAlign: textAlign ? textAlign : getTextAlign(),
+    textAlign: textAlign ? textAlign : 'auto',
     writingDirection: getWritingDirection(),
     letterSpacing: letterSpacing,
     textDecorationLine: underline ? 'underline' : 'none',
