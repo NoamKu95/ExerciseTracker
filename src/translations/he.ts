@@ -3,10 +3,10 @@ import {Translation} from './translations';
 const Hebrew: Translation = {
   appName: 'trainTracker',
   tabs: {
-    Home: 'בית',
-    Exercise: 'אימון',
-    Progress: 'התקדמות',
-    Profile: 'פרופיל',
+    home: 'בית',
+    exercise: 'אימון',
+    progress: 'התקדמות',
+    profile: 'פרופיל',
   },
   screens: {
     splash: {

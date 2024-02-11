@@ -1,10 +1,10 @@
 export interface Translation {
   appName: string;
   tabs: {
-    Home: string;
-    Exercise: string;
-    Progress: string;
-    Profile: string;
+    home: string;
+    exercise: string;
+    progress: string;
+    profile: string;
   };
   screens: {
     splash: {
