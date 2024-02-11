@@ -17,21 +17,18 @@ import SparkleIcon from '../../assets/icons/SparkleIcon';
 import {spaces} from '../../constants/ui/spaces';
 import {colors} from '../../constants/ui/colors';
 import {FontSizes} from '../../constants/ui/fonts';
+// Redux
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {loginUser} from './state/authActions';
+import {resetTo} from '../../navigation/RootNavigation';
 // Utils
-import {
-  getFlexDirection,
-  getOppositeSelfAlign,
-  hp,
-} from '../../utils/styleUtil';
+import {getFlexDirection, getTextAlign, hp, wp} from '../../utils/styleUtil';
 import {
   isLoginDataValid,
   validateEmail,
   validatePassword,
 } from '../../utils/validators';
-// Redux
-import {useAppDispatch, useAppSelector} from '../../store/store';
-import {loginUser} from './state/authActions';
-import {resetTo} from '../../navigation/RootNavigation';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +45,10 @@ const LoginScreen = () => {
   }, [email, password]);
 
   const handleLoginPress = () => {
+    // TODO: delete when BE is available
+    resetTo(Screens.TABS);
+    return;
+
     dispatch(
       loginUser({
         email,
@@ -84,6 +85,7 @@ const LoginScreen = () => {
           buttonType={ButtonType.TEXT}
           text={i18n.t('screens.login.forgotPassword')}
           fontSize={FontSizes.small}
+          textAlign={getTextAlign()}
           onPress={() => {
             navigation.navigate(Screens.FORGOT_PASSWORD);
           }}
@@ -111,35 +113,38 @@ const LoginScreen = () => {
   };
 
   return (
-    <ScreenLayout
-      onPress={handleLoginPress}
-      isButtonDisabled={!isAllInputsValid || isLoading}
-      buttonText={i18n.t('screens.login.login')}
-      isLoading={isLoading}
-      icon={<SparkleIcon />}>
-      <>
-        {renderTexts()}
-        <View style={styles.inputsContainer}>
-          <AppTextInput
-            label={i18n.t('screens.register.email')}
-            value={email}
-            onChangeText={setEmail}
-            validateInput={validateEmail}
-            errorText={i18n.t('errors.validation.invalidEmail')}
-          />
-          <AppTextInput
-            label={i18n.t('screens.register.password')}
-            value={password}
-            isCensored={true}
-            onChangeText={setPassword}
-            validateInput={validatePassword}
-            errorText={i18n.t('errors.validation.invalidPassword')}
-          />
-          {renderForgotPassword()}
-        </View>
-        {renderAlreadyRegistered()}
-      </>
-    </ScreenLayout>
+    <>
+      <LanguagePicker />
+      <ScreenLayout
+        onPress={handleLoginPress}
+        isButtonDisabled={!isAllInputsValid || isLoading}
+        buttonText={i18n.t('screens.login.login')}
+        isLoading={isLoading}
+        buttonIcon={<SparkleIcon />}>
+        <>
+          {renderTexts()}
+          <View style={styles.inputsContainer}>
+            <AppTextInput
+              label={i18n.t('screens.register.email')}
+              value={email}
+              onChangeText={setEmail}
+              validateInput={validateEmail}
+              errorText={i18n.t('errors.validation.invalidEmail')}
+            />
+            <AppTextInput
+              label={i18n.t('screens.register.password')}
+              value={password}
+              isCensored={true}
+              onChangeText={setPassword}
+              validateInput={validatePassword}
+              errorText={i18n.t('errors.validation.invalidPassword')}
+            />
+            {renderForgotPassword()}
+          </View>
+          {renderAlreadyRegistered()}
+        </>
+      </ScreenLayout>
+    </>
   );
 };
 
@@ -153,7 +158,8 @@ const styles = StyleSheet.create({
     gap: spaces._0px,
   },
   forgotPassContainer: {
-    alignSelf: getOppositeSelfAlign(),
+    width: wp(30),
+    alignSelf: 'flex-end',
   },
   notRegisteredContainer: {
     alignSelf: 'center',

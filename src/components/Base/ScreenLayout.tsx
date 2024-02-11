@@ -22,7 +22,7 @@ interface ScreenLayout1Props {
   isButtonDisabled?: boolean;
   buttonText?: string;
   isLoading?: boolean;
-  icon?: JSX.Element;
+  buttonIcon?: JSX.Element;
 }
 
 const ScreenLayout = ({
@@ -33,7 +33,7 @@ const ScreenLayout = ({
   isButtonDisabled = false,
   buttonText,
   isLoading = false,
-  icon,
+  buttonIcon,
 }: ScreenLayout1Props) => {
   const renderScreenHeader = () => {
     return (
@@ -74,7 +74,7 @@ const ScreenLayout = ({
             onPress={onPress}
             isDisabled={isButtonDisabled}
             isLoading={isLoading}
-            icon={icon}
+            icon={buttonIcon}
           />
         </View>
       )}

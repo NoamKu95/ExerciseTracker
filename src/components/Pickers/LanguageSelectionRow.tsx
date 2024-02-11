@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 // Components
-import {MediumText} from '../Base/Texts';
+import {RegularText} from '../Base/Texts';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
@@ -10,7 +10,7 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import {Language} from '../../translations/i18n';
 // Utils
-import {getFlexDirection, wp} from '../../utils/styleUtil';
+import {getFlexDirection, getTextAlign, wp} from '../../utils/styleUtil';
 
 interface LanguageSelectionRowProps {
   language: Language;
@@ -32,9 +32,9 @@ const LanguageSelectionRow = ({
       </View>
 
       <View style={styles.textContainer}>
-        <MediumText size={FontSizes.medium} color={colors.BLACK}>
+        <RegularText size={FontSizes.small} textAlign={getTextAlign()}>
           {language.name}
-        </MediumText>
+        </RegularText>
       </View>
 
       <View style={styles.flagContainer}>
@@ -58,26 +58,26 @@ const styles = StyleSheet.create({
     flexDirection: getFlexDirection(),
     backgroundColor: colors.WHITE,
     borderRadius: radiuses._16px,
-    width: wp(60),
+    width: wp(45),
     padding: spaces._16px,
-    gap: spaces._16px,
+    gap: spaces._8px,
   },
   radioButtonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   outerCircle: {
-    height: 24,
-    width: 24,
+    height: 16,
+    width: 16,
     borderRadius: radiuses._16px,
     borderWidth: 1.5,
-    borderColor: colors.GRAY,
+    borderColor: colors.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
   innerCircle: {
-    height: 16,
-    width: 16,
+    height: 8,
+    width: 8,
     borderRadius: radiuses._8px,
     backgroundColor: colors.PRIMARY,
   },

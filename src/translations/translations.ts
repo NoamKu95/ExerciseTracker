@@ -7,6 +7,11 @@ export interface Translation {
     Profile: string;
   };
   screens: {
+    splash: {
+      title: string;
+      subtitle: string;
+      actionBtn: string;
+    };
     register: {
       hey: string;
       welcome: string;
@@ -18,6 +23,11 @@ export interface Translation {
       dontWorry: string;
       haveAccount: string;
       loginHere: string;
+    };
+    onboarding: {
+      title: string;
+      subtitle: string;
+      actionBtn: string;
     };
     login: {
       title: string;
@@ -46,6 +56,12 @@ export interface Translation {
     };
     profile: {
       title: string;
+    };
+    noInternet: {
+      title: string;
+      subtitle: string;
+      stillNoConnection: string;
+      btnAction: string;
     };
   };
   bottomSheets: {
@@ -88,6 +104,7 @@ export interface Translation {
   };
   errors: {
     genericError: string;
+    initialization: string;
     server: {
       apiError: string;
       badRequestError: string;

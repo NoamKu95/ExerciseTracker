@@ -11,6 +11,11 @@ const English: Translation = {
     Profile: 'Profile',
   },
   screens: {
+    splash: {
+      title: 'The name of the app',
+      subtitle: 'Some catchphrase or slogan',
+      actionBtn: "Let's get started",
+    },
     register: {
       hey: 'Hey!',
       welcome: 'Welcome to your new exercising app :)',
@@ -23,6 +28,11 @@ const English: Translation = {
       haveAccount: 'Already have an account?',
       loginHere: "Let's Login",
     },
+    onboarding: {
+      title: 'Nice to meet you ${userName}',
+      subtitle: 'Here is a brief about what you can do in the app:',
+      actionBtn: "Cool, Let's Go",
+    },
     login: {
       title: 'Good to see you again!',
       subtitle: "A quick login and we'll let you dive right back in",
@@ -30,6 +40,16 @@ const English: Translation = {
       forgotPassword: 'Forgot password',
       noAccountYet: "Still don't have an account?",
       registerHere: 'Register here',
+    },
+    forgotPassword: {
+      screenTitle: 'Reset password',
+      didYouForget: "Can't seem to remember your password?",
+      dontWorry:
+        'No need to worry, you can quickly generate a new temporary password',
+      email: 'The email address you registered with',
+      checkInbox:
+        'Mail sent! Time to head over to your inbox & then login with the new password',
+      sendPassword: 'Send me a new password',
     },
     home: {
       title: '',
@@ -43,15 +63,13 @@ const English: Translation = {
     profile: {
       title: 'Profile',
     },
-    forgotPassword: {
-      screenTitle: 'Reset password',
-      didYouForget: "Can't seem to remember your password?",
-      dontWorry:
-        'No need to worry, you can quickly generate a new temporary password',
-      email: 'The email address you registered with',
-      checkInbox:
-        'Mail sent! Time to head over to your inbox & then login with the new password',
-      sendPassword: 'Send me a new password',
+    noInternet: {
+      title: 'Oops.. No Internet!',
+      subtitle:
+        'Seems like your device does not have an internet connection at the moment',
+      stillNoConnection:
+        'We still cannot access the internet.. try again shortly',
+      btnAction: "Let's try again",
     },
   },
   bottomSheets: {
@@ -97,6 +115,7 @@ const English: Translation = {
   },
   errors: {
     genericError: '',
+    initialization: '',
     server: {
       apiError: '',
       badRequestError: '',

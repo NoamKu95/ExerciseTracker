@@ -18,12 +18,7 @@ import {FontSizes} from '../../constants/ui/fonts';
 import {useAppSelector} from '../../store/store';
 // Utils
 import {getFontFamily} from '../../utils/fontFamily';
-import {
-  getFlexDirection,
-  getOpposingFlexDirection,
-  getSelfAlign,
-  getTextAlign,
-} from '../../utils/styleUtil';
+import {isIOS} from '../../utils/platformUtil';
 
 interface AppTextInputProps {
   label: string;
@@ -50,7 +45,7 @@ const AppTextInput = ({
   const [isErrorShown, setIsErrorShown] = useState(false);
 
   useEffect(() => {
-    labelPosition.value = isFocused || value ? 4 : 20;
+    labelPosition.value = isFocused || value ? 4 : isIOS() ? 17 : 14;
   }, [isFocused, labelPosition, value]);
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -82,7 +77,9 @@ const AppTextInput = ({
 
   const renderEyeIcon = () => {
     return (
-      <Pressable onPress={() => setIsTextVisible(!isTextVisible)}>
+      <Pressable
+        onPress={() => setIsTextVisible(!isTextVisible)}
+        style={styles().eyeIcon}>
         <EyeIcon isTextVisible={isTextVisible} />
       </Pressable>
     );
@@ -112,18 +109,18 @@ const AppTextInput = ({
           {label}
         </Reanimated.Text>
         <View style={styles().inputContainer}>
+          {isCensored && renderEyeIcon()}
           <TextInput
             style={styles().input}
             value={value}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChangeText={handleTextChange}
-            autoCapitalize="none"
+            autoCapitalize="sentences"
             maxLength={20}
-            textAlign={getTextAlign()}
             secureTextEntry={!isTextVisible}
+            textAlign={isRTL ? 'right' : 'left'}
           />
-          {isCensored && renderEyeIcon()}
         </View>
       </View>
       {renderError()}
@@ -149,28 +146,31 @@ const styles = (isRTL?: boolean) =>
       position: 'absolute',
       fontFamily: getFontFamily(isRTL ?? true, 'normal'),
       color: colors.SECONDARY_TEXT,
-      alignSelf: getSelfAlign(),
       paddingHorizontal: spaces._12px,
     },
     inputContainer: {
-      flexDirection: getFlexDirection(),
       alignItems: 'center',
-      justifyContent: 'space-between',
       height: '100%',
     },
     input: {
       borderColor: colors.TRANSPARENT,
       fontSize: FontSizes.medium,
       color: colors.MAIN_TEXT,
-      alignSelf: getSelfAlign(),
+      position: 'absolute',
+      start: 0,
+      bottom: 0,
       width: '90%',
       height: 25,
       padding: spaces._0px,
     },
+    eyeIcon: {
+      position: 'absolute',
+      end: 0,
+      top: '20%',
+    },
     errorContainer: {
-      flexDirection: getOpposingFlexDirection(),
-      alignItems: 'center',
       marginTop: spaces._4px,
+      alignItems: 'flex-end',
     },
     errorBorder: {
       borderWidth: 1,

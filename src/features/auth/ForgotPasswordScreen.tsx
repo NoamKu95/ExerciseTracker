@@ -75,7 +75,7 @@ const ForgotPasswordScreen = () => {
       isButtonDisabled={!isAllInputsValid || isLoading}
       buttonText={i18n.t('screens.forgotPassword.sendPassword')}
       isLoading={isLoading}
-      icon={<SparkleIcon />}
+      buttonIcon={<SparkleIcon />}
       screenTitle={i18n.t('screens.forgotPassword.screenTitle')}
       isBackButton={true}>
       <>
