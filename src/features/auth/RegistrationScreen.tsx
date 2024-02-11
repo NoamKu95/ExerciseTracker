@@ -28,6 +28,7 @@ import {
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {registerUser} from './state/authActions';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const RegistrationScreen = () => {
   const dispatch = useAppDispatch();
@@ -45,6 +46,9 @@ const RegistrationScreen = () => {
   }, [email, password, name]);
 
   const handleRegisterPress = () => {
+    // TODO: delete when BE is available
+    resetTo(Screens.ONBOARDING);
+    return;
     dispatch(
       registerUser({
         email,
@@ -129,6 +133,7 @@ const RegistrationScreen = () => {
 
   return (
     <>
+      <LanguagePicker />
       <ScreenLayout
         onPress={() => {
           handleRegisterPress();
@@ -136,7 +141,7 @@ const RegistrationScreen = () => {
         isButtonDisabled={!isAllInputsValid || isLoading}
         buttonText={i18n.t('screens.register.letsGo')}
         isLoading={isLoading}
-        icon={<SparkleIcon />}>
+        buttonIcon={<SparkleIcon />}>
         <>
           {renderTexts()}
           {renderDetailsTextFields()}

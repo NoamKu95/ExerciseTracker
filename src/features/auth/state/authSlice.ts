@@ -1,6 +1,10 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
-import i18n, {LanguageType, isRightToLeft} from '../../../translations/i18n';
+import i18n, {
+  LanguageType,
+  getLanguageType,
+  isRightToLeft,
+} from '../../../translations/i18n';
 // Models
 import {User} from '../../../models/core/user';
 // Redux
@@ -22,7 +26,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isRTL: true,
-  language: LanguageType.Hebrew,
+  language: getLanguageType(i18n.locale),
   isLoading: false,
   isAuthenticated: false,
   user: null,

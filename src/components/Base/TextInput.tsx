@@ -18,7 +18,7 @@ import {FontSizes} from '../../constants/ui/fonts';
 import {useAppSelector} from '../../store/store';
 // Utils
 import {getFontFamily} from '../../utils/fontFamily';
-import {getSelfAlign} from '../../utils/styleUtil';
+import {isIOS} from '../../utils/platformUtil';
 
 interface AppTextInputProps {
   label: string;
@@ -45,7 +45,7 @@ const AppTextInput = ({
   const [isErrorShown, setIsErrorShown] = useState(false);
 
   useEffect(() => {
-    labelPosition.value = isFocused || value ? 4 : 17;
+    labelPosition.value = isFocused || value ? 4 : isIOS() ? 17 : 14;
   }, [isFocused, labelPosition, value]);
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -116,9 +116,10 @@ const AppTextInput = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChangeText={handleTextChange}
-            autoCapitalize="none"
+            autoCapitalize="sentences"
             maxLength={20}
             secureTextEntry={!isTextVisible}
+            textAlign={isRTL ? 'right' : 'left'}
           />
         </View>
       </View>
@@ -155,7 +156,9 @@ const styles = (isRTL?: boolean) =>
       borderColor: colors.TRANSPARENT,
       fontSize: FontSizes.medium,
       color: colors.MAIN_TEXT,
-      alignSelf: getSelfAlign(),
+      position: 'absolute',
+      start: 0,
+      bottom: 0,
       width: '90%',
       height: 25,
       padding: spaces._0px,

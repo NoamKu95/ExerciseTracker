@@ -60,6 +60,7 @@ export interface Translation {
     noInternet: {
       title: string;
       subtitle: string;
+      stillNoConnection: string;
       btnAction: string;
     };
   };

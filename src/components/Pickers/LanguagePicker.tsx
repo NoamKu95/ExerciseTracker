@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 // Components
 import LanguageSelectionRow from './LanguageSelectionRow';
-import {MediumText} from '../Base/Texts';
+import {RegularText} from '../Base/Texts';
 // Icons
 import ChevronDown from '../../assets/icons/ChevronDown';
 // UI
@@ -17,7 +17,7 @@ import {Language, LanguageType, appLanguages} from '../../translations/i18n';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setLanguage} from '../../features/auth/state/authSlice';
 // Utils
-import {hp, wp} from '../../utils/styleUtil';
+import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
 
 const LanguagePicker = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -61,14 +61,14 @@ const LanguagePicker = () => {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.buttonContainer, shadowStyles.softShadow]}>
+      <View style={[styles.buttonContainer]}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
           <ChevronDown />
-          <MediumText size={FontSizes.large} color={colors.BLACK}>
+          <RegularText size={FontSizes.small}>
             {language.toUpperCase()}
-          </MediumText>
+          </RegularText>
         </TouchableOpacity>
       </View>
       {isDropdownOpen && renderDropdownList()}
@@ -83,20 +83,20 @@ const styles = StyleSheet.create({
     gap: spaces._8px,
     position: 'absolute',
     top: hp(7),
-    left: wp(5),
+    end: wp(5),
+    zIndex: 10,
   },
   buttonContainer: {
     backgroundColor: colors.WHITE,
     padding: spaces._8px,
-    borderRadius: radiuses._8px,
-    alignSelf: 'flex-start',
+    borderRadius: radiuses._16px,
+    alignSelf: getSelfAlign(),
   },
   button: {
-    flexDirection: 'row',
+    flexDirection: getFlexDirection(),
     alignItems: 'center',
     justifyContent: 'center',
     gap: spaces._8px,
-    height: 30,
   },
   flag: {
     width: '35%',

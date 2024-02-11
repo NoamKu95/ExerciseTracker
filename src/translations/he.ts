@@ -62,6 +62,7 @@ const Hebrew: Translation = {
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
       subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',
+      stillNoConnection: 'נראה שעדיין לא חזר האינטרנט.. נסה שוב בקרוב',
       btnAction: 'שננסה שוב?',
     },
   },

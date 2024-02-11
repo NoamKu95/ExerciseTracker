@@ -49,6 +49,7 @@ const GenericButton = ({
   isDisabled = false,
   isLoading = false,
   minWidth = 160,
+  textAlign = 'center',
 }: GenericButtonProps) => {
   return (
     <TouchableOpacity
@@ -70,6 +71,7 @@ const GenericButton = ({
           <BoldText
             size={fontSize}
             color={textColor}
+            textAlign={textAlign}
             lineHeight={lineHeight}
             children={text}
           />

@@ -5,7 +5,7 @@ import {colors} from '../../constants/ui/colors';
 const NoInternetIcon = () => {
   return (
     <Svg
-      fill={colors.GRAY}
+      fill={colors.PRIMARY}
       id="Capa_1"
       width="80px"
       height="80px"

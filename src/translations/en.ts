@@ -67,6 +67,8 @@ const English: Translation = {
       title: 'Oops.. No Internet!',
       subtitle:
         'Seems like your device does not have an internet connection at the moment',
+      stillNoConnection:
+        'We still cannot access the internet.. try again shortly',
       btnAction: "Let's try again",
     },
   },

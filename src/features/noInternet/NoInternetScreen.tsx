@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {fetch} from '@react-native-community/netinfo';
 // Components
+import ScreenLayout from '../../components/Base/ScreenLayout';
 import {MediumText, RegularText} from '../../components/Base/Texts';
-import {PrimaryButton} from '../../components/Base/Buttons';
 // Icons
 import NoInternetIcon from '../../assets/icons/NoInternetIcon';
 // UI
@@ -15,64 +15,78 @@ import i18n from '../../translations/i18n';
 // Navigation
 import {pop} from '../../navigation/RootNavigation';
 // Utils
-import {wp} from '../../utils/styleUtil';
+import {hp} from '../../utils/styleUtil';
 
 const NoInternetScreen = () => {
+  const [isHaveInternet, setIsHaveInternet] = useState(true);
+
+  const renderStillNoConnectionMsg = () => {
+    if (!isHaveInternet) {
+      return (
+        <RegularText
+          children={i18n.t('screens.noInternet.stillNoConnection')}
+          size={FontSizes.regular}
+          color={colors.SECONDARY_TEXT}
+        />
+      );
+    }
+  };
+
+  const handleRetryPressed = () => {
+    fetch().then(state => {
+      if (state.isConnected) {
+        pop();
+      } else {
+        setIsHaveInternet(false);
+        setTimeout(() => {
+          setIsHaveInternet(true);
+        }, 2500);
+      }
+    });
+  };
+
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.flex}>
-        <NoInternetIcon />
-        <View style={styles.textContainer}>
-          <View style={styles.title}>
+    <ScreenLayout
+      buttonText={i18n.t('screens.noInternet.btnAction')}
+      onPress={handleRetryPressed}>
+      <>
+        <View style={styles.mainContainer}>
+          <NoInternetIcon />
+          <View style={styles.textContainer}>
             <MediumText
+              children={i18n.t('screens.noInternet.title')}
               size={FontSizes.large}
-              lineHeight={26}
-              color={colors.BLACK}
-              textAlign="center">
-              {i18n.t('errorHandling.noInternet.title')}
-            </MediumText>
+            />
+            <RegularText
+              children={i18n.t('screens.noInternet.subtitle')}
+              size={FontSizes.medium}
+              textAlign="center"
+            />
           </View>
-          <RegularText
-            size={FontSizes.medium}
-            lineHeight={21}
-            color={colors.BLACK}
-            textAlign="center">
-            {i18n.t('errorHandling.noInternet.subtitle')}
-          </RegularText>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton
-            onPress={pop}
-            text={i18n.t('errorHandling.noInternet.btnAction')}
-            textColor={colors.WHITE}
-          />
+        <View style={styles.retryContainer}>
+          {renderStillNoConnectionMsg()}
         </View>
-      </View>
-    </SafeAreaView>
+      </>
+    </ScreenLayout>
   );
 };
 
 export default NoInternetScreen;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.WHITE,
-  },
-  flex: {
-    flex: 1,
-    justifyContent: 'center',
+  mainContainer: {
+    paddingTop: hp(20),
     alignItems: 'center',
-    paddingHorizontal: spaces._24px,
-  },
-  title: {
-    paddingVertical: spaces._8px,
   },
   textContainer: {
+    alignItems: 'center',
+    gap: spaces._12px,
     paddingVertical: spaces._36px,
-    justifyContent: 'space-between',
   },
-  buttonContainer: {
-    width: wp(50),
+  retryContainer: {
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: hp(15),
   },
 });

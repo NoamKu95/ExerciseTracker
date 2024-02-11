@@ -20,7 +20,7 @@ import {useAppSelector} from '../../store/store';
 import {getFlexDirection, hp, wp} from '../../utils/styleUtil';
 
 const OnboardingScreen = () => {
-  const userName = useAppSelector(state => state.auth.user?.fullName);
+  const userName = useAppSelector(state => state.auth.user?.fullName) ?? '';
   const [imgIndex, setImgIndex] = useState(0);
 
   const renderTexts = () => {

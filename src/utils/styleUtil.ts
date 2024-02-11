@@ -8,6 +8,11 @@ export const wp = (percent: number) => {
   return Dimensions.get('screen').width * (percent / 100);
 };
 
+export const getTextAlign = (): 'left' | 'right' => {
+  const isRTL = store.getState().auth.isRTL;
+  return isRTL ? 'left' : 'right';
+};
+
 export const getWritingDirection = (): 'rtl' | 'ltr' => {
   const isRTL = store.getState().auth.isRTL;
   return isRTL ? 'rtl' : 'ltr';
