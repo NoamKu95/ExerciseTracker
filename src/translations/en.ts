@@ -5,10 +5,10 @@ export const EN = 'en';
 const English: Translation = {
   appName: 'trainTracker',
   tabs: {
-    Home: 'בית',
-    Exercise: 'Exercise',
-    Progress: 'Progress',
-    Profile: 'Profile',
+    home: 'Home',
+    exercise: 'Exercise',
+    progress: 'Progress',
+    profile: 'Profile',
   },
   screens: {
     splash: {

@@ -1,5 +1,6 @@
 export const spaces = {
   _0px: 0,
+  _2px: 2,
   _4px: 4,
   _8px: 8,
   _10px: 10,
