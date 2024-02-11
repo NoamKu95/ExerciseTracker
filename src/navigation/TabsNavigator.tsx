@@ -14,10 +14,10 @@ import ProfileIcon from '../assets/icons/ProfileIcon';
 // UI
 import {colors} from '../constants/ui/colors';
 import {spaces} from '../constants/ui/spaces';
+import {shadowStyles} from '../constants/ui/shadows';
 // Constants
 import i18n from '../translations/i18n';
 import {RootTabsParamList, TabsScreens} from '../constants/screens';
-import {shadowStyles} from '../constants/ui/shadows';
 
 const Tab = createBottomTabNavigator<RootTabsParamList>();
 
@@ -27,8 +27,6 @@ const TabsNavigator = () => {
       initialRouteName={TabsScreens.HOME}
       backBehavior="history"
       screenOptions={({}) => ({
-        tabBarActiveTintColor: colors.PRIMARY,
-        // tabBarInactiveTintColor: colors.WHITE,
         headerShown: false,
         tabBarStyle: [
           {
