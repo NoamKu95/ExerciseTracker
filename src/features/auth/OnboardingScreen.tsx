@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
-import CarouselDot from '../../components/CarouselDot';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {colors} from '../../constants/ui/colors';
@@ -17,11 +16,16 @@ import {resetTo} from '../../navigation/RootNavigation';
 // Redux
 import {useAppSelector} from '../../store/store';
 // Utils
-import {getFlexDirection, hp, wp} from '../../utils/styleUtil';
+import {
+  getFlexDirection,
+  getOppositeFlexDirection,
+  hp,
+  wp,
+} from '../../utils/styleUtil';
 
 const OnboardingScreen = () => {
+  const isRTL = useAppSelector(state => state.auth.isRTL);
   const userName = useAppSelector(state => state.auth.user?.fullName) ?? '';
-  const [imgIndex, setImgIndex] = useState(0);
 
   const renderTexts = () => {
     return (
@@ -42,13 +46,17 @@ const OnboardingScreen = () => {
   const renderCarousel = () => {
     return (
       <Carousel
-        loop={false}
+        data={isRTL ? onboardingImages.reverse() : onboardingImages}
+        withAnimation={{
+          type: 'spring',
+          config: {
+            damping: 13,
+          },
+        }}
+        defaultIndex={isRTL ? onboardingImages.length - 1 : 0}
         overscrollEnabled={false}
-        defaultIndex={0}
         width={wp(90)}
         height={hp(50)}
-        data={onboardingImages}
-        onSnapToItem={index => setImgIndex(index)}
         renderItem={({index}) => (
           <Image
             source={onboardingImages[index]}
@@ -60,15 +68,15 @@ const OnboardingScreen = () => {
     );
   };
 
-  const renderCarouselDots = () => {
-    return (
-      <View style={styles().dotsContainer}>
-        {onboardingImages.map((_, index) => {
-          return <CarouselDot isSelected={index === imgIndex} />;
-        })}
-      </View>
-    );
-  };
+  // TODO: - finish when lottie lib bug solved
+  // const renderAnimations = () => {
+  //   return (
+  //     <View style={styles.animationsContainer}>
+  //       <LottieView source={swipeLeft} autoPlay loop={false} />
+  //       <LottieView source={swipeRight} autoPlay loop={false} />
+  //     </View>
+  //   );
+  // };
 
   return (
     <>
@@ -81,7 +89,7 @@ const OnboardingScreen = () => {
         <>
           {renderTexts()}
           {renderCarousel()}
-          {renderCarouselDots()}
+          {/* {renderAnimations()} */}
         </>
       </ScreenLayout>
     </>
@@ -105,7 +113,10 @@ const styles = () =>
       resizeMode: 'contain',
     },
     dotsContainer: {
-      flexDirection: getFlexDirection(),
+      flexDirection: getOppositeFlexDirection(),
       alignSelf: 'center',
+    },
+    animationsContainer: {
+      flexDirection: getFlexDirection(),
     },
   });
