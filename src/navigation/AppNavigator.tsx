@@ -17,7 +17,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName={Screens.SPLASH}>
+      <Stack.Navigator initialRouteName={Screens.TABS}>
         <Stack.Screen
           name={Screens.SPLASH}
           component={SplashScreen}

@@ -1,11 +1,17 @@
 export enum ButtonType {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TEXT = 'text',
+  PRIMARY,
+  SECONDARY,
+  TEXT,
 }
 
 export enum AppStateStatus {
   ACTIVE = 'active',
   BACKGROUND = 'background',
   INACTIVE = 'inactive',
+}
+
+export enum DayPeriod {
+  MORNING,
+  NOON,
+  EVENING,
 }
