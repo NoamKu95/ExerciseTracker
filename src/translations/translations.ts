@@ -46,7 +46,28 @@ export interface Translation {
       sendPassword: string;
     };
     home: {
-      title: string;
+      btnAction: string;
+      didYouKnow: string;
+      startedSavedWorkout: string;
+      activeWorkout: string;
+      clickSaveAtTheEnd: string;
+      weAutoSave: string;
+      greetings: {
+        morning: string;
+        noon: string;
+        evening: string;
+        night: string;
+      };
+      motivation: {
+        morning: string;
+        noon: string;
+        evening: string;
+        night: string;
+      };
+      emptyState: {
+        noFunFacts: string;
+        noSavedWorkouts: string;
+      };
     };
     exercise: {
       title: string;

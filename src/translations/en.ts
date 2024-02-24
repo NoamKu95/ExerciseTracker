@@ -52,7 +52,31 @@ const English: Translation = {
       sendPassword: 'Send me a new password',
     },
     home: {
-      title: '',
+      btnAction: 'Start new workout',
+      didYouKnow: 'Did you know?',
+      startedSavedWorkout: 'Start a saved workout',
+      activeWorkout: 'Workout in progress',
+      clickSaveAtTheEnd: 'Press the save button at the end of the workout',
+      weAutoSave:
+        "(but don't worry if you don't - we'll automatically close and save the workout for you at the end of the day)",
+      greetings: {
+        morning: 'Excellent morning',
+        noon: 'Great noon',
+        evening: 'Good evening',
+        night: 'Awesome night',
+      },
+      motivation: {
+        morning: 'Drank coffee? Ate a Date? Time to workout!',
+        noon: "Don't give in to the tiredness of lunch time!",
+        evening: 'Nothing like finishing a day with a great workout',
+        night: 'Night owls workouts!',
+      },
+      emptyState: {
+        noFunFacts:
+          "You haven't recorded enough workouts, but soon we'll be able to display some surprising trivia facts here about your progress!",
+        noSavedWorkouts:
+          "Seems like you haven't created any saved workout yet.. Adding saved workouts would allow you to start working out with your favorite exercises at a press of a button :)",
+      },
     },
     exercise: {
       title: '',

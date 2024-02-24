@@ -20,10 +20,11 @@ import {getFlexDirection} from '../../utils/styleUtil';
 
 interface CardRowProps {
   row: CardRowModel;
+  isFirst?: boolean;
   isLast?: boolean;
 }
 
-const CardRow = ({row, isLast = false}: CardRowProps) => {
+const CardRow = ({row, isFirst, isLast = false}: CardRowProps) => {
   const navigation = useNavigation<StackNavigationProp<any>>();
   const isRTL = useAppSelector(state => state.auth.isRTL);
 
@@ -48,6 +49,7 @@ const CardRow = ({row, isLast = false}: CardRowProps) => {
       style={[
         styles(isRTL).rowContainer,
         isLast ? styles().lastRow : styles().bottomBorder,
+        isFirst ? styles().firstRow : undefined,
       ]}
       onPress={handlePress}>
       <RegularText size={FontSizes.regular}>{row.text}</RegularText>
@@ -80,6 +82,9 @@ export const styles = (isRTL?: boolean) =>
     bottomBorder: {
       borderBottomWidth: 1,
       borderBottomColor: colors.VERY_LIGHT_GRAY,
+    },
+    firstRow: {
+      paddingTop: spaces._0px,
     },
     lastRow: {
       paddingBottom: spaces._0px,
