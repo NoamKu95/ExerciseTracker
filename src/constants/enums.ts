@@ -11,7 +11,8 @@ export enum AppStateStatus {
 }
 
 export enum DayPeriod {
-  MORNING,
-  NOON,
-  EVENING,
+  MORNING = 'morning',
+  NOON = 'noon',
+  EVENING = 'evening',
+  NIGHT = 'night',
 }

@@ -1,4 +1,5 @@
 import i18n from '../translations/i18n';
+import {DayPeriod} from '../constants/enums';
 
 // MARK: Timestamps
 export const getNowTimestamp = (): number => {
@@ -9,28 +10,30 @@ export const getXDaysAgoTimestamp = (daysToSubtract: number): number => {
   return Math.floor((Date.now() - daysToSubtract * 24 * 60 * 60 * 1000) / 1000);
 };
 
-export const getGreetingByCurrentHour = (): string => {
-  const hours = new Date().getHours();
-  if (hours > 4 && hours < 12) {
-    return i18n.t('screens.home.greetings.morning');
-  } else if (hours > 12 && hours < 18) {
-    return i18n.t('screens.home.greetings.noon');
-  } else if (hours > 18 && hours < 23) {
-    return i18n.t('screens.home.greetings.evening');
+const getDayPeriod = (hours: number): DayPeriod => {
+  if (hours >= 4 && hours < 12) {
+    return DayPeriod.MORNING;
+  } else if (hours >= 12 && hours < 18) {
+    return DayPeriod.NOON;
+  } else if (hours >= 18 && hours < 23) {
+    return DayPeriod.EVENING;
   } else {
-    return i18n.t('screens.home.greetings.night');
+    return DayPeriod.NIGHT;
   }
 };
 
-export const getMotivationPhraseByCurrentHour = (): string => {
+export const getGreetingAndMotivationByCurrentHour = (): {
+  greeting: string;
+  motivation: string;
+} => {
   const hours = new Date().getHours();
-  if (hours > 4 && hours < 12) {
-    return i18n.t('screens.home.motivation.morning');
-  } else if (hours > 12 && hours < 18) {
-    return i18n.t('screens.home.motivation.noon');
-  } else if (hours > 18 && hours < 23) {
-    return i18n.t('screens.home.motivation.evening');
-  } else {
-    return i18n.t('screens.home.motivation.night');
-  }
+  const dayPeriod = getDayPeriod(hours);
+
+  const greetingKey = `screens.home.greetings.${dayPeriod}`;
+  const motivationKey = `screens.home.motivation.${dayPeriod}`;
+
+  return {
+    greeting: i18n.t(greetingKey),
+    motivation: i18n.t(motivationKey),
+  };
 };

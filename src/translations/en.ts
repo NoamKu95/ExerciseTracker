@@ -55,6 +55,10 @@ const English: Translation = {
       btnAction: 'Start new workout',
       didYouKnow: 'Did you know?',
       startedSavedWorkout: 'Start a saved workout',
+      activeWorkout: 'Workout in progress',
+      clickSaveAtTheEnd: 'Press the save button at the end of the workout',
+      weAutoSave:
+        "(but don't worry if you don't - we'll automatically close and save the workout for you at the end of the day)",
       greetings: {
         morning: 'Excellent morning',
         noon: 'Great noon',

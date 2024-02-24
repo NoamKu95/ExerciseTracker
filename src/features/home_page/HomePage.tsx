@@ -1,46 +1,45 @@
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
-import {FontSizes} from '../../constants/ui/fonts';
-import {
-  getGreetingByCurrentHour,
-  getMotivationPhraseByCurrentHour,
-} from '../../utils/dateUtil';
-import {useAppSelector} from '../../store/store';
-import {StyleSheet, View} from 'react-native';
-import {spaces} from '../../constants/ui/spaces';
-import {getFlexDirection} from '../../utils/styleUtil';
-import i18n from '../../translations/i18n';
+// Components
 import {PrimaryButton} from '../../components/Base/Buttons';
-import SparkleIcon from '../../assets/icons/SparkleIcon';
 import TitledCard from '../../components/Cards/TitledCard';
-import CardWithRows from '../../components/Cards/CardWithRows';
 import TitledCardWithButton from '../../components/Cards/TitledCardWithButton';
+import CardWithRows from '../../components/Cards/CardWithRows';
+// Icons
 import InfoIcon from '../../assets/icons/InfoIcon';
+import SparkleIcon from '../../assets/icons/SparkleIcon';
+// UI
 import {colors} from '../../constants/ui/colors';
+import {spaces} from '../../constants/ui/spaces';
+import {FontSizes} from '../../constants/ui/fonts';
+// Constants
+import i18n from '../../translations/i18n';
+// Models
+// Redux
+import {useAppSelector} from '../../store/store';
+// Navigation
+// Utils
+import {getGreetingAndMotivationByCurrentHour} from '../../utils/dateUtil';
+import {getFlexDirection} from '../../utils/styleUtil';
 
 const HomeScreen = () => {
   const userName = useAppSelector(state => state.auth.user?.fullName) ?? '';
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
   const isActiveWorkout = useAppSelector(state => state.workout.activeWorkout);
+  const {greeting, motivation} = getGreetingAndMotivationByCurrentHour();
 
   // ** RENDER FUNCTIONS **
   const renderTexts = () => {
-    getGreetingByCurrentHour();
     return (
       <View style={styles.textContainer}>
         <View style={styles.titleContainer}>
-          <BoldText
-            children={getGreetingByCurrentHour()}
-            size={FontSizes.large}
-          />
+          <BoldText children={greeting} size={FontSizes.large} />
           <BoldText children={userName} size={FontSizes.large} />
         </View>
-        <RegularText
-          children={getMotivationPhraseByCurrentHour()}
-          size={FontSizes.regular}
-        />
+        <RegularText children={motivation} size={FontSizes.regular} />
       </View>
     );
   };
