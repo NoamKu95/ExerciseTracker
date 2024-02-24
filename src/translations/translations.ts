@@ -1,10 +1,10 @@
 export interface Translation {
   appName: string;
   tabs: {
-    Home: string;
-    Exercise: string;
-    Progress: string;
-    Profile: string;
+    home: string;
+    exercise: string;
+    progress: string;
+    profile: string;
   };
   screens: {
     splash: {
@@ -46,7 +46,28 @@ export interface Translation {
       sendPassword: string;
     };
     home: {
-      title: string;
+      btnAction: string;
+      didYouKnow: string;
+      startedSavedWorkout: string;
+      activeWorkout: string;
+      clickSaveAtTheEnd: string;
+      weAutoSave: string;
+      greetings: {
+        morning: string;
+        noon: string;
+        evening: string;
+        night: string;
+      };
+      motivation: {
+        morning: string;
+        noon: string;
+        evening: string;
+        night: string;
+      };
+      emptyState: {
+        noFunFacts: string;
+        noSavedWorkouts: string;
+      };
     };
     exercise: {
       title: string;

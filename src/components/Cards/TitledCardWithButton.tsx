@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 // Components
 import {BoldText, RegularText} from '../Base/Texts';
+import {PrimaryButton} from '../Base/Buttons';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
@@ -9,35 +10,29 @@ import {colors} from '../../constants/ui/colors';
 import {FontSizes} from '../../constants/ui/fonts';
 import {shadowStyles} from '../../constants/ui/shadows';
 // Utils
-import {getFlexDirection} from '../../utils/styleUtil';
+import {getSelfAlign} from '../../utils/styleUtil';
 
 interface TitledCardProps {
-  icon?: JSX.Element;
   title: string;
-  secondaryTitleElement?: JSX.Element;
-  headerColor?: string;
-  children: JSX.Element[] | JSX.Element | string;
+  text: string;
+  buttonText: string;
+  onPress: () => void;
 }
 
-const TitledCard = ({
-  icon,
+const TitledCardWithButton = ({
   title,
-  secondaryTitleElement,
-  headerColor = colors.PRIMARY,
-  children,
+  text,
+  buttonText,
+  onPress,
 }: TitledCardProps) => {
   const renderCardTitle = () => {
     return (
-      <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-        <View style={styles.titleIconContainer}>
-          {icon}
-          <BoldText
-            children={title}
-            size={FontSizes.regular}
-            color={colors.WHITE}
-          />
-        </View>
-        {secondaryTitleElement}
+      <View style={styles.titleContainer}>
+        <BoldText
+          children={title}
+          size={FontSizes.regular}
+          color={colors.WHITE}
+        />
       </View>
     );
   };
@@ -45,15 +40,12 @@ const TitledCard = ({
   const renderCardBody = () => {
     return (
       <View style={styles.cardBody}>
-        {typeof children === 'string' ? (
-          <RegularText
-            children={children}
-            size={FontSizes.regular}
-            color={colors.MAIN_TEXT}
-          />
-        ) : (
-          children
-        )}
+        <View style={styles.cardContentContainer}>
+          <RegularText children={text} size={FontSizes.regular} />
+          <View style={styles.actionBtnContainer}>
+            <PrimaryButton text={buttonText} onPress={onPress} />
+          </View>
+        </View>
       </View>
     );
   };
@@ -66,7 +58,7 @@ const TitledCard = ({
   );
 };
 
-export default TitledCard;
+export default TitledCardWithButton;
 
 const styles = StyleSheet.create({
   cardOuter: {
@@ -76,21 +68,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   titleContainer: {
-    width: '100%',
+    backgroundColor: colors.PRIMARY,
     paddingVertical: spaces._16px,
     paddingHorizontal: spaces._20px,
     borderTopRightRadius: radiuses._16px,
     borderTopLeftRadius: radiuses._16px,
-    justifyContent: 'space-between',
-    flexDirection: getFlexDirection(),
   },
-  titleIconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: getFlexDirection(),
-    gap: spaces._10px,
+  cardContentContainer: {
+    gap: spaces._8px,
   },
   cardBody: {
     padding: spaces._12px,
+  },
+  actionBtnContainer: {
+    alignSelf: getSelfAlign(),
   },
 });

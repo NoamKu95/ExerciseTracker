@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: colors.BACKGROUND,
   },
   scrollViewContent: {
     flexGrow: 1,
     justifyContent: 'space-between',
-    width: wp(100),
   },
   container: {
     paddingTop: hp(10),

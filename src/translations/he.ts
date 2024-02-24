@@ -3,10 +3,10 @@ import {Translation} from './translations';
 const Hebrew: Translation = {
   appName: 'trainTracker',
   tabs: {
-    Home: 'בית',
-    Exercise: 'אימון',
-    Progress: 'התקדמות',
-    Profile: 'פרופיל',
+    home: 'בית',
+    exercise: 'אימון',
+    progress: 'התקדמות',
+    profile: 'פרופיל',
   },
   screens: {
     splash: {
@@ -48,7 +48,31 @@ const Hebrew: Translation = {
       sendPassword: 'שלחו לי סיסמה חדשה',
     },
     home: {
-      title: '',
+      btnAction: 'התחלת אימון חדש',
+      didYouKnow: 'הידעת?',
+      startedSavedWorkout: 'התחלת אימון שמור',
+      activeWorkout: 'אימון פעיל',
+      clickSaveAtTheEnd: 'בסיום האימון יש ללחוץ על כפתור השמירה.',
+      weAutoSave:
+        '(אבל לא לדאוג, מקסימום בסוף היום נסגור ונשמור את האימון אוטומטית עבורך)',
+      greetings: {
+        morning: 'בוקר מעולה',
+        noon: 'צהריים נעימים',
+        evening: 'ערב טוב',
+        night: 'אחלה של לילה',
+      },
+      motivation: {
+        morning: 'שתית קפה? אכלת תמר? זה הזמן לתת בראש!',
+        noon: 'לא ניתן לעייפות של הלאנץ׳ לעצור אותנו!',
+        evening: 'אין כמו לסגור את היום עם אימון מוצלח',
+        night: 'חיית לילה של אימונים!',
+      },
+      emptyState: {
+        noFunFacts:
+          'עדיין לא תיעדת מספיק אימונים, אבל בקרוב מאוד נוכל להציג כאן עובדות טריוויה מפתיעות על ההתקדמות שלך!',
+        noSavedWorkouts:
+          'נראה שעוד לא יצרת אף אימון שמור... הוספת אימונים שמורים תאפשר לך להתחיל להתאמן עם התרגילים המועדפים עלייך בלחיצת כפתור :)',
+      },
     },
     exercise: {
       title: '',

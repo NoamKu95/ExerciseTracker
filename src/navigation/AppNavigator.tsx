@@ -11,12 +11,13 @@ import ForgotPasswordScreen from '../features/auth/ForgotPasswordScreen';
 import OnboardingScreen from '../features/auth/OnboardingScreen';
 import SplashScreen from '../features/auth/SplashScreen';
 import NoInternetScreen from '../features/noInternet/NoInternetScreen';
+import TabsNavigator from './TabsNavigator';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName={Screens.SPLASH}>
+      <Stack.Navigator initialRouteName={Screens.TABS}>
         <Stack.Screen
           name={Screens.SPLASH}
           component={SplashScreen}
@@ -40,6 +41,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name={Screens.FORGOT_PASSWORD}
           component={ForgotPasswordScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={Screens.TABS}
+          component={TabsNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
