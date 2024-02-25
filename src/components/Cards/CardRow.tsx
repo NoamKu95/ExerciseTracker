@@ -38,7 +38,11 @@ const CardRow = ({row, isFirst, isLast = false}: CardRowProps) => {
     if (row.infoText) {
       return (
         <View style={styles().infoBadgeContainer}>
-          <RegularText children={row.infoText} size={FontSizes.regular} />
+          <RegularText
+            children={row.infoText}
+            size={FontSizes.xsmall}
+            textAlign="center"
+          />
         </View>
       );
     }
@@ -74,10 +78,14 @@ export const styles = (isRTL?: boolean) =>
       paddingRight: isRTL ? spaces._4px : 0,
     },
     infoBadgeContainer: {
+      height: 30,
+      minWidth: 80,
       backgroundColor: colors.BACKGROUND_GRAY,
       borderRadius: radiuses._8px,
       paddingVertical: spaces._4px,
       paddingHorizontal: spaces._16px,
+      alignContent: 'center',
+      justifyContent: 'center',
     },
     bottomBorder: {
       borderBottomWidth: 1,

@@ -83,6 +83,18 @@ const English: Translation = {
     },
     progress: {
       title: 'My progress',
+      subtitle:
+        "Nothing like seeing the progress you've done! Choose a workout from the dropdown to display the progress you've done along the way since you've started",
+      summaryCard: {
+        title: 'Performance summary',
+        lastWeight: 'Last weight',
+        avgWeight: 'Avg. Weight',
+        maxWeight: 'Max Weight',
+      },
+      graphCard: {
+        title: 'Progress graph',
+        emptyState: 'No data to display',
+      },
     },
     profile: {
       title: 'Profile',
@@ -127,15 +139,20 @@ const English: Translation = {
       "However, records of this workout that you've already done will continue to appear in your workout history",
     removeBtnText: 'Remove workout',
   },
-  commonlyUsed: {
+  common: {
+    kg: 'kg',
     actionButton: {
       save: 'Save',
     },
+    today: 'Today',
   },
   times: {
     last7Days: 'Last 7 days',
     last2Weeks: 'Last 14 days',
     lastMonth: 'Last 30 days',
+    last30Days: 'Last month',
+    last90Days: 'Last 3 months',
+    last180Days: 'Last 6 months',
   },
   errors: {
     genericError: '',

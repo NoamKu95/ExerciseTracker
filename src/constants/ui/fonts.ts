@@ -14,6 +14,7 @@ export const fontFamilies = {
 };
 
 export const FontSizes = {
+  xsmall: 12,
   small: 14,
   regular: 18,
   medium: 20,

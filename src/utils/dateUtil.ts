@@ -1,5 +1,6 @@
 import i18n from '../translations/i18n';
 import {DayPeriod} from '../constants/enums';
+import {TimePeriod} from '../models/timePeriod';
 
 // MARK: Timestamps
 export const getNowTimestamp = (): number => {
@@ -37,3 +38,18 @@ export const getGreetingAndMotivationByCurrentHour = (): {
     motivation: i18n.t(motivationKey),
   };
 };
+
+export function generateTimePeriod(
+  name: string,
+  amountOfDays: number,
+): TimePeriod {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setDate(endDate.getDate() - amountOfDays + 1);
+  return {
+    name: name,
+    amountOfDays: amountOfDays,
+    startDate: startDate,
+    endDate: endDate,
+  };
+}

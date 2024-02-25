@@ -79,6 +79,18 @@ const Hebrew: Translation = {
     },
     progress: {
       title: 'ההתקדמות שלי',
+      subtitle:
+        'הכי כיף ומדרבן לראות את הדרך שעברת! בחרי אימון מהרשימה כדי להציג את הפרוגרס שעשית לאורך הדרך מאז שהתחלת.',
+      summaryCard: {
+        title: 'הביצועים בקצרה',
+        lastWeight: 'משקל אחרון',
+        avgWeight: 'משקל ממוצע',
+        maxWeight: 'משקל מקסימאלי',
+      },
+      graphCard: {
+        title: 'גרף התקדמות',
+        emptyState: 'לא נמצאו נתונים להצגה',
+      },
     },
     profile: {
       title: 'אזור אישי',
@@ -121,15 +133,20 @@ const Hebrew: Translation = {
       'עם זאת, תיעודי האימון שהספקת לבצע ימשיכו להופיע בדף היסטוריית האימונים',
     removeBtnText: 'הסרת אימון',
   },
-  commonlyUsed: {
+  common: {
+    kg: 'ק״ג',
     actionButton: {
       save: 'שמירה',
     },
+    today: 'היום',
   },
   times: {
     last7Days: '7 ימים אחרונים',
     last2Weeks: 'שבועיים אחרונים',
     lastMonth: 'חודש אחרון',
+    last30Days: 'חודש אחרון',
+    last90Days: '3 חודשים אחרונים',
+    last180Days: 'חצי שנה אחרונה',
   },
   errors: {
     genericError: '',

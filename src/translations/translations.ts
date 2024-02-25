@@ -74,6 +74,17 @@ export interface Translation {
     };
     progress: {
       title: string;
+      subtitle: string;
+      summaryCard: {
+        title: string;
+        lastWeight: string;
+        avgWeight: string;
+        maxWeight: string;
+      };
+      graphCard: {
+        title: string;
+        emptyState: string;
+      };
     };
     profile: {
       title: string;
@@ -113,15 +124,20 @@ export interface Translation {
     removeText2: string;
     removeBtnText: string;
   };
-  commonlyUsed: {
+  common: {
+    kg: string;
     actionButton: {
       save: string;
     };
+    today: string;
   };
   times: {
     last7Days: string;
     last2Weeks: string;
     lastMonth: string;
+    last30Days: string;
+    last90Days: string;
+    last180Days: string;
   };
   errors: {
     genericError: string;

@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabItem from './components/TabItem';
 import HomeScreen from '../features/home_page/HomePage';
 import WorkoutScreen from '../features/WorkoutScreen';
-import ProgressScreen from '../features/ProgressScreen';
+import ProgressScreen from '../features/progress/ProgressScreen';
 import ProfileScreen from '../features/ProfileScreen';
 // Icons
 import HomeIcon from '../assets/icons/HomeIcon';
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator<RootTabsParamList>();
 const TabsNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={TabsScreens.HOME}
+      initialRouteName={TabsScreens.PROGRESS}
       backBehavior="history"
       screenOptions={({}) => ({
         headerShown: false,
