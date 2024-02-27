@@ -37,11 +37,16 @@ const CardRow = ({row, isFirst, isLast = false}: CardRowProps) => {
   const renderInfoView = () => {
     if (row.infoText) {
       return (
-        <View style={styles().infoBadgeContainer}>
+        <View
+          style={[
+            styles().infoBadgeContainer,
+            {backgroundColor: row.infoBgColor ?? colors.BACKGROUND_GRAY},
+          ]}>
           <RegularText
             children={row.infoText}
             size={FontSizes.xsmall}
             textAlign="center"
+            color={row.infoBgColor ? colors.WHITE : colors.MAIN_TEXT}
           />
         </View>
       );
@@ -80,7 +85,6 @@ export const styles = (isRTL?: boolean) =>
     infoBadgeContainer: {
       height: 30,
       minWidth: 80,
-      backgroundColor: colors.BACKGROUND_GRAY,
       borderRadius: radiuses._8px,
       paddingVertical: spaces._4px,
       paddingHorizontal: spaces._16px,

@@ -18,38 +18,36 @@ import {getFlexDirection} from '../../../utils/styleUtil';
 import {getPeriodInTextFormat} from '../../../utils/timeUtil';
 
 interface TimePeriodSelectorProps {
-  periods: TimePeriod[];
+  availablePeriods: TimePeriod[];
   selectedPeriod: TimePeriod;
   setSelectedPeriod: (timePeriod: TimePeriod) => void;
 }
 
 const TimePeriodSelector = ({
-  periods,
+  availablePeriods,
   selectedPeriod,
   setSelectedPeriod,
 }: TimePeriodSelectorProps) => {
-  const [periodText, setPeriodText] = useState('');
-  const [isFutureBtnDisabled, setIsFutureBtnDisabled] = useState(true);
-  const [currentPeriodEndDate, setCurrentPeriodEndDate] = useState<Date>(
+  const [selectedPeriodText, setPeriodText] = useState('');
+  const [selectedPeriodEndDate, setCurrentPeriodEndDate] = useState<Date>(
     new Date(),
   );
+  const [isFutureBtnDisabled, setIsFutureBtnDisabled] = useState(true);
 
   useEffect(() => {
-    const currentPeriodText = getPeriodInTextFormat(
+    const periodText = getPeriodInTextFormat(
       selectedPeriod,
-      currentPeriodEndDate,
+      selectedPeriodEndDate,
     );
-
-    setPeriodText(currentPeriodText);
+    setPeriodText(periodText);
 
     const endDate = subDays(
-      currentPeriodEndDate,
+      selectedPeriodEndDate,
       selectedPeriod.amountOfDays - 1,
     );
 
     setIsFutureBtnDisabled(isToday(endDate) || isAfter(endDate, new Date()));
-    console.log(selectedPeriod);
-  }, [selectedPeriod, currentPeriodEndDate]);
+  }, [selectedPeriod, selectedPeriodEndDate]);
 
   const goToPreviousTimePeriod = () => {
     setCurrentPeriodEndDate(prevDate => {
@@ -59,8 +57,8 @@ const TimePeriodSelector = ({
 
     setSelectedPeriod({
       ...selectedPeriod,
-      endDate: currentPeriodEndDate,
-      startDate: subDays(currentPeriodEndDate, selectedPeriod.amountOfDays),
+      endDate: selectedPeriodEndDate,
+      startDate: subDays(selectedPeriodEndDate, selectedPeriod.amountOfDays),
     });
   };
 
@@ -72,48 +70,58 @@ const TimePeriodSelector = ({
 
     setSelectedPeriod({
       ...selectedPeriod,
-      endDate: addDays(currentPeriodEndDate, selectedPeriod.amountOfDays),
-      startDate: currentPeriodEndDate,
+      endDate: addDays(selectedPeriodEndDate, selectedPeriod.amountOfDays),
+      startDate: selectedPeriodEndDate,
     });
   };
 
   // ** RENDER FUNCTIONS **
-  const renderGeneralTimePeriodTabs = () =>
-    periods.map(period => (
+  const renderTimePeriodOptions = () =>
+    availablePeriods.map(period => (
       <TextButton
         key={period.name}
         text={period.name}
         onPress={() => setSelectedPeriod(period)}
         textColor={
-          selectedPeriod.name === period.name ? colors.PRIMARY : colors.GRAY
+          selectedPeriod.name === period.name ? colors.SECONDARY : colors.GRAY
         }
         fontSize={FontSizes.xsmall}
       />
     ));
 
+  const renderFuturePeriodArrow = () => {
+    return isFutureBtnDisabled ? (
+      <Pressable
+        style={styles.rightArrow}
+        hitSlop={20}
+        disabled={isFutureBtnDisabled}
+        onPress={() => goToNextPeriod()}>
+        <ChevronDown />
+      </Pressable>
+    ) : (
+      <View />
+    );
+  };
+
+  const renderPastPeriodArrow = () => {
+    return (
+      <Pressable
+        style={styles.leftArrow}
+        hitSlop={20}
+        onPress={() => goToPreviousTimePeriod()}>
+        <ChevronDown />
+      </Pressable>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.generalPeriods}>{renderGeneralTimePeriodTabs()}</View>
+      <View style={styles.generalPeriods}>{renderTimePeriodOptions()}</View>
       <View style={styles.separator} />
       <View style={styles.specificPeriod}>
-        <Pressable
-          style={styles.leftArrow}
-          hitSlop={50}
-          onPress={() => goToPreviousTimePeriod()}>
-          <ChevronDown />
-        </Pressable>
-        <MediumText size={FontSizes.xsmall}>{periodText}</MediumText>
-        {isFutureBtnDisabled ? (
-          <Pressable
-            style={styles.rightArrow}
-            hitSlop={50}
-            disabled={isFutureBtnDisabled}
-            onPress={() => goToNextPeriod()}>
-            <ChevronDown />
-          </Pressable>
-        ) : (
-          <View />
-        )}
+        {renderFuturePeriodArrow()}
+        <MediumText size={FontSizes.xsmall}>{selectedPeriodText}</MediumText>
+        {renderPastPeriodArrow()}
       </View>
     </View>
   );
@@ -124,6 +132,7 @@ export default TimePeriodSelector;
 const styles = StyleSheet.create({
   container: {
     gap: spaces._16px,
+    paddingBottom: spaces._10px,
   },
   generalPeriods: {
     flexDirection: getFlexDirection(),
@@ -139,10 +148,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  leftArrow: {
+  rightArrow: {
     transform: [{rotate: '-90deg'}],
   },
-  rightArrow: {
+  leftArrow: {
     transform: [{rotate: '90deg'}],
   },
 });

@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     margin: spaces._0px,
   },
   modalContent: {
-    alignItems: 'center',
     backgroundColor: colors.WHITE,
     padding: spaces._24px,
     borderTopLeftRadius: radiuses._24px,

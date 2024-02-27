@@ -3,17 +3,19 @@ import i18n from '../translations/i18n';
 import {TimePeriod} from '../models/timePeriod';
 
 /**
- * Converts a Date object into a textual representation, such as "today", "yesterday", or "d MMM" format.
+ * Converts a Date object into a textual representation, such as "today" or "dd/MM/yy" format.
+ **    Example -> input: ()  =>   output: ("29/01/24")
  */
 export const formatDateToText = (date: Date) => {
   // eslint-disable-next-line curly
   if (isToday(date)) return i18n.t('common.today');
-  return format(date, 'd MMM');
+  return format(date, 'dd/MM/yy');
 };
 
 /**
  * Returns a textual representation of a period based on the current date and amount of days.
  * The text format varies depending on the length of the period.
+ * Example -> input: ()   =>   output:
  */
 export const getPeriodInTextFormat = (
   period: TimePeriod,
@@ -27,13 +29,13 @@ export const getPeriodInTextFormat = (
 };
 
 /**
- * Formats the start and end date of a period into a textual representation.
- * Example output: "1 Jan - 3 Jan"
+ * Formats the start & end dates of a period into a textual representation.
+ **    Example -> input: ()   =>   output: ("30/12/23 - 28/1/24")
  */
 export const formatTimePeriod = (
   currentDate: Date,
   periodRageInDays: number,
 ) => {
   const startDate = subDays(currentDate, periodRageInDays - 1);
-  return `${formatDateToText(startDate)} - ${formatDateToText(currentDate)}`;
+  return `${formatDateToText(currentDate)} - ${formatDateToText(startDate)}`;
 };

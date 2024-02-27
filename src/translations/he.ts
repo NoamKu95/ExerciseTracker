@@ -103,7 +103,7 @@ const Hebrew: Translation = {
     },
   },
   bottomSheets: {
-    exercise: {
+    exercises: {
       chooseBodyArea: 'בחירת אזור גוף:',
       chooseExercise: 'בחירת תרגיל:',
     },

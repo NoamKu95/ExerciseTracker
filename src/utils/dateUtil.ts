@@ -1,3 +1,4 @@
+import {subDays} from 'date-fns';
 import i18n from '../translations/i18n';
 import {DayPeriod} from '../constants/enums';
 import {TimePeriod} from '../models/timePeriod';
@@ -43,13 +44,11 @@ export function generateTimePeriod(
   name: string,
   amountOfDays: number,
 ): TimePeriod {
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setDate(endDate.getDate() - amountOfDays + 1);
+  const startDate = subDays(new Date(), amountOfDays);
   return {
     name: name,
     amountOfDays: amountOfDays,
     startDate: startDate,
-    endDate: endDate,
+    endDate: new Date(),
   };
 }

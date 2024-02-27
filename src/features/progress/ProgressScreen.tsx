@@ -3,10 +3,9 @@ import {StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
-import TitledCard from '../../components/Cards/TitledCard';
 import CardWithRows from '../../components/Cards/CardWithRows';
-import TimePeriodSelector from './components/TimePeriodSelector';
-import LineGraph from './components/LineGraph';
+import CardWithGraph from './components/CardWithGraph';
+import ExercisesBottomSheet from '../../components/BottomSheets/ExercisesBottomSheet';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
@@ -17,31 +16,19 @@ import {progressPeriods} from '../../data/timePeriods';
 // Models
 import {TimePeriod} from '../../models/timePeriod';
 // Redux
-import {useAppDispatch, useAppSelector} from '../../store/store';
-import {ExerciseDayData} from '../../models/core/exercise';
-import FilterExcHistoryBottomSheet from '../../components/BottomSheets/FilterExcHistoryBottomSheet';
+import {useAppSelector} from '../../store/store';
 
 const ProgressScreen = () => {
-  const dispatch = useAppDispatch();
-
   // VARIABLES
+  const isLoading = useAppSelector(state => state.progress.isLoading);
   const currentExercise = useAppSelector(
     state => state.progress.chosenExercise,
   );
-  const [selectionPeriod, setSelectedPeriod] = useState<TimePeriod>(
+  const exerciseData = useAppSelector(state => state.progress.exerciseData);
+  const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
     progressPeriods[0],
   );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-  const exerciseData: ExerciseDayData[] = [
-    {date: new Date(), weight: 60},
-    {date: new Date('2024-02-22'), weight: 58},
-    {date: new Date('2024-02-21'), weight: 55},
-    {date: new Date('2024-02-20'), weight: 55},
-    {date: new Date('2024-02-19'), weight: 52.5},
-    {date: new Date('2024-02-18'), weight: 52.5},
-    {date: new Date('2024-02-17'), weight: 52.5},
-  ];
 
   useEffect(() => {
     // dispatch - get data for selected exercise
@@ -80,6 +67,7 @@ const ProgressScreen = () => {
           {
             text: i18n.t('screens.progress.summaryCard.lastWeight'),
             infoText: `${currentExercise?.lastWeight} ${i18n.t('common.kg')}`,
+            infoBgColor: colors.SECONDARY,
           },
           {
             text: i18n.t('screens.progress.summaryCard.avgWeight'),
@@ -96,43 +84,14 @@ const ProgressScreen = () => {
     );
   };
 
-  const renderGraphCard = () => {
-    return (
-      <>
-        <TitledCard
-          title={i18n.t('screens.progress.graphCard.title')}
-          children={renderGraph()}
-        />
-      </>
-    );
-  };
-
-  const renderGraph = () => {
-    if (!currentExercise?.lastWeight) {
-      return (
-        <RegularText
-          children={i18n.t('screens.progress.emptyState')}
-          size={FontSizes.regular}
-        />
-      );
-    }
-
-    return (
-      <>
-        <TimePeriodSelector
-          periods={progressPeriods}
-          selectedPeriod={selectionPeriod}
-          setSelectedPeriod={handleDateChange}
-        />
-        <LineGraph graphData={exerciseData} />
-      </>
-    );
-  };
-
   // ** HANDLE FUNCTIONS **
-  const handleDateChange = (newPeriod: TimePeriod) => {
-    // dispatch - get data for new period for the selected exercise
+  const handleTimePeriodChange = (newPeriod: TimePeriod) => {
+    // dispatch - get data for new period for the selected exercise ; .then() setSelectedPeriod
     setSelectedPeriod(newPeriod);
+  };
+
+  const handleExerciseSelection = () => {
+    // dispatch - get data for the new exercise
   };
 
   return (
@@ -141,10 +100,16 @@ const ProgressScreen = () => {
         {renderTitles()}
         {renderDropdown()}
         {renderSummaryCard()}
-        {renderGraphCard()}
-        <FilterExcHistoryBottomSheet
+        <CardWithGraph
+          graphData={exerciseData}
+          selectedTimePeriod={selectedPeriod}
+          handlePeriodChange={handleTimePeriodChange}
+          isLoading={isLoading}
+        />
+        <ExercisesBottomSheet
+          isVisible={true}
+          onClosePressed={() => {}}
           onSavePressed={() => {}}
-          onCloseSheet={() => setIsSheetOpen(false)}
         />
       </>
     </ScreenLayout>

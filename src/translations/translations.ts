@@ -97,7 +97,7 @@ export interface Translation {
     };
   };
   bottomSheets: {
-    exercise: {
+    exercises: {
       chooseBodyArea: string;
       chooseExercise: string;
     };
