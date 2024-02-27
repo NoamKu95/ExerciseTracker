@@ -4,6 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import {BoldText} from '../Base/Texts';
 import Chip from '../Base/Chip';
 import BottomSheetLayout from './BottomSheetLayout';
+import AppScrollPicker from '../Base/AppScrollPicker';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
@@ -12,9 +13,10 @@ import i18n from '../../translations/i18n';
 import {bodyAreas} from '../../data/bodyAreas';
 // Models
 import {BodyArea} from '../../models/bodyArea';
+import {Exercise} from '../../models/core/exercise';
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
-import {Exercise} from '../../models/core/exercise';
+import {exercises} from '../../mockData/exercises';
 
 interface ExercisesBottomSheetProps {
   isVisible: boolean;
@@ -57,8 +59,9 @@ const ExercisesBottomSheet = ({
     setSelectedArea(selection);
   };
 
-  const handleExerciseSelection = (selection: Exercise) => {
-    setSelectedExercise(selection);
+  const handleExerciseSelection = (exrcName: string) => {
+    // find the exercise by the exrcName
+    // setSelectedExercise(selection);
   };
 
   return (
@@ -75,6 +78,11 @@ const ExercisesBottomSheet = ({
         <BoldText
           children={i18n.t('bottomSheets.exercises.chooseExercise')}
           size={FontSizes.regular}
+        />
+        <AppScrollPicker
+          data={exercises.map(exc => exc.name)}
+          value={exercises[0].name}
+          setValue={handleExerciseSelection}
         />
       </>
     </BottomSheetLayout>

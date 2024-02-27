@@ -2,6 +2,7 @@ export const colors = {
   BLACK: '#000000',
   WHITE: '#FFFFFF',
   TRANSPARENT: 'transparent',
+  SCROLL_TRANSPARENT: 'rgba(255,255,255, 0.5)',
 
   BACKGROUND: '#DBE6ED',
 
