@@ -10,7 +10,6 @@ import ChevronDown from '../../../assets/icons/ChevronDown';
 import {colors} from '../../../constants/ui/colors';
 import {spaces} from '../../../constants/ui/spaces';
 import {FontSizes} from '../../../constants/ui/fonts';
-// Constants
 // Models
 import {TimePeriod} from '../../../models/TimePeriod';
 // Utils

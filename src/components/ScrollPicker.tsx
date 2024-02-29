@@ -214,7 +214,7 @@ const ScrollPicker: {
     height: wrapperHeight,
     width: '100%',
     flex: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.TRANSPARENT,
     overflow: 'hidden',
   };
 

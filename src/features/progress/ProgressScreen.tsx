@@ -60,14 +60,12 @@ const ProgressScreen = () => {
 
   const renderDropdown = () => {
     return (
-      <>
-        <DropDown
-          value={currentExercise.name}
-          onPress={() => {
-            setIsSheetOpen(true);
-          }}
-        />
-      </>
+      <DropDown
+        value={currentExercise.name}
+        onPress={() => {
+          setIsSheetOpen(true);
+        }}
+      />
     );
   };
 

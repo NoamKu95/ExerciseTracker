@@ -8,13 +8,13 @@ import {radiuses} from '../../constants/ui/radiuses';
 import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 
-interface Props {
+interface ChipProps {
   text: string;
   isSelected: boolean;
   onPress: () => void;
 }
 
-const Chip = ({text, isSelected, onPress}: Props) => {
+const Chip = ({text, isSelected, onPress}: ChipProps) => {
   return (
     <Pressable onPress={onPress} style={[styles(isSelected).chipOuter]}>
       <RegularText

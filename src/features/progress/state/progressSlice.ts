@@ -1,12 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 // Constants
 import {exerciseLastMonthData} from '../../../mockData/exerciseDataMock';
+import {defaultBodyArea, defaultExercise} from '../../../data/defaultData';
 // Models
 import {ExerciseDayData} from '../../../models/core/exercise';
-import {defaultBodyArea, defaultExercise} from '../../../data/defaultData';
 import {BodyArea} from '../../../models/bodyArea';
 import {ExerciseResponse} from '../../../models/networkingObjects/exerciseResponse';
-// Redux
 
 export interface WorkoutState {
   isLoading: boolean;

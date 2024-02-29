@@ -81,7 +81,7 @@ const ExercisesBottomSheet = ({
         />
         <AppScrollPicker
           data={exercises.map(exc => exc.name)}
-          value={exercises[0].name}
+          value={selectedExercise.name}
           setValue={() => handleExerciseSelection}
         />
       </>

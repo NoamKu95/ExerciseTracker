@@ -5,7 +5,6 @@ import {RegularText} from '../../../components/Base/Texts';
 import TitledCard from '../../../components/Cards/TitledCard';
 import TimePeriodSelector from './TimePeriodSelector';
 import LineGraph from './LineGraph';
-// Icons
 // UI
 import {spaces} from '../../../constants/ui/spaces';
 import {FontSizes} from '../../../constants/ui/fonts';

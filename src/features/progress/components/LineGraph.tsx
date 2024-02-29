@@ -4,8 +4,12 @@ import {StyleSheet, View} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 // UI
 import {colors} from '../../../constants/ui/colors';
+// Constants
+import i18n from '../../../translations/i18n';
 // Models
 import {ExerciseDayData} from '../../../models/core/exercise';
+// Redux
+import {useAppSelector} from '../../../store/store';
 // Utils
 import {hp, wp} from '../../../utils/styleUtil';
 import {formatDateToText} from '../../../utils/timeUtil';
@@ -16,6 +20,7 @@ interface DataLineGraphProps {
 
 const LineGraph = ({graphData}: DataLineGraphProps) => {
   // VARIABLES
+  const isRTL = useAppSelector(state => state.auth.isRTL);
   const [chartWidth, setChartWidth] = useState(wp(100));
 
   const renderXAxisDates = () => {
@@ -55,6 +60,9 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
         width={chartWidth}
         height={hp(25)}
         yAxisInterval={0.5}
+        xLabelsOffset={4}
+        yAxisSuffix={isRTL ? ` ${i18n.t('common.kg')}` : i18n.t('common.kg')}
+        yLabelsOffset={16}
         chartConfig={{
           backgroundGradientFromOpacity: 0,
           backgroundGradientToOpacity: 0,
@@ -67,7 +75,6 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
             strokeWidth: 0.2,
           },
         }}
-        style={styles.chartStyle}
       />
     </View>
   );
@@ -79,5 +86,4 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  chartStyle: {},
 });
