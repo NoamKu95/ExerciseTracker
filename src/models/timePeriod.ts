@@ -1,5 +1,6 @@
 export interface TimePeriod {
   name: string;
-  startTime: number;
-  endTime: number;
+  amountOfDays: number;
+  startDate: Date;
+  endDate: Date;
 }

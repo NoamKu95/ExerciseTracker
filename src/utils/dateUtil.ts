@@ -1,5 +1,7 @@
+import {subDays} from 'date-fns';
 import i18n from '../translations/i18n';
 import {DayPeriod} from '../constants/enums';
+import {TimePeriod} from '../models/timePeriod';
 
 // MARK: Timestamps
 export const getNowTimestamp = (): number => {
@@ -37,3 +39,16 @@ export const getGreetingAndMotivationByCurrentHour = (): {
     motivation: i18n.t(motivationKey),
   };
 };
+
+export function generateTimePeriod(
+  name: string,
+  amountOfDays: number,
+): TimePeriod {
+  const startDate = subDays(new Date(), amountOfDays);
+  return {
+    name: name,
+    amountOfDays: amountOfDays,
+    startDate: startDate,
+    endDate: new Date(),
+  };
+}

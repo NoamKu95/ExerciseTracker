@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 // Components
 import {BoldText} from '../Base/Texts';
-import Chip from '../Chip';
+import Chip from '../Base/Chip';
 import BottomSheetLayout from './BottomSheetLayout';
 // Icons
 import {FontSizes} from '../../constants/ui/fonts';
@@ -18,11 +18,13 @@ import {TimePeriod} from '../../models/timePeriod';
 import {getFlexDirection, getSelfAlign, hp} from '../../utils/styleUtil';
 
 interface FilterExcHistoryBottomSheetProps {
+  isOpen: boolean;
   onSavePressed: () => void;
   onCloseSheet: () => void;
 }
 
 const FilterExcHistoryBottomSheet = ({
+  isOpen,
   onSavePressed,
   onCloseSheet,
 }: FilterExcHistoryBottomSheetProps) => {
@@ -123,7 +125,7 @@ const FilterExcHistoryBottomSheet = ({
     <BottomSheetLayout
       height={hp(65)}
       handleSave={onSavePressed}
-      isVisible={true}
+      isVisible={isOpen}
       onCloseSheetPressed={onCloseSheet}>
       <View style={styles.contentContainer}>
         {renderTimePeriodChips()}

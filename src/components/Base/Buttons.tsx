@@ -100,10 +100,10 @@ export const SecondaryButton = (props: GenericButtonProps) => (
 
 export const TextButton = (props: GenericButtonProps) => (
   <GenericButton
-    {...props}
     buttonType={ButtonType.TEXT}
     textColor={colors.PRIMARY}
     minWidth={50}
+    {...props}
   />
 );
 

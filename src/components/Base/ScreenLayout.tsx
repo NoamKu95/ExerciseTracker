@@ -2,17 +2,17 @@ import React from 'react';
 import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 // Components
+import {BoldText} from './Texts';
 import {BackwardsButton, PrimaryButton} from './Buttons';
 // UI
+import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
-import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
+import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import {ButtonType} from '../../constants/enums';
 // Utils
+import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
 import {isIOS} from '../../utils/platformUtil';
-import {FontSizes} from '../../constants/ui/fonts';
-import {BoldText} from './Texts';
-import {colors} from '../../constants/ui/colors';
 
 interface ScreenLayout1Props {
   children: JSX.Element;
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: colors.BACKGROUND,
     paddingBottom: hp(15),
+    width: wp(100),
   },
   headerContainer: {
     backgroundColor: colors.BACKGROUND,

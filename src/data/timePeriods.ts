@@ -1,6 +1,10 @@
 import {TimePeriod} from '../models/timePeriod';
 import i18n from '../translations/i18n';
-import {getNowTimestamp, getXDaysAgoTimestamp} from '../utils/dateUtil';
+import {
+  generateTimePeriod,
+  getNowTimestamp,
+  getXDaysAgoTimestamp,
+} from '../utils/dateUtil';
 
 export const timePeriodsForFiltering: TimePeriod[] = [
   {
@@ -18,4 +22,10 @@ export const timePeriodsForFiltering: TimePeriod[] = [
     startTime: getXDaysAgoTimestamp(30),
     endTime: getNowTimestamp(),
   },
+];
+
+export const progressPeriods: TimePeriod[] = [
+  generateTimePeriod(i18n.t('times.last30Days'), 30),
+  generateTimePeriod(i18n.t('times.last90Days'), 90),
+  generateTimePeriod(i18n.t('times.last180Days'), 180),
 ];

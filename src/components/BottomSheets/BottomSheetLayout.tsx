@@ -38,7 +38,7 @@ const BottomSheetLayout = ({
           <CloseIcon />
         </Pressable>
         <TextButton
-          text={i18n.t('commonlyUsed.actionButton.save')}
+          text={i18n.t('common.actionButton.save')}
           fontSize={FontSizes.small}
           textColor={colors.PRIMARY}
           onPress={handleSave}
@@ -51,7 +51,6 @@ const BottomSheetLayout = ({
     <Modal
       isVisible={isVisible}
       style={styles.bottomModal}
-      swipeDirection={['down']}
       onSwipeComplete={onCloseSheetPressed}
       onBackdropPress={onCloseSheetPressed}>
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
     margin: spaces._0px,
   },
   modalContent: {
-    alignItems: 'center',
     backgroundColor: colors.WHITE,
     padding: spaces._24px,
     borderTopLeftRadius: radiuses._24px,
