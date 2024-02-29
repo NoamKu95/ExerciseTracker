@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
+import DropDown from './components/DropDown';
 import CardWithRows from '../../components/Cards/CardWithRows';
 import CardWithGraph from './components/CardWithGraph';
 import ExercisesBottomSheet from '../../components/BottomSheets/ExercisesBottomSheet';
@@ -14,6 +15,9 @@ import {FontSizes} from '../../constants/ui/fonts';
 import i18n from '../../translations/i18n';
 import {progressPeriods} from '../../data/timePeriods';
 // Models
+import {Exercise} from '../../models/core/exercise';
+import {ExerciseResponse} from '../../models/networkingObjects/exerciseResponse';
+import {BodyArea} from '../../models/bodyArea';
 import {TimePeriod} from '../../models/timePeriod';
 // Redux
 import {useAppSelector} from '../../store/store';
@@ -21,8 +25,11 @@ import {useAppSelector} from '../../store/store';
 const ProgressScreen = () => {
   // VARIABLES
   const isLoading = useAppSelector(state => state.progress.isLoading);
-  const currentExercise = useAppSelector(
+  const currentExercise = useAppSelector<ExerciseResponse>(
     state => state.progress.chosenExercise,
+  );
+  const currentBodyArea = useAppSelector(
+    state => state.progress.chosenBodyArea,
   );
   const exerciseData = useAppSelector(state => state.progress.exerciseData);
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
@@ -54,7 +61,12 @@ const ProgressScreen = () => {
   const renderDropdown = () => {
     return (
       <>
-        <></>
+        <DropDown
+          value={currentExercise.name}
+          onPress={() => {
+            setIsSheetOpen(true);
+          }}
+        />
       </>
     );
   };
@@ -90,7 +102,8 @@ const ProgressScreen = () => {
     setSelectedPeriod(newPeriod);
   };
 
-  const handleExerciseSelection = () => {
+  const handleExerciseSelection = (bodyArea: BodyArea, exercise: Exercise) => {
+    console.log(bodyArea, exercise);
     // dispatch - get data for the new exercise
   };
 
@@ -107,9 +120,13 @@ const ProgressScreen = () => {
           isLoading={isLoading}
         />
         <ExercisesBottomSheet
-          isVisible={true}
-          onClosePressed={() => {}}
-          onSavePressed={() => {}}
+          isVisible={isSheetOpen}
+          currentArea={currentBodyArea}
+          currentExercise={currentExercise}
+          onClosePressed={() => {
+            setIsSheetOpen(false);
+          }}
+          onSavePressed={handleExerciseSelection}
         />
       </>
     </ScreenLayout>

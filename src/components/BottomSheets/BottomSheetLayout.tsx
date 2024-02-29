@@ -51,7 +51,6 @@ const BottomSheetLayout = ({
     <Modal
       isVisible={isVisible}
       style={styles.bottomModal}
-      swipeDirection={['down']}
       onSwipeComplete={onCloseSheetPressed}
       onBackdropPress={onCloseSheetPressed}>
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>

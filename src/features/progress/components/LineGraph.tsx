@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react';
+// React & Libs
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import {spaces} from '../../../constants/ui/spaces';
-import {hp, wp} from '../../../utils/styleUtil';
+// UI
 import {colors} from '../../../constants/ui/colors';
-import {formatDateToText} from '../../../utils/timeUtil';
+// Models
 import {ExerciseDayData} from '../../../models/core/exercise';
-import {useAppSelector} from '../../../store/store';
+// Utils
+import {hp, wp} from '../../../utils/styleUtil';
+import {formatDateToText} from '../../../utils/timeUtil';
 
 interface DataLineGraphProps {
   graphData: ExerciseDayData[];
 }
 
 const LineGraph = ({graphData}: DataLineGraphProps) => {
-  const isRTL = useAppSelector(state => state.auth.isRTL);
-
   // VARIABLES
   const [chartWidth, setChartWidth] = useState(wp(100));
 
@@ -39,21 +39,22 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
         setChartWidth(width);
       }}>
       <LineChart
-        withInnerLines={false}
-        withShadow={false}
+        withShadow={true}
+        withHorizontalLines={true}
+        withVerticalLines={false}
         data={{
-          labels: isRTL ? renderXAxisDates().reverse() : renderXAxisDates(),
+          labels: renderXAxisDates().reverse(),
           datasets: [
             {
-              data: [20, 45, 28, 80, 99, 43],
+              data: graphData.map(item => item.weight).reverse(),
               color: () => colors.SECONDARY,
-              strokeWidth: 3,
+              strokeWidth: 2.5,
             },
           ],
         }}
         width={chartWidth}
         height={hp(25)}
-        yAxisInterval={1}
+        yAxisInterval={0.5}
         chartConfig={{
           backgroundGradientFromOpacity: 0,
           backgroundGradientToOpacity: 0,
@@ -63,7 +64,7 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
           propsForDots: {r: '0'},
           propsForBackgroundLines: {
             stroke: colors.PRIMARY,
-            strokeWidth: 0.5,
+            strokeWidth: 0.2,
           },
         }}
         style={styles.chartStyle}
@@ -78,8 +79,5 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  chartStyle: {
-    marginVertical: spaces._8px,
-    paddingRight: hp(4),
-  },
+  chartStyle: {},
 });

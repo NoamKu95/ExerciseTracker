@@ -3,9 +3,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Components
 import TabItem from './components/TabItem';
 import HomeScreen from '../features/home_page/HomePage';
-import WorkoutScreen from '../features/WorkoutScreen';
+import WorkoutScreen from '../features/workout/WorkoutScreen';
 import ProgressScreen from '../features/progress/ProgressScreen';
-import ProfileScreen from '../features/ProfileScreen';
+import ProfileScreen from '../features/profile/ProfileScreen';
 // Icons
 import HomeIcon from '../assets/icons/HomeIcon';
 import WorkoutIcon from '../assets/icons/WorkoutIcon';

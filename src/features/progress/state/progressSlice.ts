@@ -2,24 +2,23 @@ import {createSlice} from '@reduxjs/toolkit';
 // Constants
 import {exerciseLastMonthData} from '../../../mockData/exerciseDataMock';
 // Models
-import {Exercise, ExerciseDayData} from '../../../models/core/exercise';
+import {ExerciseDayData} from '../../../models/core/exercise';
+import {defaultBodyArea, defaultExercise} from '../../../data/defaultData';
+import {BodyArea} from '../../../models/bodyArea';
+import {ExerciseResponse} from '../../../models/networkingObjects/exerciseResponse';
 // Redux
 
 export interface WorkoutState {
   isLoading: boolean;
-  chosenExercise: Exercise | null;
+  chosenExercise: ExerciseResponse;
+  chosenBodyArea: BodyArea;
   exerciseData: ExerciseDayData[];
 }
 
 const initialState: WorkoutState = {
   isLoading: false,
-  chosenExercise: {
-    id: '',
-    name: '',
-    lastWeight: 60,
-    averageWeight: 55,
-    maxWeight: 62.5,
-  },
+  chosenExercise: defaultExercise,
+  chosenBodyArea: defaultBodyArea,
   exerciseData: exerciseLastMonthData, // TODO: replace with []
 };
 
