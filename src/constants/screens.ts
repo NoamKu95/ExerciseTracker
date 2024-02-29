@@ -56,3 +56,13 @@ export const TabsScreens: {
   PROGRESS: 'Progress',
   PROFILE: 'Profile',
 };
+
+// PROFILE STACK
+export type ProfileStackParamList = {
+  Profile: undefined;
+};
+export const ProfileScreens: {
+  PROFILE: keyof ProfileStackParamList;
+} = {
+  PROFILE: 'Profile',
+};
