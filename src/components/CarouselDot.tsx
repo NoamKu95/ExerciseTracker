@@ -5,11 +5,11 @@ import {colors} from '../constants/ui/colors';
 import {spaces} from '../constants/ui/spaces';
 import {radiuses} from '../constants/ui/radiuses';
 
-interface Props {
+interface DotProps {
   isSelected: boolean;
 }
 
-const CarouselDot = (props: Props) => {
+const CarouselDot = (props: DotProps) => {
   return (
     <View style={styles.dotContainer}>
       <View
