@@ -88,6 +88,13 @@ export interface Translation {
     };
     profile: {
       title: string;
+      personalDetails: string;
+      firstName: string;
+      lastName: string;
+      gender: string;
+      male: string;
+      female: string;
+      other: string;
     };
     noInternet: {
       title: string;

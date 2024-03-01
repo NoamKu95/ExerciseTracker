@@ -14,6 +14,7 @@ import {
   registerUser,
   sendNewPassword,
 } from './authActions';
+import {mockUser} from '../../../mockData/userMock';
 
 export interface AuthState {
   isRTL: boolean;
@@ -29,7 +30,7 @@ const initialState: AuthState = {
   language: getLanguageType(i18n.locale),
   isLoading: false,
   isAuthenticated: false,
-  user: null,
+  user: mockUser, //null,
   userToken: null,
 };
 

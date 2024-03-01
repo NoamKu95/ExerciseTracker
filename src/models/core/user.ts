@@ -1,6 +1,9 @@
+import {Gender} from '../../constants/enums';
+
 export interface User {
   fullName: string;
   email: string;
+  gender: Gender;
 }
 
 export interface UserCredentials {

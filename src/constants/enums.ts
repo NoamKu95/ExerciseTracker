@@ -16,3 +16,9 @@ export enum DayPeriod {
   EVENING = 'evening',
   NIGHT = 'night',
 }
+
+export enum Gender {
+  FEMALE = 'female',
+  MALE = 'male',
+  OTHER = 'other',
+}

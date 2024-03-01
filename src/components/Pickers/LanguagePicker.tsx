@@ -4,7 +4,7 @@ import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import LanguageSelectionRow from './LanguageSelectionRow';
 import {RegularText} from '../Base/Texts';
 // Icons
-import ChevronDown from '../../assets/icons/ChevronDown';
+import ChevronDownIcon from '../../assets/icons/ChevronDownIcon';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {radiuses} from '../../constants/ui/radiuses';
@@ -65,7 +65,7 @@ const LanguagePicker = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
-          <ChevronDown />
+          <ChevronDownIcon />
           <RegularText size={FontSizes.small}>
             {language.toUpperCase()}
           </RegularText>

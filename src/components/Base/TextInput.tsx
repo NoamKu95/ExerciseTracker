@@ -19,6 +19,7 @@ import {useAppSelector} from '../../store/store';
 // Utils
 import {getFontFamily} from '../../utils/fontFamily';
 import {isIOS} from '../../utils/platformUtil';
+import {shadowStyles} from '../../constants/ui/shadows';
 
 interface AppTextInputProps {
   label: string;
@@ -27,6 +28,7 @@ interface AppTextInputProps {
   validateInput: (text: string) => boolean;
   errorText: string;
   isCensored?: boolean;
+  isShadow?: boolean;
 }
 
 const AppTextInput = ({
@@ -36,6 +38,7 @@ const AppTextInput = ({
   validateInput,
   isCensored = false,
   errorText,
+  isShadow = false,
 }: AppTextInputProps) => {
   const isRTL = useAppSelector(state => state.auth.isRTL);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
@@ -99,7 +102,8 @@ const AppTextInput = ({
   };
 
   return (
-    <View style={styles().container}>
+    <View
+      style={[styles().container, isShadow ? shadowStyles.softShadow : null]}>
       <View
         style={[
           styles().mainContainer,

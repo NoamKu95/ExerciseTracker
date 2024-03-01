@@ -7,6 +7,10 @@ export const validateFullName = (name: string) => {
   return /^[\u05D0-\u05EAa-zA-Z]+(\s[\u05D0-\u05EAa-zA-Z]+)+$/i.test(name);
 };
 
+export const validateName = (name: string) => {
+  return /^(?=.*[a-zA-Z].*[a-zA-Z])(?=.*\w)[^\W!@#$%^&*~]+$/i.test(name);
+};
+
 export const validatePassword = (password: string): boolean => {
   return password.length >= 5;
 };

@@ -94,6 +94,13 @@ const Hebrew: Translation = {
     },
     profile: {
       title: 'אזור אישי',
+      personalDetails: 'פרטים אישיים',
+      firstName: 'שם פרטי',
+      lastName: 'שם משפחה',
+      gender: 'מגדר',
+      male: 'זכר',
+      female: 'נקבה',
+      other: 'אחר',
     },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',

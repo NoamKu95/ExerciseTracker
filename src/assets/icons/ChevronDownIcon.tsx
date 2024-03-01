@@ -2,7 +2,7 @@ import React from 'react';
 import {Path, Svg} from 'react-native-svg';
 import {colors} from '../../constants/ui/colors';
 
-const ChevronDown = () => {
+const ChevronDownIcon = () => {
   return (
     <Svg width="16" height="10" viewBox="0 0 16 10" fill="none">
       <Path
@@ -16,4 +16,4 @@ const ChevronDown = () => {
   );
 };
 
-export default ChevronDown;
+export default ChevronDownIcon;
