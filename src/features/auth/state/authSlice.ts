@@ -1,8 +1,8 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
 import i18n, {
-  LanguageType,
-  getLanguageType,
+  Language,
+  appLanguages,
   isRightToLeft,
 } from '../../../translations/i18n';
 // Models
@@ -18,7 +18,7 @@ import {mockUser} from '../../../mockData/userMock';
 
 export interface AuthState {
   isRTL: boolean;
-  language: LanguageType;
+  language: Language;
   isLoading: boolean;
   isAuthenticated: boolean;
   user: User | null;
@@ -27,7 +27,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isRTL: true,
-  language: getLanguageType(i18n.locale),
+  language: appLanguages[1],
   isLoading: false,
   isAuthenticated: false,
   user: mockUser, //null,
@@ -38,10 +38,10 @@ export const AuthSlice = createSlice({
   name: 'AuthSlice',
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<LanguageType>) => {
+    setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
-      i18n.locale = action.payload;
-      state.isRTL = isRightToLeft(action.payload);
+      i18n.locale = action.payload.code;
+      state.isRTL = isRightToLeft(action.payload.code);
     },
     login(state) {
       state.isAuthenticated = true;

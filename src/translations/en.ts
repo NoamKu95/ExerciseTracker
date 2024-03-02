@@ -166,6 +166,9 @@ const English: Translation = {
       unauthorizedError: '',
       tokenExpired: '',
     },
+    app: {
+      cantOpenEmail: "Couldn't send the email",
+    },
     validation: {
       invalidName: '',
       invalidEmail: '',

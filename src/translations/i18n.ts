@@ -71,8 +71,8 @@ export const getDeviceLng = (): LanguageType => {
   }
 };
 
-export const getLanguageType = (languageCode: string): LanguageType => {
-  switch (languageCode) {
+export const getLanguageType = (language: Language): LanguageType => {
+  switch (language.code) {
     case 'he':
       return LanguageType.Hebrew;
     case 'en':

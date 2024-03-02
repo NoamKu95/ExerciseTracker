@@ -22,3 +22,14 @@ export enum Gender {
   MALE = 'male',
   OTHER = 'other',
 }
+
+export enum RowActionIdentifier {
+  LANGUAGE,
+  CONTACT,
+  MEASURE_UNIT,
+}
+
+export enum MeasureUnit {
+  KG = 'Kg',
+  LB = 'lbs',
+}

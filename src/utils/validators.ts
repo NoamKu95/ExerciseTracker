@@ -8,7 +8,9 @@ export const validateFullName = (name: string) => {
 };
 
 export const validateName = (name: string) => {
-  return /^(?=.*[a-zA-Z].*[a-zA-Z])(?=.*\w)[^\W!@#$%^&*~]+$/i.test(name);
+  return /^(?=.*[a-zA-Z].*[a-zA-Z])(?=.*[a-zA-Z])[^\W\d!@#$%^&*~ ]+$/i.test(
+    name,
+  );
 };
 
 export const validatePassword = (password: string): boolean => {
