@@ -16,3 +16,22 @@ export enum DayPeriod {
   EVENING = 'evening',
   NIGHT = 'night',
 }
+
+export enum Gender {
+  FEMALE = 'female',
+  MALE = 'male',
+  OTHER = 'other',
+}
+
+export enum RowActionIdentifier {
+  SAVED_WORKOUTS,
+  WORKOUT_HISTORY,
+  LANGUAGE,
+  MEASURE_UNIT,
+  CONTACT,
+}
+
+export enum MeasureUnit {
+  KG = 'Kg',
+  LB = 'lbs',
+}

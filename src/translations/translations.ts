@@ -88,6 +88,20 @@ export interface Translation {
     };
     profile: {
       title: string;
+      personalDetails: string;
+      firstName: string;
+      lastName: string;
+      gender: string;
+      male: string;
+      female: string;
+      other: string;
+      settings: string;
+      language: string;
+      measureUnit: string;
+      contactUs: string;
+      emailSubject: string;
+      emailBody: string;
+      deleteUser: string;
     };
     noInternet: {
       title: string;
@@ -150,6 +164,9 @@ export interface Translation {
       notFoundError: string;
       unauthorizedError: string;
       tokenExpired: string;
+    };
+    app: {
+      cantOpenEmail: string;
     };
     validation: {
       invalidName: string;

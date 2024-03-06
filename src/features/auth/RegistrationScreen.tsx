@@ -11,6 +11,7 @@ import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 // Icons
 import SparkleIcon from '../../assets/icons/SparkleIcon';
 // UI
@@ -28,7 +29,6 @@ import {
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {registerUser} from './state/authActions';
-import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const RegistrationScreen = () => {
   const dispatch = useAppDispatch();

@@ -3,7 +3,7 @@ import {Pressable, StyleSheet} from 'react-native';
 // Components
 import {RegularText} from '../../../components/Base/Texts';
 // Icons
-import ChevronDown from '../../../assets/icons/ChevronDown';
+import ChevronDownIcon from '../../../assets/icons/ChevronDownIcon';
 // UI
 import {colors} from '../../../constants/ui/colors';
 import {spaces} from '../../../constants/ui/spaces';
@@ -21,7 +21,7 @@ const DropDown = ({value, onPress}: DropDownProps) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <RegularText children={value} size={FontSizes.regular} />
-      <ChevronDown />
+      <ChevronDownIcon />
     </Pressable>
   );
 };

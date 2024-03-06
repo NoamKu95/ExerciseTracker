@@ -60,6 +60,7 @@ const ExercisesBottomSheet = ({
   };
 
   const handleExerciseSelection = (exrcName: string) => {
+    console.log(exrcName);
     // find the exercise by the exrcName
     // setSelectedExercise(selection);
   };

@@ -5,7 +5,7 @@ import TabItem from './components/TabItem';
 import HomeScreen from '../features/home_page/HomePage';
 import WorkoutScreen from '../features/workout/WorkoutScreen';
 import ProgressScreen from '../features/progress/ProgressScreen';
-import ProfileScreen from '../features/profile/ProfileScreen';
+import ProfileStack from './ProfileNavigator';
 // Icons
 import HomeIcon from '../assets/icons/HomeIcon';
 import WorkoutIcon from '../assets/icons/WorkoutIcon';
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator<RootTabsParamList>();
 const TabsNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={TabsScreens.PROGRESS}
+      initialRouteName={TabsScreens.PROFILE}
       backBehavior="history"
       screenOptions={({}) => ({
         headerShown: false,
@@ -82,7 +82,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name={TabsScreens.PROFILE}
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (

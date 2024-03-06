@@ -1,6 +1,10 @@
+import {Gender, MeasureUnit} from '../../constants/enums';
+
 export interface User {
   fullName: string;
   email: string;
+  gender: Gender;
+  measureUnit: MeasureUnit;
 }
 
 export interface UserCredentials {

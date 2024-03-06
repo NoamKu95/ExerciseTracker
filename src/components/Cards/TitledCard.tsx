@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Pressable} from 'react-native';
 // Components
 import {BoldText, RegularText} from '../Base/Texts';
 // UI
@@ -9,10 +9,14 @@ import {colors} from '../../constants/ui/colors';
 import {FontSizes} from '../../constants/ui/fonts';
 import {shadowStyles} from '../../constants/ui/shadows';
 // Utils
-import {getFlexDirection} from '../../utils/styleUtil';
+import {
+  getFlexDirection,
+  getOppositeFlexDirection,
+} from '../../utils/styleUtil';
 
 interface TitledCardProps {
   icon?: JSX.Element;
+  isIconPressable?: boolean;
   title: string;
   secondaryTitleElement?: JSX.Element;
   headerColor?: string;
@@ -21,6 +25,7 @@ interface TitledCardProps {
 
 const TitledCard = ({
   icon,
+  isIconPressable,
   title,
   secondaryTitleElement,
   headerColor = colors.PRIMARY,
@@ -29,7 +34,17 @@ const TitledCard = ({
   const renderCardTitle = () => {
     return (
       <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-        <View style={styles.titleIconContainer}>
+        <View
+          style={[
+            styles.titleIconContainer,
+            // eslint-disable-next-line react-native/no-inline-styles
+            {justifyContent: isIconPressable ? 'space-between' : undefined},
+            {
+              flexDirection: isIconPressable
+                ? getOppositeFlexDirection()
+                : getFlexDirection(),
+            },
+          ]}>
           {icon}
           <BoldText
             children={title}
@@ -86,9 +101,8 @@ const styles = StyleSheet.create({
   },
   titleIconContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: getFlexDirection(),
     gap: spaces._10px,
+    width: '100%',
   },
   cardBody: {
     padding: spaces._12px,

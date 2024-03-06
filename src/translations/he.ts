@@ -94,6 +94,20 @@ const Hebrew: Translation = {
     },
     profile: {
       title: 'אזור אישי',
+      personalDetails: 'פרטים אישיים',
+      firstName: 'שם פרטי',
+      lastName: 'שם משפחה',
+      gender: 'מגדר',
+      male: 'זכר',
+      female: 'נקבה',
+      other: 'אחר',
+      settings: 'הגדרות',
+      language: 'שפה',
+      measureUnit: 'יחידת מידה',
+      contactUs: 'יצירת קשר',
+      emailSubject: 'אפליקציית itnessTracker',
+      emailBody: 'פנייה בנוגע לאפליקצייה...',
+      deleteUser: 'מחיקת נתונים שמורים',
     },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
@@ -159,6 +173,9 @@ const Hebrew: Translation = {
       notFoundError: '',
       unauthorizedError: '',
       tokenExpired: '',
+    },
+    app: {
+      cantOpenEmail: 'לא ניתן היה לשלוח את המייל',
     },
     validation: {
       invalidName: 'שם לא תקין',

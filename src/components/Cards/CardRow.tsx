@@ -31,6 +31,8 @@ const CardRow = ({row, isFirst, isLast = false}: CardRowProps) => {
   const handlePress = () => {
     if (row.path) {
       navigation.navigate(row.path);
+    } else if (row.onPress) {
+      row.onPress();
     }
   };
 
@@ -62,7 +64,7 @@ const CardRow = ({row, isFirst, isLast = false}: CardRowProps) => {
       ]}
       onPress={handlePress}>
       <RegularText size={FontSizes.regular}>{row.text}</RegularText>
-      {row.path && <ArrowIcon />}
+      {(row.path || row.onPress) && <ArrowIcon />}
       {row.infoText && renderInfoView()}
     </Pressable>
   );

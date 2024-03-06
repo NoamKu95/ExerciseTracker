@@ -5,7 +5,7 @@ import {addDays, isAfter, isToday, subDays} from 'date-fns';
 import {TextButton} from '../../../components/Base/Buttons';
 import {MediumText} from '../../../components/Base/Texts';
 // Icons
-import ChevronDown from '../../../assets/icons/ChevronDown';
+import ChevronDownIcon from '../../../assets/icons/ChevronDownIcon';
 // UI
 import {colors} from '../../../constants/ui/colors';
 import {spaces} from '../../../constants/ui/spaces';
@@ -95,7 +95,7 @@ const TimePeriodSelector = ({
         hitSlop={20}
         disabled={isFutureBtnDisabled}
         onPress={() => goToNextPeriod()}>
-        <ChevronDown />
+        <ChevronDownIcon />
       </Pressable>
     ) : (
       <View />
@@ -108,7 +108,7 @@ const TimePeriodSelector = ({
         style={styles.leftArrow}
         hitSlop={20}
         onPress={() => goToPreviousTimePeriod()}>
-        <ChevronDown />
+        <ChevronDownIcon />
       </Pressable>
     );
   };
