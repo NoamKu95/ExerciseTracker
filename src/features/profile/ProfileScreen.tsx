@@ -75,10 +75,15 @@ const ProfileScreen = () => {
   const handleLanguageSelection = (lang: Language) => {
     console.log(lang);
     // TODO: update state and reboot app
+    setIsLangSheetOpen(false);
   };
 
   const handleRowTap = (identifier: RowActionIdentifier) => {
     switch (identifier) {
+      case RowActionIdentifier.SAVED_WORKOUTS:
+        break;
+      case RowActionIdentifier.WORKOUT_HISTORY:
+        break;
       case RowActionIdentifier.LANGUAGE:
         setIsLangSheetOpen(true);
         break;
@@ -94,6 +99,7 @@ const ProfileScreen = () => {
   const handleMeasurementUnitChange = (newUnit: MeasureUnit) => {
     console.log(newUnit);
     // save to LS & update state
+    setIsUnitSheetOpen(false);
   };
 
   const deleteUserProfile = () => {

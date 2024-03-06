@@ -59,10 +59,10 @@ export const TabsScreens: {
 
 // PROFILE STACK
 export type ProfileStackParamList = {
-  Profile: undefined;
+  Main_Profile: undefined;
 };
 export const ProfileScreens: {
-  PROFILE: keyof ProfileStackParamList;
+  MAIN_PROFILE: keyof ProfileStackParamList;
 } = {
-  PROFILE: 'Profile',
+  MAIN_PROFILE: 'Main_Profile',
 };

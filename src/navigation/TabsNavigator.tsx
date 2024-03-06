@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator<RootTabsParamList>();
 const TabsNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={TabsScreens.PROGRESS}
+      initialRouteName={TabsScreens.PROFILE}
       backBehavior="history"
       screenOptions={({}) => ({
         headerShown: false,

@@ -14,12 +14,12 @@ const ProfileStack = () => {
   return (
     <SafeAreaView style={styles.bottomAreaView} edges={['left', 'right']}>
       <Stack.Navigator
-        initialRouteName={ProfileScreens.PROFILE}
+        initialRouteName={ProfileScreens.MAIN_PROFILE}
         screenOptions={{
           headerShown: false,
         }}>
         <Stack.Screen
-          name={ProfileScreens.PROFILE}
+          name={ProfileScreens.MAIN_PROFILE}
           component={ProfileScreen}
           options={{headerShown: false}}
         />

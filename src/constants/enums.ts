@@ -24,9 +24,11 @@ export enum Gender {
 }
 
 export enum RowActionIdentifier {
+  SAVED_WORKOUTS,
+  WORKOUT_HISTORY,
   LANGUAGE,
-  CONTACT,
   MEASURE_UNIT,
+  CONTACT,
 }
 
 export enum MeasureUnit {
