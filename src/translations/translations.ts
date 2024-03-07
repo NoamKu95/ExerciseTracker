@@ -144,6 +144,12 @@ export interface Translation {
       save: string;
     };
     today: string;
+    dayTimes: {
+      morning: string;
+      noon: string;
+      evening: string;
+      night: string;
+    };
   };
   times: {
     last7Days: string;

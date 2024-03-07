@@ -8,11 +8,13 @@ import {savedWorkoutsMock} from '../../../mockData/savedWorkoutsMock';
 export interface WorkoutState {
   savedWorkouts: Workout[];
   activeWorkout: Workout | null;
+  isLoading: boolean;
 }
 
 const initialState: WorkoutState = {
   savedWorkouts: savedWorkoutsMock, // TODO: - replace with []
   activeWorkout: null,
+  isLoading: false,
 };
 
 export const WorkoutSlice = createSlice({

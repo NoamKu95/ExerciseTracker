@@ -153,6 +153,12 @@ const Hebrew: Translation = {
       save: 'שמירה',
     },
     today: 'היום',
+    dayTimes: {
+      morning: 'בוקר',
+      noon: 'צהריים',
+      evening: 'ערב',
+      night: 'לילה',
+    },
   },
   times: {
     last7Days: '7 ימים אחרונים',
