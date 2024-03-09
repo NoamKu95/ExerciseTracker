@@ -109,6 +109,10 @@ const Hebrew: Translation = {
       emailBody: 'פנייה בנוגע לאפליקצייה...',
       deleteUser: 'מחיקת נתונים שמורים',
     },
+    workoutsHistory: {
+      title: 'היסטוריית אימונים',
+      emptyStateText: 'לא תועד אף אימון עדיין!',
+    },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
       subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',

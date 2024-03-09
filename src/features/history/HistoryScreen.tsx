@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {FlatList, Pressable, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, LogBox, Pressable, StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
@@ -14,23 +14,31 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
-import {historyWorkoutsMock} from '../../mockData/historyWorkoutsMock';
 // Models
 import {HistoryExercise} from '../../models/core/exercise';
 import {HistoryExerciseSection} from '../../models/ui/historyExerciseSection';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 // Utils
 import {getFlexDirection, hp} from '../../utils/styleUtil';
 import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
+import {fetchWorkoutHistory} from '../home_page/state/workoutActions';
 
 const HistoryScreen = () => {
+  // TODO: Remove when find solution
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
+
+  const dispatch = useAppDispatch();
+
   // STATE VARIABLES
-  const isLoading = useAppSelector(state => state.workout.isLoading);
-  const historyData: HistoryExerciseSection[] = historyWorkoutsMock;
+  const {pastWorkouts, page, isLoading, didFinishFetchingAllHistory} =
+    useAppSelector(state => state.workout);
 
   // LOCAL VARIABLES
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   // ** RENDER FUNCTIONS **
   const renderFilterButton = () => {
@@ -95,34 +103,39 @@ const HistoryScreen = () => {
   };
 
   const handleExerciseTapped = (exerciseID: string) => {
+    console.log(exerciseID);
     // navigate
   };
 
-  const loadMoreNotifications = () => {
-    if (!isLoading && !isFetching && !didFinishFetchingAllNotifications) {
+  const fetchMoreHistoryData = () => {
+    if (!isLoading && !isFetching && !didFinishFetchingAllHistory) {
       //   setIsFetching(true);
       dispatch(
-        getNotifications({
-          userId: user.userId.toString(),
+        fetchWorkoutHistory({
           page,
-          limit: LIMIT_PER_PAGE,
+          limit: 20,
         }),
       ).finally(() => setIsFetching(false));
     }
   };
 
   return (
-    <ScreenLayout screenTitle="היסטוריית אימונים" isBackButton={true}>
+    <ScreenLayout
+      screenTitle={i18n.t('screens.workoutsHistory.title')}
+      isBackButton={true}
+      isScrollable={false}>
       <>
         {renderFilterButton()}
         <FlatList
-          data={[]}
+          data={pastWorkouts}
           renderItem={({item}) => renderPeriodCard(item)}
           keyExtractor={item => item.title}
-          onEndReachedThreshold={0.1} // Trigger the load more function when the user is 10% away from the bottom
-          //   onEndReached={loadMoreNotifications}
+          onEndReachedThreshold={0.1}
+          //   onEndReached={fetchMoreHistoryData}
           ListEmptyComponent={
-            <EmptyStateComponent text="לא תועד אף אימון עדיין!" />
+            <EmptyStateComponent
+              text={i18n.t('screens.workoutsHistory.emptyStateText')}
+            />
           }
         />
         <FilterExcHistoryBottomSheet

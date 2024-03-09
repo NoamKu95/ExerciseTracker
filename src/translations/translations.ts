@@ -103,6 +103,10 @@ export interface Translation {
       emailBody: string;
       deleteUser: string;
     };
+    workoutsHistory: {
+      title: string;
+      emptyStateText: string;
+    };
     noInternet: {
       title: string;
       subtitle: string;

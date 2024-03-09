@@ -5,7 +5,8 @@ import {useNavigation} from '@react-navigation/native';
 // UI
 import {FontSizes} from '../../constants/ui/fonts';
 // Components
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import {RegularText} from '../../components/Base/Texts';
+import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
 import Loader from '../../components/Base/Loader';
 import TitledCard from '../../components/Cards/TitledCard';
@@ -35,7 +36,6 @@ import {translateIntoGender} from '../../utils/transformsUtil';
 import {extractFirstWord, removeFirstWord} from '../../utils/stringUtil';
 import {getFlexDirection} from '../../utils/styleUtil';
 import {openEmail} from '../../utils/contactUtil';
-import {TextButton} from '../../components/Base/Buttons';
 
 const ProfileScreen = () => {
   // ** STATE VARIABLES **
@@ -249,12 +249,8 @@ const ProfileScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout screenTitle={i18n.t('screens.profile.title')}>
       <>
-        <BoldText
-          children={i18n.t('screens.profile.title')}
-          size={FontSizes.large}
-        />
         {renderPersonalDetailsCard()}
         {renderMyDataCard()}
         {renderSettingsCard()}

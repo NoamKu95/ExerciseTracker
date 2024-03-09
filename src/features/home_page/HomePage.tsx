@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import {RegularText} from '../../components/Base/Texts';
 // Components
 import {PrimaryButton} from '../../components/Base/Buttons';
 import TitledCard from '../../components/Cards/TitledCard';
@@ -35,10 +35,6 @@ const HomeScreen = () => {
   const renderTexts = () => {
     return (
       <View style={styles.textContainer}>
-        <View style={styles.titleContainer}>
-          <BoldText children={greeting} size={FontSizes.large} />
-          <BoldText children={userName} size={FontSizes.large} />
-        </View>
         <RegularText children={motivation} size={FontSizes.regular} />
       </View>
     );
@@ -120,7 +116,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout screenTitle={`${greeting} ${userName}`}>
       <>
         {renderTexts()}
         {renderActionButton()}

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 // Components
 import ProfileScreen from '../features/profile/ProfileScreen';
 import HistoryScreen from '../features/history/HistoryScreen';
@@ -9,9 +10,21 @@ import HistoryScreen from '../features/history/HistoryScreen';
 import {colors} from '../constants/ui/colors';
 // Constants
 import {ProfileScreens} from '../constants/screens';
+import {tabBarStyle} from '../constants/ui/commonStyles';
 
 const Stack = createStackNavigator();
-const ProfileStack = () => {
+const ProfileStack = ({navigation, route}) => {
+  React.useLayoutEffect(() => {
+    const tabHiddenRoutes = [ProfileScreens.WORKOUT_HISTORY];
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+      navigation.setOptions({tabBarStyle: {display: 'none'}});
+    } else {
+      navigation.setOptions({
+        tabBarStyle: [...tabBarStyle, {display: 'flex'}],
+      });
+    }
+  }, [navigation, route]);
+
   return (
     <SafeAreaView style={styles.bottomAreaView} edges={['left', 'right']}>
       <Stack.Navigator

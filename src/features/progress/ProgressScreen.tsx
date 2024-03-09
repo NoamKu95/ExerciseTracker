@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import {RegularText} from '../../components/Base/Texts';
 import DropDown from './components/DropDown';
 import CardWithRows from '../../components/Cards/CardWithRows';
 import CardWithGraph from './components/CardWithGraph';
@@ -16,7 +16,7 @@ import i18n from '../../translations/i18n';
 import {progressPeriods} from '../../data/timePeriods';
 // Models
 import {Exercise} from '../../models/core/exercise';
-import {ExerciseResponse} from '../../models/networkingObjects/exerciseResponse';
+import {ExerciseResponse} from '../../models/networkingObjects/responses/exerciseResponse';
 import {BodyArea} from '../../models/bodyArea';
 import {TimePeriod} from '../../models/timePeriod';
 // Redux
@@ -42,22 +42,6 @@ const ProgressScreen = () => {
   }, [currentExercise]);
 
   // ** RENDER FUNCTIONS **
-  const renderTitles = () => {
-    return (
-      <View style={styles.textContainer}>
-        <BoldText
-          children={i18n.t('screens.progress.title')}
-          size={FontSizes.large}
-        />
-        <RegularText
-          children={i18n.t('screens.progress.subtitle')}
-          size={FontSizes.regular}
-          color={colors.SECONDARY_TEXT}
-        />
-      </View>
-    );
-  };
-
   const renderDropdown = () => {
     return (
       <DropDown
@@ -106,9 +90,15 @@ const ProgressScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout screenTitle={i18n.t('screens.progress.title')}>
       <>
-        {renderTitles()}
+        <View style={styles.textContainer}>
+          <RegularText
+            children={i18n.t('screens.progress.subtitle')}
+            size={FontSizes.regular}
+            color={colors.SECONDARY_TEXT}
+          />
+        </View>
         {renderDropdown()}
         {renderSummaryCard()}
         <CardWithGraph

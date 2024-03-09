@@ -5,4 +5,5 @@ export const paths = {
   FORGOT_PASSWORD: 'auth/forgotPassword',
   REFRESH_ACCESS_TOKEN: 'auth/refreshToken',
   GET_USER: 'users/getUser',
+  WORKOUT_HISTORY: 'workout/history',
 };

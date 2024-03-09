@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   container: {
-    paddingTop: hp(10),
+    paddingTop: spaces._24px,
     paddingHorizontal: spaces._24px,
     gap: spaces._24px,
     height: '100%',
@@ -104,12 +104,13 @@ const styles = StyleSheet.create({
     width: wp(100),
   },
   headerContainer: {
+    paddingTop: hp(7),
     backgroundColor: colors.BACKGROUND,
-    paddingTop: spaces._36px,
     paddingHorizontal: spaces._24px,
     flexDirection: getFlexDirection(),
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
   },
   titleTextContainer: {
     flex: 1,

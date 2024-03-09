@@ -1,4 +1,4 @@
-import {Exercise} from '../core/exercise';
+import {Exercise} from '../../core/exercise';
 
 export interface ExerciseResponse extends Exercise {
   lastWeight: number;

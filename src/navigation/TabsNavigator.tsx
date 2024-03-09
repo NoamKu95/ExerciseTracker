@@ -12,12 +12,10 @@ import WorkoutIcon from '../assets/icons/WorkoutIcon';
 import ProgressIcon from '../assets/icons/ProgressIcon';
 import ProfileIcon from '../assets/icons/ProfileIcon';
 // UI
-import {colors} from '../constants/ui/colors';
-import {spaces} from '../constants/ui/spaces';
-import {shadowStyles} from '../constants/ui/shadows';
 // Constants
 import i18n from '../translations/i18n';
 import {RootTabsParamList, TabsScreens} from '../constants/screens';
+import {tabBarStyle} from '../constants/ui/commonStyles';
 
 const Tab = createBottomTabNavigator<RootTabsParamList>();
 
@@ -28,14 +26,7 @@ const TabsNavigator = () => {
       backBehavior="history"
       screenOptions={({}) => ({
         headerShown: false,
-        tabBarStyle: [
-          {
-            paddingTop: spaces._16px,
-            backgroundColor: colors.WHITE,
-            height: 85,
-          },
-          shadowStyles.mediumShadow,
-        ],
+        tabBarStyle: [...tabBarStyle],
         tabBarShowLabel: false,
       })}>
       <Tab.Screen
