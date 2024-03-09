@@ -128,9 +128,15 @@ const Hebrew: Translation = {
     filtering: {
       filterByPeriod: 'סינון לפי תקופה:',
       filterByDates: 'סינון לפי תאריכים:',
+      chooseDate: 'בחירת תאריך',
+      startDate: 'תאריך התחלה',
+      till: 'עד',
+      endDate: 'תאריך סיום',
       filterByExercise: 'סינון לפי סוג אימון:',
       savedExercise: 'אימון שמור',
       unsavedExercise: 'אימון שאינו שמור',
+      confirm: 'אישור',
+      cancel: 'ביטול',
     },
     datePicker: {
       day: 'יום',

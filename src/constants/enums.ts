@@ -17,6 +17,11 @@ export enum DayPeriod {
   NIGHT = 'night',
 }
 
+export enum DateSelectionType {
+  START,
+  END,
+}
+
 export enum Gender {
   FEMALE = 'female',
   MALE = 'male',

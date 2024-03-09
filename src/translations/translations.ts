@@ -122,9 +122,15 @@ export interface Translation {
     filtering: {
       filterByPeriod: string;
       filterByDates: string;
+      chooseDate: string;
+      startDate: string;
+      till: string;
+      endDate: string;
       filterByExercise: string;
       savedExercise: string;
       unsavedExercise: string;
+      confirm: string;
+      cancel: string;
     };
     datePicker: {
       day: string;
