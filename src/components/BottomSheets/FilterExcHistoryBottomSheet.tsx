@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FlatList, Pressable, StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 // Components
@@ -17,9 +17,10 @@ import {shadowStyles} from '../../constants/ui/shadows';
 import i18n from '../../translations/i18n';
 import {timePeriodsForFiltering} from '../../data/timePeriods';
 import {exercisesTypes} from '../../data/exerciseTypes';
-import {DateSelectionType} from '../../constants/enums';
+import {DateSelectionType, ExerciseSaveType} from '../../constants/enums';
 // Models
 import {TimePeriod} from '../../models/timePeriod';
+import {FilteringObject} from '../../models/filtering';
 // Redux
 import {useAppSelector} from '../../store/store';
 // Utils
@@ -28,7 +29,7 @@ import {formatDateToText} from '../../utils/timeUtil';
 
 interface FilterExcHistoryBottomSheetProps {
   isOpen: boolean;
-  onSavePressed: () => void;
+  onSavePressed: (filters: FilteringObject) => void;
   onCloseSheet: () => void;
 }
 
@@ -39,23 +40,30 @@ const FilterExcHistoryBottomSheet = ({
 }: FilterExcHistoryBottomSheetProps) => {
   // ** STATE VARIABLES **
   const localeLang = useAppSelector(state => state.auth.language);
+
   // ** LOCAL VARIABLES **
+  // Date selector vars
   const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
   const [dateSelectorType, setDateSelectorType] = useState(
     DateSelectionType.START,
   );
-  const [selectorDate, setSelectorDate] = useState<Date>(new Date());
-  //
-  const [selectedTimePeriod, setSelectedTimePeriod] = useState<string | null>();
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>();
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>();
-  const [selectedExerciseType, setSelectedExerciseType] = useState<
-    string | null
-  >();
+  const [selectorInitialDate, setSelectorInitialDate] = useState<Date>(
+    new Date(),
+  );
+  const [selectorMinDate, setSelectorMinDate] = useState<Date | undefined>();
+  const [selectorMaxDate, setSelectorMaxDate] = useState<Date | undefined>();
 
-  useEffect(() => {
-    // setup sheet parts according to existing filter
-  }, []);
+  // Filter Selection vars
+  const [selectedTimePeriod, setSelectedTimePeriod] = useState<
+    string | undefined
+  >();
+  const [selectedStartDate, setSelectedStartDate] = useState<
+    Date | undefined
+  >();
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | undefined>();
+  const [selectedExerciseType, setSelectedExerciseType] = useState<
+    ExerciseSaveType | undefined
+  >();
 
   // ** RENDER FUNCTIONS **
   const renderTimePeriodChips = () => {
@@ -89,9 +97,11 @@ const FilterExcHistoryBottomSheet = ({
           isSelected={item.name === selectedTimePeriod}
           onPress={() => {
             if (item.name === selectedTimePeriod) {
-              setSelectedTimePeriod(null);
+              setSelectedTimePeriod(undefined);
             } else {
               setSelectedTimePeriod(item.name);
+              setSelectedStartDate(undefined);
+              setSelectedEndDate(undefined);
             }
           }}
         />
@@ -99,7 +109,7 @@ const FilterExcHistoryBottomSheet = ({
     );
   };
 
-  const renderDatePickers = () => {
+  const renderDateSelections = () => {
     return (
       <>
         <View style={styles.titleContainer}>
@@ -124,7 +134,8 @@ const FilterExcHistoryBottomSheet = ({
                 size={FontSizes.small}
               />
             </Pressable>
-            <Pressable onPress={() => setSelectedStartDate(null)}>
+            <Pressable
+              onPress={() => handleClearButtonPressed(DateSelectionType.START)}>
               <CloseIcon color={colors.GRAY} size={0.8} />
             </Pressable>
           </View>
@@ -144,12 +155,41 @@ const FilterExcHistoryBottomSheet = ({
                 size={FontSizes.small}
               />
             </Pressable>
-            <Pressable onPress={() => setSelectedEndDate(null)}>
+            <Pressable
+              onPress={() => handleClearButtonPressed(DateSelectionType.END)}>
               <CloseIcon color={colors.GRAY} size={0.8} />
             </Pressable>
           </View>
         </View>
       </>
+    );
+  };
+
+  const renderDatePicker = () => {
+    return (
+      <DatePicker
+        modal
+        mode="date"
+        locale={localeLang.code}
+        open={isDateSelectorOpen}
+        date={selectorInitialDate}
+        minimumDate={selectorMinDate}
+        maximumDate={selectorMaxDate}
+        onConfirm={date => {
+          setIsDateSelectorOpen(false);
+          handleNewDateSelected(date);
+        }}
+        onCancel={() => {
+          setIsDateSelectorOpen(false);
+        }}
+        title={
+          dateSelectorType === DateSelectionType.START
+            ? i18n.t('bottomSheets.filtering.startDate')
+            : i18n.t('bottomSheets.filtering.endDate')
+        }
+        confirmText={i18n.t('bottomSheets.filtering.confirm')}
+        cancelText={i18n.t('bottomSheets.filtering.cancel')}
+      />
     );
   };
 
@@ -199,11 +239,15 @@ const FilterExcHistoryBottomSheet = ({
     switch (type) {
       case DateSelectionType.START:
         setDateSelectorType(DateSelectionType.START);
-        setSelectorDate(selectedStartDate ?? new Date());
+        setSelectorInitialDate(selectedStartDate ?? new Date());
+        setSelectorMinDate(undefined);
+        setSelectorMaxDate(new Date());
         break;
       case DateSelectionType.END:
         setDateSelectorType(DateSelectionType.END);
-        setSelectorDate(selectedEndDate ?? new Date());
+        setSelectorInitialDate(selectedEndDate ?? new Date());
+        setSelectorMinDate(selectedStartDate);
+        setSelectorMaxDate(new Date());
         break;
     }
     setIsDateSelectorOpen(true);
@@ -213,52 +257,53 @@ const FilterExcHistoryBottomSheet = ({
     switch (dateSelectorType) {
       case DateSelectionType.START:
         setSelectedStartDate(date);
+        setSelectedEndDate(undefined);
+        setSelectorMinDate(date);
         break;
       case DateSelectionType.END:
         setSelectedEndDate(date);
         break;
     }
+    setSelectedTimePeriod(undefined);
   };
 
-  const handleSavePressed = () => {
-    // TODO: wrap selections into an object & then do the -
-    onSavePressed();
+  const handleClearButtonPressed = (inputType: DateSelectionType) => {
+    switch (inputType) {
+      case DateSelectionType.START:
+        setSelectedStartDate(undefined);
+        break;
+      case DateSelectionType.END:
+        setSelectedEndDate(undefined);
+        break;
+    }
+    setSelectorMinDate(undefined);
+    setSelectorMaxDate(undefined);
+  };
+
+  const handleSaveFiltersPressed = () => {
+    let selectedFilters: FilteringObject = {
+      builtInPeriod: selectedTimePeriod,
+      startDate: selectedStartDate,
+      endDate: selectedEndDate,
+      exerciseType: selectedExerciseType,
+    };
+    onSavePressed(selectedFilters);
   };
 
   return (
     <BottomSheetLayout
       height={hp(50)}
-      handleSave={handleSavePressed}
+      handleSave={handleSaveFiltersPressed}
       isVisible={isOpen}
       onCloseSheetPressed={onCloseSheet}
       padding={spaces._0px}>
       <>
         <View style={styles.contentContainer}>
           {renderTimePeriodChips()}
-          {renderDatePickers()}
+          {renderDateSelections()}
           {renderWorkoutTypes()}
         </View>
-        <DatePicker
-          modal
-          mode="date"
-          locale={localeLang.code}
-          open={isDateSelectorOpen}
-          date={selectorDate}
-          onConfirm={date => {
-            setIsDateSelectorOpen(false);
-            handleNewDateSelected(date);
-          }}
-          onCancel={() => {
-            setIsDateSelectorOpen(false);
-          }}
-          title={
-            dateSelectorType === DateSelectionType.START
-              ? i18n.t('bottomSheets.filtering.startDate')
-              : i18n.t('bottomSheets.filtering.endDate')
-          }
-          confirmText={i18n.t('bottomSheets.filtering.confirm')}
-          cancelText={i18n.t('bottomSheets.filtering.cancel')}
-        />
+        {renderDatePicker()}
       </>
     </BottomSheetLayout>
   );

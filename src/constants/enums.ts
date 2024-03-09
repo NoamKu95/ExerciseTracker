@@ -28,15 +28,20 @@ export enum Gender {
   OTHER = 'other',
 }
 
+export enum MeasureUnit {
+  KG = 'Kg',
+  LB = 'lbs',
+}
+
+export enum ExerciseSaveType {
+  SAVED,
+  NOT_SAVED,
+}
+
 export enum RowActionIdentifier {
   SAVED_WORKOUTS,
   WORKOUT_HISTORY,
   LANGUAGE,
   MEASURE_UNIT,
   CONTACT,
-}
-
-export enum MeasureUnit {
-  KG = 'Kg',
-  LB = 'lbs',
 }

@@ -5,6 +5,7 @@ import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
 import FilterExcHistoryBottomSheet from '../../components/BottomSheets/FilterExcHistoryBottomSheet';
+import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
 // Icons
 import FilterIcon from '../../assets/icons/FilterIcon';
 import ChevronLeftIcon from '../../assets/icons/ChevronLeftIcon';
@@ -17,12 +18,12 @@ import i18n from '../../translations/i18n';
 // Models
 import {HistoryExercise} from '../../models/core/exercise';
 import {HistoryExerciseSection} from '../../models/ui/historyExerciseSection';
+import {FilteringObject} from '../../models/filtering';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
+import {fetchWorkoutHistory} from '../home_page/state/workoutActions';
 // Utils
 import {getFlexDirection, hp} from '../../utils/styleUtil';
-import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
-import {fetchWorkoutHistory} from '../home_page/state/workoutActions';
 
 const HistoryScreen = () => {
   // TODO: Remove when find solution
@@ -98,8 +99,10 @@ const HistoryScreen = () => {
   };
 
   // ** HANDLE FUNCTIONS **
-  const handleFilterSelected = () => {
-    //
+  const handleFiltersSelected = (filters: FilteringObject) => {
+    console.log(filters);
+    // dispatch to BE .then()
+    setIsFilterSheetOpen(false);
   };
 
   const handleExerciseTapped = (exerciseID: string) => {
@@ -109,7 +112,7 @@ const HistoryScreen = () => {
 
   const fetchMoreHistoryData = () => {
     if (!isLoading && !isFetching && !didFinishFetchingAllHistory) {
-      //   setIsFetching(true);
+      setIsFetching(true);
       dispatch(
         fetchWorkoutHistory({
           page,
@@ -122,8 +125,7 @@ const HistoryScreen = () => {
   return (
     <ScreenLayout
       screenTitle={i18n.t('screens.workoutsHistory.title')}
-      isBackButton={true}
-      isScrollable={false}>
+      isBackButton={true}>
       <>
         {renderFilterButton()}
         <FlatList
@@ -131,7 +133,7 @@ const HistoryScreen = () => {
           renderItem={({item}) => renderPeriodCard(item)}
           keyExtractor={item => item.title}
           onEndReachedThreshold={0.1}
-          //   onEndReached={fetchMoreHistoryData}
+          // onEndReached={fetchMoreHistoryData}
           ListEmptyComponent={
             <EmptyStateComponent
               text={i18n.t('screens.workoutsHistory.emptyStateText')}
@@ -140,7 +142,7 @@ const HistoryScreen = () => {
         />
         <FilterExcHistoryBottomSheet
           isOpen={isFilterSheetOpen}
-          onSavePressed={handleFilterSelected}
+          onSavePressed={handleFiltersSelected}
           onCloseSheet={() => setIsFilterSheetOpen(false)}
         />
       </>
