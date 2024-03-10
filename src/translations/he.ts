@@ -109,6 +109,10 @@ const Hebrew: Translation = {
       emailBody: 'פנייה בנוגע לאפליקצייה...',
       deleteUser: 'מחיקת נתונים שמורים',
     },
+    workoutsHistory: {
+      title: 'היסטוריית אימונים',
+      emptyStateText: 'לא תועד אף אימון עדיין!',
+    },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
       subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',
@@ -124,9 +128,15 @@ const Hebrew: Translation = {
     filtering: {
       filterByPeriod: 'סינון לפי תקופה:',
       filterByDates: 'סינון לפי תאריכים:',
+      chooseDate: 'בחירת תאריך',
+      startDate: 'תאריך התחלה',
+      till: 'עד',
+      endDate: 'תאריך סיום',
       filterByExercise: 'סינון לפי סוג אימון:',
       savedExercise: 'אימון שמור',
       unsavedExercise: 'אימון שאינו שמור',
+      confirm: 'אישור',
+      cancel: 'ביטול',
     },
     datePicker: {
       day: 'יום',
@@ -153,6 +163,12 @@ const Hebrew: Translation = {
       save: 'שמירה',
     },
     today: 'היום',
+    dayTimes: {
+      morning: 'בוקר',
+      noon: 'צהריים',
+      evening: 'ערב',
+      night: 'לילה',
+    },
   },
   times: {
     last7Days: '7 ימים אחרונים',

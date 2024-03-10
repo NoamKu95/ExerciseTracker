@@ -5,7 +5,7 @@ import {defaultBodyArea, defaultExercise} from '../../../data/defaultData';
 // Models
 import {ExerciseDayData} from '../../../models/core/exercise';
 import {BodyArea} from '../../../models/bodyArea';
-import {ExerciseResponse} from '../../../models/networkingObjects/exerciseResponse';
+import {ExerciseResponse} from '../../../models/networkingObjects/responses/exerciseResponse';
 
 export interface WorkoutState {
   isLoading: boolean;

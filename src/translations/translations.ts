@@ -103,6 +103,10 @@ export interface Translation {
       emailBody: string;
       deleteUser: string;
     };
+    workoutsHistory: {
+      title: string;
+      emptyStateText: string;
+    };
     noInternet: {
       title: string;
       subtitle: string;
@@ -118,9 +122,15 @@ export interface Translation {
     filtering: {
       filterByPeriod: string;
       filterByDates: string;
+      chooseDate: string;
+      startDate: string;
+      till: string;
+      endDate: string;
       filterByExercise: string;
       savedExercise: string;
       unsavedExercise: string;
+      confirm: string;
+      cancel: string;
     };
     datePicker: {
       day: string;
@@ -144,6 +154,12 @@ export interface Translation {
       save: string;
     };
     today: string;
+    dayTimes: {
+      morning: string;
+      noon: string;
+      evening: string;
+      night: string;
+    };
   };
   times: {
     last7Days: string;

@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 // UI
 import {FontSizes} from '../../constants/ui/fonts';
 // Components
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import {RegularText} from '../../components/Base/Texts';
+import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
 import Loader from '../../components/Base/Loader';
 import TitledCard from '../../components/Cards/TitledCard';
@@ -23,6 +26,7 @@ import {radiuses} from '../../constants/ui/radiuses';
 // Constants
 import {Gender, MeasureUnit, RowActionIdentifier} from '../../constants/enums';
 import i18n, {Language} from '../../translations/i18n';
+import {ProfileStackParamList} from '../../constants/screens';
 // Redux
 import {shadowStyles} from '../../constants/ui/shadows';
 import {useAppSelector} from '../../store/store';
@@ -32,13 +36,15 @@ import {translateIntoGender} from '../../utils/transformsUtil';
 import {extractFirstWord, removeFirstWord} from '../../utils/stringUtil';
 import {getFlexDirection} from '../../utils/styleUtil';
 import {openEmail} from '../../utils/contactUtil';
-import {TextButton} from '../../components/Base/Buttons';
 
 const ProfileScreen = () => {
   // ** STATE VARIABLES **
   const user = useAppSelector(state => state.auth.user);
   const appLang = useAppSelector(state => state.auth.language);
   const isLoading = useAppSelector(state => state.auth.isLoading);
+
+  const navigation =
+    useNavigation<StackNavigationProp<ProfileStackParamList, 'Main_Profile'>>();
 
   // ** LOCAL VARIABLES**
   const [isEditMode, setIsEditMode] = useState(false);
@@ -83,6 +89,7 @@ const ProfileScreen = () => {
       case RowActionIdentifier.SAVED_WORKOUTS:
         break;
       case RowActionIdentifier.WORKOUT_HISTORY:
+        navigation.navigate('Workout_History');
         break;
       case RowActionIdentifier.LANGUAGE:
         setIsLangSheetOpen(true);
@@ -206,11 +213,11 @@ const ProfileScreen = () => {
         contentRows={[
           {
             text: 'אימונים שמורים',
-            path: 'Tabs',
+            path: 'Workout_History',
           },
           {
             text: 'היסטוריית אימונים',
-            path: 'Tabs',
+            path: 'Workout_History',
           },
         ]}
       />
@@ -242,12 +249,8 @@ const ProfileScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout screenTitle={i18n.t('screens.profile.title')}>
       <>
-        <BoldText
-          children={i18n.t('screens.profile.title')}
-          size={FontSizes.large}
-        />
         {renderPersonalDetailsCard()}
         {renderMyDataCard()}
         {renderSettingsCard()}

@@ -1,5 +1,5 @@
 import {BodyArea} from '../models/bodyArea';
-import {ExerciseResponse} from '../models/networkingObjects/exerciseResponse';
+import {ExerciseResponse} from '../models/networkingObjects/responses/exerciseResponse';
 
 export const defaultExercise: ExerciseResponse = {
   id: '4ft45t34',

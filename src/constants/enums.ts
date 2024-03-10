@@ -17,10 +17,25 @@ export enum DayPeriod {
   NIGHT = 'night',
 }
 
+export enum DateSelectionType {
+  START,
+  END,
+}
+
 export enum Gender {
   FEMALE = 'female',
   MALE = 'male',
   OTHER = 'other',
+}
+
+export enum MeasureUnit {
+  KG = 'Kg',
+  LB = 'lbs',
+}
+
+export enum ExerciseSaveType {
+  SAVED,
+  NOT_SAVED,
 }
 
 export enum RowActionIdentifier {
@@ -29,9 +44,4 @@ export enum RowActionIdentifier {
   LANGUAGE,
   MEASURE_UNIT,
   CONTACT,
-}
-
-export enum MeasureUnit {
-  KG = 'Kg',
-  LB = 'lbs',
 }

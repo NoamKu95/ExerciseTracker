@@ -22,6 +22,7 @@ interface BottomSheetLayoutProps {
   handleSave: () => void;
   isVisible: boolean;
   onCloseSheetPressed: () => void;
+  padding?: number;
 }
 
 const BottomSheetLayout = ({
@@ -30,6 +31,7 @@ const BottomSheetLayout = ({
   handleSave,
   isVisible,
   onCloseSheetPressed,
+  padding = spaces._24px,
 }: BottomSheetLayoutProps) => {
   const renderActionButtons = () => {
     return (
@@ -56,7 +58,7 @@ const BottomSheetLayout = ({
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>
         <View style={[styles.modalContent, {height}]}>
           {renderActionButtons()}
-          {children}
+          <View style={{padding}}>{children}</View>
         </View>
       </KeyboardAvoidingView>
     </Modal>
@@ -72,11 +74,12 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: colors.WHITE,
-    padding: spaces._24px,
     borderTopLeftRadius: radiuses._24px,
     borderTopRightRadius: radiuses._24px,
   },
   actionButtons: {
+    padding: spaces._24px,
+    paddingBottom: spaces._0px,
     flexDirection: getFlexDirection(),
     alignItems: 'center',
     justifyContent: 'space-between',
