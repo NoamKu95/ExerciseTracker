@@ -11,6 +11,7 @@ import {colors} from '../constants/ui/colors';
 // Constants
 import {ProfileScreens} from '../constants/screens';
 import {tabBarStyle} from '../constants/ui/commonStyles';
+import PastWorkoutDetailsScreen from '../features/past_workout/PastWorkoutDetails';
 
 const Stack = createStackNavigator();
 const ProfileStack = ({navigation, route}) => {
@@ -40,6 +41,11 @@ const ProfileStack = ({navigation, route}) => {
         <Stack.Screen
           name={ProfileScreens.WORKOUT_HISTORY}
           component={HistoryScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={ProfileScreens.PAST_WORKOUT_DETAILS}
+          component={PastWorkoutDetailsScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

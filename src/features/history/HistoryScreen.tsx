@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, LogBox, Pressable, StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 // Components
 import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
@@ -15,8 +17,9 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
+import {ProfileStackParamList} from '../../constants/screens';
 // Models
-import {HistoryExercise} from '../../models/core/exercise';
+import {HistoryWorkout} from '../../models/core/exercise';
 import {HistoryExerciseSection} from '../../models/ui/historyExerciseSection';
 import {FilteringObject} from '../../models/filtering';
 // Redux
@@ -32,6 +35,10 @@ const HistoryScreen = () => {
   }, []);
 
   const dispatch = useAppDispatch();
+  const navigation =
+    useNavigation<
+      StackNavigationProp<ProfileStackParamList, 'Workout_History'>
+    >();
 
   // STATE VARIABLES
   const {pastWorkouts, page, isLoading, didFinishFetchingAllHistory} =
@@ -76,9 +83,13 @@ const HistoryScreen = () => {
     );
   };
 
-  const renderHistoryWorkoutRow = (workout: HistoryExercise) => {
+  const renderHistoryWorkoutRow = (workout: HistoryWorkout) => {
     return (
-      <View style={styles.rowContainer}>
+      <Pressable
+        style={styles.rowContainer}
+        onPress={() =>
+          navigation.navigate('Past_Workout_Details', {workoutID: workout.id})
+        }>
         <View style={styles.textsContainer}>
           <View style={styles.rowDateContainer}>
             <RegularText
@@ -94,7 +105,7 @@ const HistoryScreen = () => {
           <BoldText children={workout.name} size={FontSizes.medium} />
         </View>
         <ChevronLeftIcon />
-      </View>
+      </Pressable>
     );
   };
 

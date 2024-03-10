@@ -1,6 +1,6 @@
-import {HistoryExercise} from '../core/exercise';
+import {HistoryWorkout} from '../core/exercise';
 
 export interface HistoryExerciseSection {
   title: string;
-  data: HistoryExercise[];
+  data: HistoryWorkout[];
 }

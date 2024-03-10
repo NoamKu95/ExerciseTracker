@@ -107,6 +107,13 @@ export interface Translation {
       title: string;
       emptyStateText: string;
     };
+    pastWorkoutDetails: {
+      title: string;
+      exercise: string;
+      weight: string;
+      reps: string;
+      set: string;
+    };
     noInternet: {
       title: string;
       subtitle: string;
