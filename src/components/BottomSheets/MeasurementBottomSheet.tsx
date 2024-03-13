@@ -5,7 +5,6 @@ import AppScrollPicker from '../Base/AppScrollPicker';
 // Constants
 import {MeasureUnit} from '../../constants/enums';
 // Utils
-import {hp} from '../../utils/styleUtil';
 
 interface GenderBottomSheetProps {
   isVisible: boolean;
@@ -25,8 +24,7 @@ const MeasurementBottomSheet = ({
     <BottomSheetLayout
       handleSave={() => onSavePressed(selectedUnit)}
       isVisible={isVisible}
-      onCloseSheetPressed={onClosePressed}
-      height={hp(30)}>
+      onCloseSheetPressed={onClosePressed}>
       <>
         <AppScrollPicker
           data={[MeasureUnit.KG, MeasureUnit.LB]}

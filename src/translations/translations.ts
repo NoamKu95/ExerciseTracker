@@ -114,6 +114,13 @@ export interface Translation {
       reps: string;
       set: string;
     };
+    savedWorkouts: {
+      title: string;
+      savedAt: string;
+      exercises: string;
+      sets: string;
+      emptyState: string;
+    };
     noInternet: {
       title: string;
       subtitle: string;

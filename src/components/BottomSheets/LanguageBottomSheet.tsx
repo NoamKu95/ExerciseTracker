@@ -5,7 +5,6 @@ import AppScrollPicker from '../Base/AppScrollPicker';
 // Constants
 import {Language, appLanguages} from '../../translations/i18n';
 // Utils
-import {hp} from '../../utils/styleUtil';
 
 interface GenderBottomSheetProps {
   isVisible: boolean;
@@ -25,8 +24,7 @@ const LanguageBottomSheet = ({
     <BottomSheetLayout
       handleSave={() => onSavePressed(selectedLang)}
       isVisible={isVisible}
-      onCloseSheetPressed={onClosePressed}
-      height={hp(30)}>
+      onCloseSheetPressed={onClosePressed}>
       <>
         <AppScrollPicker
           data={appLanguages.map(lng => lng.name)}

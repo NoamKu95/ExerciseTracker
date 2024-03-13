@@ -90,7 +90,7 @@ const PastWorkoutDetailsScreen = () => {
     lastIndex: number,
   ) => {
     return (
-      <View style={styles.setContainer}>
+      <View>
         <OpenableRow
           text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
           key={index}

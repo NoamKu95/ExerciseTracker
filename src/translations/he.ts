@@ -120,6 +120,13 @@ const Hebrew: Translation = {
       reps: 'חזרות:',
       set: 'סט',
     },
+    savedWorkouts: {
+      title: 'אימונים שמורים',
+      savedAt: 'נשמר ב:',
+      exercises: 'תרגילים:',
+      sets: 'סטים',
+      emptyState: 'לא נשמר אף אימון עדיין!',
+    },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
       subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',

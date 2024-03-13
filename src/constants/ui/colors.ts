@@ -15,6 +15,7 @@ export const colors = {
   BACKGROUND_GRAY: '#D9D9D9',
   VERY_LIGHT_GRAY: '#E3E6E8',
   SUPER_LIGHT_GRAY: '#F5F5F5',
+  DARK_GRAY: '#2F3C33',
 
   ERROR: '#ff0033',
 };
