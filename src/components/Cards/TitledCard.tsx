@@ -76,9 +76,11 @@ const TitledCard = ({
   };
 
   return (
-    <View style={[styles.cardOuter, shadowStyles.mediumShadow, outerStyle]}>
-      {renderCardTitle()}
-      {renderCardBody()}
+    <View style={outerStyle}>
+      <View style={[styles.cardOuter, shadowStyles.mediumShadow]}>
+        {renderCardTitle()}
+        {renderCardBody()}
+      </View>
     </View>
   );
 };

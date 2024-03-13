@@ -38,7 +38,7 @@ const SavedWorkoutsScreen = () => {
   const renderSavedWorkout = ({item}: {item: Workout}) => {
     return (
       <View style={{paddingEnd: 24}}>
-        <TitledCard title={item.name} outerStyle={{paddingStart: 24}}>
+        <TitledCard title={item.name} outerStyle={{paddingStart: spaces._24px}}>
           <View style={{gap: 10}}>
             <View style={{flexDirection: getFlexDirection(), gap: spaces._4px}}>
               <RegularText
