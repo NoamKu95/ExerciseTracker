@@ -5,9 +5,9 @@ import i18n from '../translations/i18n';
 import {AppErrorTypes} from '../models/error';
 // Redux
 import {useAppDispatch} from '../store/store';
+import {setError} from '../features/errorHandling/state/errorHandlingSlice';
 // Managers
 import {logger} from '../managers/loggingManager';
-import {setError} from '../features/errorHandling/state/errorHandlingSlice';
 
 export const openEmail = () => {
   const subject = i18n.t('screens.profile.emailSubject');

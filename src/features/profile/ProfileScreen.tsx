@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-// UI
-import {FontSizes} from '../../constants/ui/fonts';
 // Components
 import {RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
@@ -23,12 +21,13 @@ import CloseIcon from '../../assets/icons/CloseIcon';
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
+import {FontSizes} from '../../constants/ui/fonts';
+import {shadowStyles} from '../../constants/ui/shadows';
 // Constants
 import {Gender, MeasureUnit, RowActionIdentifier} from '../../constants/enums';
 import i18n, {Language} from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
 // Redux
-import {shadowStyles} from '../../constants/ui/shadows';
 import {useAppSelector} from '../../store/store';
 // Utils
 import {validateName} from '../../utils/validators';

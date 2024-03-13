@@ -12,7 +12,7 @@ export interface ExerciseDayData {
 
 export interface HistoryWorkout {
   id: string;
-  date: string;
+  date: Date;
   time: DayPeriod;
   name: string;
   exercises: {title: string; data: WorkoutSection[]}[];

@@ -26,6 +26,7 @@ import {Set, WorkoutSection} from '../../models/core/exercise';
 // Redux
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
+import {formatDateToText} from '../../utils/timeUtil';
 
 const PastWorkoutDetailsScreen = () => {
   // TODO: Remove when find solution
@@ -54,7 +55,7 @@ const PastWorkoutDetailsScreen = () => {
       <View style={styles.titleContainer}>
         <BoldText children={historyWorkout.name} size={FontSizes.large} />
         <RegularText
-          children={`, ${historyWorkout.date} ${i18n.t(
+          children={`, ${formatDateToText(historyWorkout.date)}, ${i18n.t(
             'screens.pastWorkoutDetails.exercise',
           )} ${i18n.t(`common.dayTimes.${historyWorkout.time}`)}`}
           size={FontSizes.regular}

@@ -13,12 +13,11 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 // Utils
-import {getFlexDirection, hp} from '../../utils/styleUtil';
+import {getFlexDirection} from '../../utils/styleUtil';
 import {isIOS} from '../../utils/platformUtil';
 
 interface BottomSheetLayoutProps {
   children: JSX.Element;
-  height?: number;
   handleSave: () => void;
   isVisible: boolean;
   onCloseSheetPressed: () => void;
@@ -27,7 +26,6 @@ interface BottomSheetLayoutProps {
 
 const BottomSheetLayout = ({
   children,
-  height = hp(50),
   handleSave,
   isVisible,
   onCloseSheetPressed,
@@ -56,7 +54,7 @@ const BottomSheetLayout = ({
       onSwipeComplete={onCloseSheetPressed}
       onBackdropPress={onCloseSheetPressed}>
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>
-        <View style={[styles.modalContent, {height}]}>
+        <View style={[styles.modalContent]}>
           {renderActionButtons()}
           <View style={{padding}}>{children}</View>
         </View>

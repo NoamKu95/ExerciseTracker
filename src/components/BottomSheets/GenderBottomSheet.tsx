@@ -4,11 +4,11 @@ import BottomSheetLayout from './BottomSheetLayout';
 import AppScrollPicker from '../Base/AppScrollPicker';
 // Constants
 import {genders} from '../../data/genders';
+import i18n from '../../translations/i18n';
 // Models
 import {Gender} from '../../constants/enums';
 // Utils
 import {hp} from '../../utils/styleUtil';
-import i18n from '../../translations/i18n';
 
 interface GenderBottomSheetProps {
   isVisible: boolean;
