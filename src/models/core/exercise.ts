@@ -10,9 +10,20 @@ export interface ExerciseDayData {
   weight: number;
 }
 
-export interface HistoryExercise {
+export interface HistoryWorkout {
   id: string;
-  date: string;
+  date: Date;
   time: DayPeriod;
   name: string;
+  exercises: {title: string; data: WorkoutSection[]}[];
+}
+
+export interface Set {
+  weight: number;
+  reps: number;
+}
+
+export interface WorkoutSection {
+  sectionTitle: string;
+  sectionExercises: {id: string; name: string; sets: Set[]}[];
 }

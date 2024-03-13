@@ -24,7 +24,7 @@ import {FilteringObject} from '../../models/filtering';
 // Redux
 import {useAppSelector} from '../../store/store';
 // Utils
-import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
+import {getFlexDirection, getSelfAlign, wp} from '../../utils/styleUtil';
 import {formatDateToText} from '../../utils/timeUtil';
 
 interface FilterExcHistoryBottomSheetProps {
@@ -135,6 +135,7 @@ const FilterExcHistoryBottomSheet = ({
               />
             </Pressable>
             <Pressable
+              style={styles.clearBtn}
               onPress={() => handleClearButtonPressed(DateSelectionType.START)}>
               <CloseIcon color={colors.GRAY} size={0.8} />
             </Pressable>
@@ -156,6 +157,7 @@ const FilterExcHistoryBottomSheet = ({
               />
             </Pressable>
             <Pressable
+              style={styles.clearBtn}
               onPress={() => handleClearButtonPressed(DateSelectionType.END)}>
               <CloseIcon color={colors.GRAY} size={0.8} />
             </Pressable>
@@ -292,7 +294,6 @@ const FilterExcHistoryBottomSheet = ({
 
   return (
     <BottomSheetLayout
-      height={hp(50)}
       handleSave={handleSaveFiltersPressed}
       isVisible={isOpen}
       onCloseSheetPressed={onCloseSheet}
@@ -341,9 +342,12 @@ const styles = StyleSheet.create({
     flexDirection: getFlexDirection(),
     justifyContent: 'space-between',
     paddingVertical: spaces._16px,
-    paddingHorizontal: spaces._20px,
+    paddingHorizontal: spaces._16px,
     ...shadowStyles.softShadow,
     alignItems: 'center',
-    gap: spaces._16px,
+  },
+  clearBtn: {
+    position: 'absolute',
+    end: spaces._16px,
   },
 });

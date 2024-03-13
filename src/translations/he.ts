@@ -113,6 +113,13 @@ const Hebrew: Translation = {
       title: 'היסטוריית אימונים',
       emptyStateText: 'לא תועד אף אימון עדיין!',
     },
+    pastWorkoutDetails: {
+      title: 'פרטי אימון עבר',
+      exercise: 'אימון',
+      weight: 'משקל:',
+      reps: 'חזרות:',
+      set: 'סט',
+    },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
       subtitle: 'נראה שאין למכשיר שלך חיבור אינטרנט כרגע',

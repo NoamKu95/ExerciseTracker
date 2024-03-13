@@ -61,11 +61,14 @@ export const TabsScreens: {
 export type ProfileStackParamList = {
   Main_Profile: undefined;
   Workout_History: undefined;
+  Past_Workout_Details: undefined;
 };
 export const ProfileScreens: {
   MAIN_PROFILE: keyof ProfileStackParamList;
   WORKOUT_HISTORY: keyof ProfileStackParamList;
+  PAST_WORKOUT_DETAILS: {workoutID: string};
 } = {
   MAIN_PROFILE: 'Main_Profile',
   WORKOUT_HISTORY: 'Workout_History',
+  PAST_WORKOUT_DETAILS: 'Past_Workout_Details',
 };
