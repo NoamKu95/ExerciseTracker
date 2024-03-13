@@ -37,9 +37,9 @@ const SavedWorkoutsScreen = () => {
 
   const renderSavedWorkout = ({item}: {item: Workout}) => {
     return (
-      <View style={{paddingEnd: 24}}>
+      <View style={{paddingEnd: spaces._24px}}>
         <TitledCard title={item.name} outerStyle={{paddingStart: spaces._24px}}>
-          <View style={{gap: 10}}>
+          <View style={{gap: spaces._10px}}>
             <View style={{flexDirection: getFlexDirection(), gap: spaces._4px}}>
               <RegularText
                 children={i18n.t('screens.savedWorkouts.savedAt')}
@@ -89,13 +89,15 @@ const SavedWorkoutsScreen = () => {
             children={`  ⦁ ${exercise.name}`}
             size={FontSizes.regular}
           />
-          <RegularText
-            children={`(${i18n.t('screens.savedWorkouts.sets')} ${
-              exercise.sets?.length ?? 0
-            })`}
-            size={FontSizes.regular}
-            color={colors.SECONDARY_TEXT}
-          />
+          {exercise.sets && exercise.sets!.length > 0 && (
+            <RegularText
+              children={`(${i18n.t('screens.savedWorkouts.sets')} ${
+                exercise.sets!.length
+              })`}
+              size={FontSizes.regular}
+              color={colors.SECONDARY_TEXT}
+            />
+          )}
         </View>
       )) ?? null
     );
