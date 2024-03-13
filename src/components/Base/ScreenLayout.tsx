@@ -23,6 +23,7 @@ interface ScreenLayout1Props {
   buttonText?: string;
   isLoading?: boolean;
   buttonIcon?: JSX.Element;
+  paddingHorizontal?: number;
 }
 
 const ScreenLayout = ({
@@ -34,6 +35,7 @@ const ScreenLayout = ({
   buttonText,
   isLoading = false,
   buttonIcon,
+  paddingHorizontal = spaces._24px,
 }: ScreenLayout1Props) => {
   const renderScreenHeader = () => {
     return (
@@ -64,7 +66,7 @@ const ScreenLayout = ({
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
         bounces={false}>
-        <View style={styles.container}>{children}</View>
+        <View style={[styles.container, {paddingHorizontal}]}>{children}</View>
       </ScrollView>
       {buttonText && onPress && (
         <View style={styles.buttonContainer}>
@@ -96,7 +98,6 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: spaces._24px,
-    paddingHorizontal: spaces._24px,
     gap: spaces._24px,
     height: '100%',
     backgroundColor: colors.BACKGROUND,

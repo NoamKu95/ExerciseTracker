@@ -62,13 +62,16 @@ export type ProfileStackParamList = {
   Main_Profile: undefined;
   Workout_History: undefined;
   Past_Workout_Details: undefined;
+  Saved_Workouts: undefined;
 };
 export const ProfileScreens: {
   MAIN_PROFILE: keyof ProfileStackParamList;
   WORKOUT_HISTORY: keyof ProfileStackParamList;
   PAST_WORKOUT_DETAILS: {workoutID: string};
+  SAVED_WORKOUTS: keyof ProfileStackParamList;
 } = {
   MAIN_PROFILE: 'Main_Profile',
   WORKOUT_HISTORY: 'Workout_History',
   PAST_WORKOUT_DETAILS: 'Past_Workout_Details',
+  SAVED_WORKOUTS: 'Saved_Workouts',
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable, StyleProp, ViewStyle} from 'react-native';
 // Components
 import {BoldText, RegularText} from '../Base/Texts';
 // UI
@@ -21,6 +21,7 @@ interface TitledCardProps {
   secondaryTitleElement?: JSX.Element;
   headerColor?: string;
   children: JSX.Element[] | JSX.Element | string;
+  outerStyle?: StyleProp<ViewStyle>;
 }
 
 const TitledCard = ({
@@ -30,6 +31,7 @@ const TitledCard = ({
   secondaryTitleElement,
   headerColor = colors.PRIMARY,
   children,
+  outerStyle,
 }: TitledCardProps) => {
   const renderCardTitle = () => {
     return (
@@ -74,7 +76,7 @@ const TitledCard = ({
   };
 
   return (
-    <View style={[styles.cardOuter, shadowStyles.mediumShadow]}>
+    <View style={[styles.cardOuter, shadowStyles.mediumShadow, outerStyle]}>
       {renderCardTitle()}
       {renderCardBody()}
     </View>
@@ -85,7 +87,6 @@ export default TitledCard;
 
 const styles = StyleSheet.create({
   cardOuter: {
-    backgroundColor: colors.WHITE,
     borderRadius: radiuses._16px,
     width: '100%',
     alignSelf: 'center',
@@ -105,6 +106,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cardBody: {
+    backgroundColor: colors.WHITE,
     padding: spaces._12px,
+    borderBottomStartRadius: radiuses._16px,
+    borderBottomEndRadius: radiuses._16px,
   },
 });

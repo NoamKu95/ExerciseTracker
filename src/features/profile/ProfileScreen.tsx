@@ -86,6 +86,7 @@ const ProfileScreen = () => {
   const handleRowTap = (identifier: RowActionIdentifier) => {
     switch (identifier) {
       case RowActionIdentifier.SAVED_WORKOUTS:
+        navigation.navigate('Saved_Workouts');
         break;
       case RowActionIdentifier.WORKOUT_HISTORY:
         navigation.navigate('Workout_History');
@@ -212,7 +213,7 @@ const ProfileScreen = () => {
         contentRows={[
           {
             text: 'אימונים שמורים',
-            path: 'Workout_History',
+            path: 'Saved_Workouts',
           },
           {
             text: 'היסטוריית אימונים',

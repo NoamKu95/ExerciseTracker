@@ -3,6 +3,7 @@ import {DayPeriod} from '../../constants/enums';
 export interface Exercise {
   id: string;
   name: string;
+  sets?: Set[];
 }
 
 export interface ExerciseDayData {

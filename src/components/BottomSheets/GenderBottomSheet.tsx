@@ -8,7 +8,6 @@ import i18n from '../../translations/i18n';
 // Models
 import {Gender} from '../../constants/enums';
 // Utils
-import {hp} from '../../utils/styleUtil';
 
 interface GenderBottomSheetProps {
   isVisible: boolean;
@@ -28,8 +27,7 @@ const GenderBottomSheet = ({
     <BottomSheetLayout
       handleSave={() => onSavePressed(selectedGender)}
       isVisible={isVisible}
-      onCloseSheetPressed={onClosePressed}
-      height={hp(30)}>
+      onCloseSheetPressed={onClosePressed}>
       <>
         <AppScrollPicker
           data={genders.map(g => i18n.t(`screens.profile.${g}`))}
