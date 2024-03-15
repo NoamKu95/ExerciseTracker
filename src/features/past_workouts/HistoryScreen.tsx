@@ -64,7 +64,7 @@ const HistoryScreen = () => {
 
   const renderPeriodCard = (title: string, data: HistoryWorkout[]) => {
     return (
-      <View style={styles.cardContainer}>
+      <View style={styles.cardContainer} key={title + data.length}>
         <TitledCard title={title}>
           {data.map((workout, index) => {
             return (
@@ -88,6 +88,7 @@ const HistoryScreen = () => {
   const renderHistoryWorkoutRow = (workout: HistoryWorkout) => {
     return (
       <Pressable
+        key={workout.id}
         style={styles.rowContainer}
         onPress={() =>
           navigation.navigate('Past_Workout_Details', {workoutID: workout.id})
