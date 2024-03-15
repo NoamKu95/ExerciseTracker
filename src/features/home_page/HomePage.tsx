@@ -45,7 +45,7 @@ const HomeScreen = () => {
       <View style={styles.actionBtnContainer}>
         <PrimaryButton
           text={i18n.t('screens.home.btnAction')}
-          onPress={() => {}}
+          onPress={() => {}} // TODO
           icon={<SparkleIcon />}
         />
       </View>

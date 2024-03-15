@@ -1,5 +1,11 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Pressable, StyleSheet, TextInput, View} from 'react-native';
+import {
+  KeyboardTypeOptions,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import Reanimated, {
   useAnimatedStyle,
   useSharedValue,
@@ -29,6 +35,7 @@ interface AppTextInputProps {
   errorText: string;
   isCensored?: boolean;
   isShadow?: boolean;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 const AppTextInput = ({
@@ -39,6 +46,7 @@ const AppTextInput = ({
   isCensored = false,
   errorText,
   isShadow = false,
+  keyboardType = 'default',
 }: AppTextInputProps) => {
   const isRTL = useAppSelector(state => state.auth.isRTL);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
@@ -124,6 +132,7 @@ const AppTextInput = ({
             maxLength={20}
             secureTextEntry={!isTextVisible}
             textAlign={isRTL ? 'right' : 'left'}
+            keyboardType={keyboardType}
           />
         </View>
       </View>
@@ -138,6 +147,7 @@ const styles = (isRTL?: boolean) =>
   StyleSheet.create({
     container: {
       marginVertical: spaces._10px,
+      flex: 1,
     },
     mainContainer: {
       borderRadius: radiuses._16px,

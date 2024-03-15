@@ -1,30 +1,18 @@
-import {DayPeriod} from '../../constants/enums';
-
 export interface Exercise {
   id: string;
   name: string;
   sets?: Set[];
 }
 
-export interface ExerciseDayData {
-  date: Date;
-  weight: number;
-}
-
-export interface HistoryWorkout {
-  id: string;
-  date: Date;
-  time: DayPeriod;
-  name: string;
-  exercises: {title: string; data: WorkoutSection[]}[];
-}
-
 export interface Set {
-  weight: number;
+  weight?: number;
   reps: number;
 }
 
-export interface WorkoutSection {
-  sectionTitle: string;
-  sectionExercises: {id: string; name: string; sets: Set[]}[];
+// ------------------------------------------------------------------
+
+// Data model for progress graph of specific exercise
+export interface ExerciseDayData {
+  date: Date;
+  weight: number;
 }

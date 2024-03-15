@@ -100,6 +100,7 @@ const RegistrationScreen = () => {
           onChangeText={setEmail}
           validateInput={validateEmail}
           errorText={i18n.t('errors.validation.invalidEmail')}
+          keyboardType="email-address"
         />
         <AppTextInput
           label={i18n.t('screens.register.password')}

@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
 import {View, StyleSheet, LogBox, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import SwipeableFlatList from 'react-native-swipeable-list';
 // Components
 import {RegularText} from '../../components/Base/Texts';
@@ -16,6 +18,7 @@ import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
+import {ProfileStackParamList} from '../../constants/screens';
 import i18n from '../../translations/i18n';
 // Models
 import {Workout} from '../../models/core/workout';
@@ -31,6 +34,11 @@ const SavedWorkoutsScreen = () => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
+
+  const navigation =
+    useNavigation<
+      StackNavigationProp<ProfileStackParamList, 'Saved_Workouts'>
+    >();
 
   // ** RENDER FUNCTIONS **
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
@@ -64,7 +72,7 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
-  const renderHiddenButtons = (item: Workout, index: number) => {
+  const renderHiddenButtons = (item: Workout) => {
     return (
       <View style={styles.buttonsContainer}>
         <Pressable
@@ -103,8 +111,14 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
-  const handleDeletePressed = (id: string) => {};
-  const handleEditPressed = (id: string) => {};
+  const handleDeletePressed = (workoutID: string) => {
+    console.log(workoutID);
+    // dispatch delete to BE with id
+  };
+
+  const handleEditPressed = (workoutID: string) => {
+    navigation.navigate('Past_Workout_Details', {workoutID});
+  };
 
   return (
     <ScreenLayout

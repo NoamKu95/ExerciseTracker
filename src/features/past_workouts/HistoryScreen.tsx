@@ -19,8 +19,7 @@ import {FontSizes} from '../../constants/ui/fonts';
 import i18n from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
 // Models
-import {HistoryWorkout} from '../../models/core/exercise';
-import {HistoryExerciseSection} from '../../models/ui/historyExerciseSection';
+import {HistoryWorkout} from '../../models/core/workout';
 import {FilteringObject} from '../../models/filtering';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
@@ -54,27 +53,30 @@ const HistoryScreen = () => {
       <Pressable
         style={styles.filterContainer}
         onPress={() => setIsFilterSheetOpen(true)}>
-        <RegularText children={'סינון תוצאות'} size={FontSizes.regular} />
+        <RegularText
+          children={i18n.t('screens.workoutsHistory.filter')}
+          size={FontSizes.regular}
+        />
         <FilterIcon />
       </Pressable>
     );
   };
 
-  const renderPeriodCard = (section: HistoryExerciseSection) => {
+  const renderPeriodCard = (title: string, data: HistoryWorkout[]) => {
     return (
       <View style={styles.cardContainer}>
-        <TitledCard title={section.title}>
-          {section.data.map((data, index) => {
+        <TitledCard title={title}>
+          {data.map((workout, index) => {
             return (
               <Pressable
-                key={data.id}
-                onPress={() => handleExerciseTapped(data.id)}
+                key={workout.id}
+                onPress={() => handleExerciseTapped(workout.id)}
                 style={[
                   styles.innerRow,
                   index === 0 ? styles.firstRow : null,
-                  index === section.data.length - 1 ? styles.lastRow : null,
+                  index === data.length - 1 ? styles.lastRow : null,
                 ]}>
-                {renderHistoryWorkoutRow(data)}
+                {renderHistoryWorkoutRow(workout)}
               </Pressable>
             );
           })}
@@ -141,8 +143,8 @@ const HistoryScreen = () => {
         {renderFilterButton()}
         <FlatList
           data={pastWorkouts}
-          renderItem={({item}) => renderPeriodCard(item)}
-          keyExtractor={item => item.title}
+          renderItem={({item}) => renderPeriodCard(item.title, item.data)}
+          keyExtractor={item => item.categoryName}
           onEndReachedThreshold={0.1}
           // onEndReached={fetchMoreHistoryData}
           ListEmptyComponent={

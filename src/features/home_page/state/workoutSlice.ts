@@ -1,16 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit';
 // Constants
 import {savedWorkoutsMock} from '../../../mockData/savedWorkoutsMock';
-import {historyWorkoutsMock} from '../../../mockData/historyWorkoutsMock';
 // Models
-import {Workout} from '../../../models/core/workout';
-import {HistoryExerciseSection} from '../../../models/ui/historyExerciseSection';
+import {
+  CategorizedHistoryWorkouts,
+  Workout,
+} from '../../../models/core/workout';
+import {historyWorkoutsMock} from '../../../mockData/historyWorkoutsMock';
 // Redux
 
 export interface WorkoutState {
   savedWorkouts: Workout[];
   activeWorkout: Workout | null;
-  pastWorkouts: HistoryExerciseSection[];
+  pastWorkouts: CategorizedHistoryWorkouts[];
   page: number;
   didFinishFetchingAllHistory: boolean;
   isLoading: boolean;

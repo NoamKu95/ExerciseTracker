@@ -112,6 +112,7 @@ const Hebrew: Translation = {
     workoutsHistory: {
       title: 'היסטוריית אימונים',
       emptyStateText: 'לא תועד אף אימון עדיין!',
+      filter: 'סינון תוצאות',
     },
     pastWorkoutDetails: {
       title: 'פרטי אימון עבר',
@@ -126,6 +127,10 @@ const Hebrew: Translation = {
       exercises: 'תרגילים:',
       sets: 'סטים',
       emptyState: 'לא נשמר אף אימון עדיין!',
+    },
+    editSavedWorkout: {
+      title: 'עריכת אימון שמור',
+      addExercise: 'הוספת תרגיל לאימון',
     },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',
@@ -212,6 +217,7 @@ const Hebrew: Translation = {
       invalidEmail: 'כתובת אימייל לא תקינה',
       invalidPassword: 'סיסמה לא תקינה',
       unmatchingPasswords: 'סיסמה לא תואמת',
+      mustNumbersOnly: 'יש להזין מספרים בלבד',
     },
   },
 };

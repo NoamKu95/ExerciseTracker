@@ -1,11 +1,5 @@
-import React, {useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  SectionList,
-  LogBox,
-  SectionListRenderItem,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, SectionList, LogBox} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 // Components
 import {BoldText, RegularText} from '../../components/Base/Texts';
@@ -20,9 +14,10 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
-import {historyWorkout} from '../../mockData/historyWorkoutDetailsMock';
+import {specificHistoryWorkout} from '../../mockData/historyWorkoutDetailsMock';
 // Models
-import {Set, WorkoutSection} from '../../models/core/exercise';
+import {HistoryWorkout} from '../../models/core/workout';
+import {Exercise, Set} from '../../models/core/exercise';
 // Redux
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
@@ -40,24 +35,28 @@ const PastWorkoutDetailsScreen = () => {
     workoutID: '',
   };
 
+  const [pastWorkout, setPastWorkout] = useState<HistoryWorkout>(
+    specificHistoryWorkout,
+  );
+
   // STATE VARIABLES
 
   // LOCAL VARIABLES
 
   useEffect(() => {
-    // fetch data by workoutID
-    console.log(workoutID);
+    // fetch data by workoutID and setPastWorkout accordingly
+    // console.log(workoutID);
   }, [workoutID]);
 
   // ** RENDER FUNCTIONS **
   const renderTitle = () => {
     return (
       <View style={styles.titleContainer}>
-        <BoldText children={historyWorkout.name} size={FontSizes.large} />
+        <BoldText children={pastWorkout.name} size={FontSizes.large} />
         <RegularText
-          children={`, ${formatDateToText(historyWorkout.date)}, ${i18n.t(
+          children={`, ${formatDateToText(pastWorkout.date)}, ${i18n.t(
             'screens.pastWorkoutDetails.exercise',
-          )} ${i18n.t(`common.dayTimes.${historyWorkout.time}`)}`}
+          )} ${i18n.t(`common.dayTimes.${pastWorkout.time}`)}`}
           size={FontSizes.regular}
           color={colors.SECONDARY_TEXT}
         />
@@ -65,21 +64,26 @@ const PastWorkoutDetailsScreen = () => {
     );
   };
 
-  const renderExercises: SectionListRenderItem<
-    WorkoutSection,
-    {section: WorkoutSection}
-  > = ({item}) => {
+  const renderCategoryTitle = (categoryName: string) => {
     return (
-      <View style={styles.cardWrapper}>
-        {item.sectionExercises.map((exercise, index) => (
-          <TitledCard title={exercise.name}>
-            <View key={index}>
-              {exercise.sets.map((set, indexx) =>
-                renderSetsRepsContent(set, indexx, exercise.sets.length - 1),
+      <View style={styles.sectionHeader}>
+        <BoldText children={categoryName} size={FontSizes.large} />
+      </View>
+    );
+  };
+
+  const renderExercisesCard = ({item}) => {
+    let exercise: Exercise = item;
+    return (
+      <View style={styles.cardWrapper} key={exercise.id}>
+        <TitledCard title={exercise.name}>
+          <>
+            {exercise.sets &&
+              exercise.sets.map((set, index) =>
+                renderSetsRepsContent(set, index, exercise.sets!.length - 1),
               )}
-            </View>
-          </TitledCard>
-        ))}
+          </>
+        </TitledCard>
       </View>
     );
   };
@@ -125,14 +129,12 @@ const PastWorkoutDetailsScreen = () => {
       isBackButton={true}>
       <SectionList
         ListHeaderComponent={renderTitle()}
-        sections={historyWorkout.exercises}
-        keyExtractor={(item, index) => item.title + index.toString()}
-        renderItem={renderExercises}
-        renderSectionHeader={({section: {title}}) => (
-          <View style={styles.sectionHeader}>
-            <BoldText children={title} size={FontSizes.large} />
-          </View>
-        )}
+        sections={pastWorkout.exercises}
+        keyExtractor={item => item.id}
+        renderSectionHeader={({section: {categoryName}}) =>
+          renderCategoryTitle(categoryName)
+        }
+        renderItem={renderExercisesCard}
       />
     </ScreenLayout>
   );

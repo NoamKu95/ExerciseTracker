@@ -11,6 +11,7 @@ import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 // Icons
 import SparkleIcon from '../../assets/icons/SparkleIcon';
 // UI
@@ -28,7 +29,6 @@ import {
   validateEmail,
   validatePassword,
 } from '../../utils/validators';
-import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
@@ -130,6 +130,7 @@ const LoginScreen = () => {
               onChangeText={setEmail}
               validateInput={validateEmail}
               errorText={i18n.t('errors.validation.invalidEmail')}
+              keyboardType="email-address"
             />
             <AppTextInput
               label={i18n.t('screens.register.password')}
