@@ -106,6 +106,7 @@ export interface Translation {
     workoutsHistory: {
       title: string;
       emptyStateText: string;
+      filter: string;
     };
     pastWorkoutDetails: {
       title: string;
@@ -120,6 +121,10 @@ export interface Translation {
       exercises: string;
       sets: string;
       emptyState: string;
+    };
+    editSavedWorkout: {
+      title: string;
+      addExercise: string;
     };
     noInternet: {
       title: string;
@@ -203,6 +208,7 @@ export interface Translation {
       invalidEmail: string;
       invalidPassword: string;
       unmatchingPasswords: string;
+      mustNumbersOnly: string;
     };
   };
 }

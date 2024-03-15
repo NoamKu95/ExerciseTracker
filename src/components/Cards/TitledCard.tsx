@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Pressable, StyleProp, ViewStyle} from 'react-native';
+import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 // Components
 import {BoldText, RegularText} from '../Base/Texts';
 // UI

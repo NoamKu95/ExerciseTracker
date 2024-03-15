@@ -12,7 +12,7 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 import {shadowStyles} from '../../constants/ui/shadows';
 // Constants
-import {Language, LanguageType, appLanguages} from '../../translations/i18n';
+import {Language, appLanguages} from '../../translations/i18n';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setLanguage} from '../../features/auth/state/authSlice';
@@ -24,8 +24,8 @@ const LanguagePicker = () => {
   const language = useAppSelector(state => state.auth.language);
   const dispatch = useAppDispatch();
 
-  const onLanguageSelected = (langCode: LanguageType) => {
-    dispatch(setLanguage(langCode));
+  const onLanguageSelected = (lang: Language) => {
+    dispatch(setLanguage(lang));
     setIsDropdownOpen(false);
   };
 
@@ -53,8 +53,8 @@ const LanguagePicker = () => {
       <LanguageSelectionRow
         key={index}
         language={item}
-        isSelected={item.code === language}
-        onPress={() => onLanguageSelected(item.code)}
+        isSelected={item === language}
+        onPress={() => onLanguageSelected(item)}
       />
     );
   };
@@ -67,7 +67,7 @@ const LanguagePicker = () => {
           onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
           <ChevronDownIcon />
           <RegularText size={FontSizes.small}>
-            {language.toUpperCase()}
+            {language.code.toUpperCase()}
           </RegularText>
         </TouchableOpacity>
       </View>

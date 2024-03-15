@@ -5,14 +5,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 // Components
 import ProfileScreen from '../features/profile/ProfileScreen';
-import HistoryScreen from '../features/history/HistoryScreen';
+import HistoryScreen from '../features/past_workouts/HistoryScreen';
+import PastWorkoutDetailsScreen from '../features/past_workouts/PastWorkoutDetails';
+import SavedWorkoutsScreen from '../features/saved_workouts/SavedWorkouts';
+import EditSavedWorkoutScreen from '../features/saved_workouts/EditSavedWorkout';
 // UI
 import {colors} from '../constants/ui/colors';
 // Constants
 import {ProfileScreens} from '../constants/screens';
 import {tabBarStyle} from '../constants/ui/commonStyles';
-import PastWorkoutDetailsScreen from '../features/past_workout/PastWorkoutDetails';
-import SavedWorkoutsScreen from '../features/saved_workouts/SavedWorkouts';
 
 const Stack = createStackNavigator();
 const ProfileStack = ({navigation, route}) => {
@@ -52,6 +53,11 @@ const ProfileStack = ({navigation, route}) => {
         <Stack.Screen
           name={ProfileScreens.SAVED_WORKOUTS}
           component={SavedWorkoutsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={ProfileScreens.EDIT_SAVED_WORKOUT}
+          component={EditSavedWorkoutScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

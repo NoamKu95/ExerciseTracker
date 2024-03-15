@@ -1,6 +1,6 @@
-import i18n from '../translations/i18n';
+import {ExerciseSaveType} from '../constants/enums';
 
-export const exercisesTypes: string[] = [
-  i18n.t('bottomSheets.filtering.savedExercise'),
-  i18n.t('bottomSheets.filtering.unsavedExercise'),
+export const exercisesTypes: ExerciseSaveType[] = [
+  ExerciseSaveType.SAVED,
+  ExerciseSaveType.NOT_SAVED,
 ];

@@ -34,8 +34,8 @@ export enum MeasureUnit {
 }
 
 export enum ExerciseSaveType {
-  SAVED,
-  NOT_SAVED,
+  SAVED = 'savedExercise',
+  NOT_SAVED = 'unsavedExercise',
 }
 
 export enum RowActionIdentifier {

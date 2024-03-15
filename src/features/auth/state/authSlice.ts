@@ -7,6 +7,7 @@ import i18n, {
 } from '../../../translations/i18n';
 // Models
 import {User} from '../../../models/core/user';
+import {mockUser} from '../../../mockData/userMock';
 // Redux
 import {
   loginUser,
@@ -14,7 +15,6 @@ import {
   registerUser,
   sendNewPassword,
 } from './authActions';
-import {mockUser} from '../../../mockData/userMock';
 
 export interface AuthState {
   isRTL: boolean;

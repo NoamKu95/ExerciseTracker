@@ -1,12 +1,11 @@
 import {subDays} from 'date-fns';
-import {DayPeriod} from '../constants/enums';
-import {HistoryWorkout} from '../models/core/workout';
+import {SavedWorkout} from '../models/core/workout';
 
-export const specificHistoryWorkout: HistoryWorkout = {
+export const savedWorkoutDetailsMock: SavedWorkout = {
   id: '23423r23',
   name: 'אימון חזה קליל',
   date: subDays(new Date(), 4),
-  time: DayPeriod.MORNING,
+  savingDate: new Date(),
   exercises: [
     // CategorizedExercises[]
     {

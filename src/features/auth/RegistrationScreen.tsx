@@ -34,7 +34,11 @@ const RegistrationScreen = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'Register'>>();
+
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.auth.isLoading);
+
+  // LOCAL VARIABLES
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +49,7 @@ const RegistrationScreen = () => {
     setIsAllInputsValid(validationResponse);
   }, [email, password, name]);
 
+  // ** HANDLE FUNCTIONS **
   const handleRegisterPress = () => {
     // TODO: delete when BE is available
     resetTo(Screens.ONBOARDING);
@@ -100,6 +105,7 @@ const RegistrationScreen = () => {
           onChangeText={setEmail}
           validateInput={validateEmail}
           errorText={i18n.t('errors.validation.invalidEmail')}
+          keyboardType="email-address"
         />
         <AppTextInput
           label={i18n.t('screens.register.password')}

@@ -218,15 +218,15 @@ const FilterExcHistoryBottomSheet = ({
     );
   };
 
-  const renderWorkoutChip = ({item}: {item: string}) => {
+  const renderWorkoutChip = ({item}: {item: ExerciseSaveType}) => {
     return (
       <View style={styles.chip}>
         <Chip
-          text={item}
+          text={i18n.t(`bottomSheets.filtering.${item}`)}
           isSelected={item === selectedExerciseType}
           onPress={() => {
-            if (item === selectedTimePeriod) {
-              setSelectedExerciseType(null);
+            if (item === selectedExerciseType) {
+              setSelectedExerciseType(undefined);
             } else {
               setSelectedExerciseType(item);
             }

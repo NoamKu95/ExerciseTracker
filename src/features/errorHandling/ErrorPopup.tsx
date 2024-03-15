@@ -38,7 +38,7 @@ const ErrorPopUp = () => {
             size={FontSizes.medium}
             color={colors.ERROR}
             textAlign="center">
-            {errorState.errorMessage}
+            {errorState.errorMessage ?? ''}
           </MediumText>
         </View>
       </View>

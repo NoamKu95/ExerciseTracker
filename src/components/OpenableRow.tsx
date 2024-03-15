@@ -23,12 +23,10 @@ const OpenableRow = ({text, children, isLast}: OpenableRowProps) => {
 
   return (
     <View style={[styles(isLast).bottomBorder]}>
-      <View style={styles().container}>
+      <Pressable style={styles().container} onPress={() => setIsOpen(!isOpen)}>
         <RegularText children={text} size={FontSizes.regular} />
-        <Pressable onPress={() => setIsOpen(!isOpen)}>
-          {isOpen ? <ChevronDownIcon /> : <ChevronLeftIcon />}
-        </Pressable>
-      </View>
+        {isOpen ? <ChevronDownIcon /> : <ChevronLeftIcon />}
+      </Pressable>
       {isOpen && children}
     </View>
   );

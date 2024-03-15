@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import {getBuildNumber} from 'react-native-device-info';
 // Components
 import {RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
@@ -57,7 +58,6 @@ const ProfileScreen = () => {
   const [isGenderSheetOpen, setIsGenderSheetOpen] = useState(false);
   const [isLangSheetOpen, setIsLangSheetOpen] = useState(false);
   const [isUnitSheetOpen, setIsUnitSheetOpen] = useState(false);
-  const pkg = require('../../../package.json');
 
   // ** HANDLE FUNCTIONS **
   const handleSavePersonalDetails = () => {
@@ -248,6 +248,18 @@ const ProfileScreen = () => {
     );
   };
 
+  const renderVersion = () => {
+    const pkg = require('../../../package.json');
+    const buildNumber = getBuildNumber();
+    return (
+      <RegularText
+        children={`${pkg.version} (${buildNumber})`}
+        size={FontSizes.small}
+        textAlign="center"
+      />
+    );
+  };
+
   return (
     <ScreenLayout screenTitle={i18n.t('screens.profile.title')}>
       <>
@@ -259,11 +271,7 @@ const ProfileScreen = () => {
           onPress={deleteUserProfile}
           textAlign="left"
         />
-        <RegularText
-          children={`${pkg.version}`}
-          size={FontSizes.small}
-          textAlign="center"
-        />
+        {renderVersion()}
         <GenderBottomSheet
           isVisible={isGenderSheetOpen}
           currentGender={gender}

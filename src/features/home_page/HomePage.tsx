@@ -26,9 +26,12 @@ import {getGreetingAndMotivationByCurrentHour} from '../../utils/dateUtil';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 const HomeScreen = () => {
+  // GLOBAL VARIABLES
   const userName = useAppSelector(state => state.auth.user?.fullName) ?? '';
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
   const isActiveWorkout = useAppSelector(state => state.workout.activeWorkout);
+
+  // LOCAL VARIABLES
   const {greeting, motivation} = getGreetingAndMotivationByCurrentHour();
 
   // ** RENDER FUNCTIONS **
@@ -45,7 +48,7 @@ const HomeScreen = () => {
       <View style={styles.actionBtnContainer}>
         <PrimaryButton
           text={i18n.t('screens.home.btnAction')}
-          onPress={() => {}}
+          onPress={() => {}} // TODO
           icon={<SparkleIcon />}
         />
       </View>

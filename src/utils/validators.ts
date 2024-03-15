@@ -17,6 +17,10 @@ export const validatePassword = (password: string): boolean => {
   return password.length >= 5;
 };
 
+export const validateNumbersOnly = (text: string): boolean => {
+  return /^(\d+|\d*\.\d+)$/i.test(text);
+};
+
 export const isRegistrationDataValid = (
   email: string,
   password: string,
