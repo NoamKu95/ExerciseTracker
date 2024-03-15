@@ -25,7 +25,7 @@ import {FilteringObject} from '../../models/filtering';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchWorkoutHistory} from '../home_page/state/workoutActions';
 // Utils
-import {getFlexDirection, hp} from '../../utils/styleUtil';
+import {getFlexDirection} from '../../utils/styleUtil';
 
 const HistoryScreen = () => {
   // TODO: Remove when find solution
@@ -69,46 +69,37 @@ const HistoryScreen = () => {
           {data.map((workout, index) => {
             return (
               <Pressable
-                key={workout.id}
-                onPress={() => handleExerciseTapped(workout.id)}
+                key={workout.id + index}
                 style={[
-                  styles.innerRow,
+                  styles.rowContainer,
                   index === 0 ? styles.firstRow : null,
                   index === data.length - 1 ? styles.lastRow : null,
-                ]}>
-                {renderHistoryWorkoutRow(workout)}
+                ]}
+                onPress={() =>
+                  navigation.navigate('Past_Workout_Details', {
+                    workoutID: workout.id,
+                  })
+                }>
+                <View style={styles.textsContainer}>
+                  <View style={styles.rowDateContainer}>
+                    <RegularText
+                      children={`${workout.date}, `}
+                      size={FontSizes.regular}
+                    />
+                    <RegularText
+                      children={`${i18n.t(`common.dayTimes.${workout.time}`)}`}
+                      size={FontSizes.regular}
+                      color={colors.GRAY}
+                    />
+                  </View>
+                  <BoldText children={workout.name} size={FontSizes.medium} />
+                </View>
+                <ChevronLeftIcon />
               </Pressable>
             );
           })}
         </TitledCard>
       </View>
-    );
-  };
-
-  const renderHistoryWorkoutRow = (workout: HistoryWorkout) => {
-    return (
-      <Pressable
-        key={workout.id}
-        style={styles.rowContainer}
-        onPress={() =>
-          navigation.navigate('Past_Workout_Details', {workoutID: workout.id})
-        }>
-        <View style={styles.textsContainer}>
-          <View style={styles.rowDateContainer}>
-            <RegularText
-              children={`${workout.date}, `}
-              size={FontSizes.regular}
-            />
-            <RegularText
-              children={`${i18n.t(`common.dayTimes.${workout.time}`)}`}
-              size={FontSizes.regular}
-              color={colors.GRAY}
-            />
-          </View>
-          <BoldText children={workout.name} size={FontSizes.medium} />
-        </View>
-        <ChevronLeftIcon />
-      </Pressable>
     );
   };
 
@@ -119,7 +110,7 @@ const HistoryScreen = () => {
     setIsFilterSheetOpen(false);
   };
 
-  const handleExerciseTapped = (exerciseID: string) => {
+  const handleWorkoutTapped = (exerciseID: string) => {
     console.log(exerciseID);
     // navigate
   };
@@ -176,32 +167,27 @@ const styles = StyleSheet.create({
   cardContainer: {
     paddingBottom: spaces._36px,
   },
-  firstRow: {
-    paddingTop: spaces._8px,
-    paddingBottom: spaces._16px,
-  },
-  innerRow: {
+  rowContainer: {
+    flexDirection: getFlexDirection(),
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.TRANSPARENT,
     borderBottomColor: colors.SUPER_LIGHT_GRAY,
+  },
+  firstRow: {
+    paddingTop: spaces._8px,
+    paddingBottom: spaces._16px,
   },
   lastRow: {
     paddingTop: spaces._16px,
     paddingBottom: spaces._8px,
     borderWidth: 0,
   },
-  rowContainer: {
-    flexDirection: getFlexDirection(),
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   textsContainer: {
     gap: spaces._8px,
   },
   rowDateContainer: {
     flexDirection: getFlexDirection(),
-  },
-  footer: {
-    paddingBottom: hp(20),
   },
 });

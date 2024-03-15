@@ -100,32 +100,30 @@ const PastWorkoutDetailsScreen = () => {
     lastIndex: number,
   ) => {
     return (
-      <View>
-        <OpenableRow
-          text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
-          key={`${exerciseID}-${index}`}
-          isLast={index === lastIndex}>
-          <View style={styles.rowInnerContentContainer}>
-            <View style={styles.innerRow}>
-              <BoldText
-                children={i18n.t('screens.pastWorkoutDetails.weight')}
-                size={FontSizes.regular}
-              />
-              <RegularText
-                children={`${set.weight} ${i18n.t('common.kg')}`}
-                size={FontSizes.regular}
-              />
-            </View>
-            <View style={styles.innerRow}>
-              <BoldText
-                children={i18n.t('screens.pastWorkoutDetails.reps')}
-                size={FontSizes.regular}
-              />
-              <RegularText children={`${set.reps}`} size={FontSizes.regular} />
-            </View>
+      <OpenableRow
+        text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
+        key={`${exerciseID}-${index}`}
+        isLast={index === lastIndex}>
+        <View style={styles.rowInnerContentContainer}>
+          <View style={styles.innerRow}>
+            <BoldText
+              children={i18n.t('screens.pastWorkoutDetails.weight')}
+              size={FontSizes.regular}
+            />
+            <RegularText
+              children={`${set.weight} ${i18n.t('common.kg')}`}
+              size={FontSizes.regular}
+            />
           </View>
-        </OpenableRow>
-      </View>
+          <View style={styles.innerRow}>
+            <BoldText
+              children={i18n.t('screens.pastWorkoutDetails.reps')}
+              size={FontSizes.regular}
+            />
+            <RegularText children={`${set.reps}`} size={FontSizes.regular} />
+          </View>
+        </View>
+      </OpenableRow>
     );
   };
 

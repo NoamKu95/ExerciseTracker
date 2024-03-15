@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, LogBox, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -11,6 +11,7 @@ import ScreenLayout from '../../components/Base/ScreenLayout';
 import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
 // Icons
 import EditIcon from '../../assets/icons/EditIcon';
+import OutlineHeartIcon from '../../assets/icons/OutlineHeartIcon';
 import TrashIcon from '../../assets/icons/TrashIcon';
 // UI
 import {colors} from '../../constants/ui/colors';
@@ -28,6 +29,7 @@ import {useAppSelector} from '../../store/store';
 // Utils
 import {getFlexDirection, wp} from '../../utils/styleUtil';
 import {formatDateToText} from '../../utils/timeUtil';
+import SaveWorkoutModal from '../../components/Modals/SaveWorkoutModal';
 
 const SavedWorkoutsScreen = () => {
   // TODO: Remove when find solution
@@ -39,6 +41,9 @@ const SavedWorkoutsScreen = () => {
     useNavigation<
       StackNavigationProp<ProfileStackParamList, 'Saved_Workouts'>
     >();
+
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [tappedWorkoutID, setTappedWorkoutID] = useState('');
 
   // ** RENDER FUNCTIONS **
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
@@ -72,13 +77,21 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
-  const renderHiddenButtons = (item: Workout) => {
+  const renderHiddenButtons = (index: number, item: Workout) => {
     return (
       <View style={styles.buttonsContainer}>
         <Pressable
           onPress={() => handleDeletePressed(item.id)}
           style={styles.btnContainer}>
           <TrashIcon color={colors.DARK_GRAY} />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            setTappedWorkoutID(item.id);
+            setIsSheetOpen(true);
+          }}
+          style={styles.btnContainer}>
+          <OutlineHeartIcon color={colors.DARK_GRAY} />
         </Pressable>
         <Pressable
           onPress={() => handleEditPressed(item.id)}
@@ -99,9 +112,9 @@ const SavedWorkoutsScreen = () => {
           />
           {exercise.sets && exercise.sets!.length > 0 && (
             <RegularText
-              children={`(${i18n.t('screens.savedWorkouts.sets')} ${
-                exercise.sets!.length
-              })`}
+              children={`(${exercise.sets!.length} ${i18n.t(
+                'screens.savedWorkouts.sets',
+              )})`}
               size={FontSizes.regular}
               color={colors.SECONDARY_TEXT}
             />
@@ -111,13 +124,20 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
+  const handleEditPressed = (workoutID: string) => {
+    navigation.navigate('Edit_Saved_Workout', {workoutID});
+  };
+
+  const handleUnsavePressed = (workoutID: string) => {
+    console.log(workoutID);
+    // dispatch delete to BE with id
+    setTappedWorkoutID('');
+    setIsSheetOpen(false);
+  };
+
   const handleDeletePressed = (workoutID: string) => {
     console.log(workoutID);
     // dispatch delete to BE with id
-  };
-
-  const handleEditPressed = (workoutID: string) => {
-    navigation.navigate('Past_Workout_Details', {workoutID});
   };
 
   return (
@@ -125,21 +145,34 @@ const SavedWorkoutsScreen = () => {
       screenTitle={i18n.t('screens.savedWorkouts.title')}
       isBackButton={true}
       paddingHorizontal={spaces._0px}>
-      <SwipeableFlatList
-        keyExtractor={(item: Workout) => item.id}
-        data={savedWorkouts}
-        renderItem={renderSavedWorkout}
-        maxSwipeDistance={wp(30)}
-        renderQuickActions={renderHiddenButtons}
-        contentContainerStyle={styles.contentContainerStyle}
-        shouldBounceOnMount={true}
-        ListEmptyComponent={
-          <EmptyStateComponent
-            text={i18n.t('screens.savedWorkouts.emptyState')}
-          />
-        }
-        showsVerticalScrollIndicator={false}
-      />
+      <>
+        <SwipeableFlatList
+          keyExtractor={(item: Workout) => item.id}
+          data={savedWorkouts}
+          renderItem={renderSavedWorkout}
+          maxSwipeDistance={wp(50)}
+          renderQuickActions={({index, item}) =>
+            renderHiddenButtons(index, item)
+          }
+          contentContainerStyle={styles.contentContainerStyle}
+          shouldBounceOnMount={true}
+          ListEmptyComponent={
+            <EmptyStateComponent
+              text={i18n.t('screens.savedWorkouts.emptyState')}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+        />
+        <SaveWorkoutModal
+          isVisible={isSheetOpen}
+          onActionButtonPress={() => handleUnsavePressed(tappedWorkoutID)}
+          onCloseButtonPress={() => {
+            setTappedWorkoutID('');
+            setIsSheetOpen(false);
+          }}
+          isSaveTheWorkout={false}
+        />
+      </>
     </ScreenLayout>
   );
 };

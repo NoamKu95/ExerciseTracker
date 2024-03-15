@@ -3,7 +3,11 @@ import {View, StyleSheet, SectionList, LogBox} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 // Components
 import {BoldText} from '../../components/Base/Texts';
-import {PrimaryButton, TextButton} from '../../components/Base/Buttons';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
 import TitledCard from '../../components/Cards/TitledCard';
 import OpenableRow from '../../components/OpenableRow';
@@ -83,13 +87,14 @@ const EditSavedWorkoutScreen = () => {
           <>
             {exercise.sets &&
               exercise.sets.map((set, index) =>
-                renderSetsRepsContent(
-                  exercise.id,
-                  set,
-                  index,
-                  exercise.sets!.length - 1,
-                ),
+                renderSetsRepsContent(exercise.id, set, index),
               )}
+            <View style={styles.secondaryBtn}>
+              <SecondaryButton
+                text={i18n.t('screens.editSavedWorkout.addSet')}
+                onPress={() => {}}
+              />
+            </View>
           </>
         </TitledCard>
       </View>
@@ -100,14 +105,12 @@ const EditSavedWorkoutScreen = () => {
     exerciseID: string,
     set: Set,
     index: number,
-    lastIndex: number,
   ) => {
     return (
       <View>
         <OpenableRow
           text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
-          key={`${exerciseID}-${index}`}
-          isLast={index === lastIndex}>
+          key={`${exerciseID}-${index}`}>
           <View style={styles.rowInnerContentContainer}>
             <View style={styles.innerRow}>
               <BoldText
@@ -219,5 +222,8 @@ const styles = StyleSheet.create({
     flexDirection: getFlexDirection(),
     gap: spaces._10px,
     alignItems: 'center',
+  },
+  secondaryBtn: {
+    alignSelf: 'flex-end',
   },
 });
