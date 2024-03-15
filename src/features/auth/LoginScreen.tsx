@@ -34,7 +34,11 @@ const LoginScreen = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'Login'>>();
+
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.auth.isLoading);
+
+  // LOCAL VARIABLES
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
@@ -44,6 +48,7 @@ const LoginScreen = () => {
     setIsAllInputsValid(validationResponse);
   }, [email, password]);
 
+  // ** HANDLE FUNCTIONS **
   const handleLoginPress = () => {
     // TODO: delete when BE is available
     resetTo(Screens.TABS);
@@ -62,6 +67,7 @@ const LoginScreen = () => {
       );
   };
 
+  // ** RENDER FUNCTIONS **
   const renderTexts = () => {
     return (
       <View style={styles.textsContainer}>

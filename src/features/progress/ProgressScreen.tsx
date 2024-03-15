@@ -16,14 +16,14 @@ import i18n from '../../translations/i18n';
 import {progressPeriods} from '../../data/timePeriods';
 // Models
 import {Exercise} from '../../models/core/exercise';
-import {ExerciseResponse} from '../../models/networkingObjects/responses/exerciseResponse';
 import {BodyArea} from '../../models/bodyArea';
 import {TimePeriod} from '../../models/timePeriod';
+import {ExerciseResponse} from '../../models/networkingObjects/responses/exerciseResponse';
 // Redux
 import {useAppSelector} from '../../store/store';
 
 const ProgressScreen = () => {
-  // VARIABLES
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.progress.isLoading);
   const currentExercise = useAppSelector<ExerciseResponse>(
     state => state.progress.chosenExercise,
@@ -32,6 +32,8 @@ const ProgressScreen = () => {
     state => state.progress.chosenBodyArea,
   );
   const exerciseData = useAppSelector(state => state.progress.exerciseData);
+
+  // LOCAL VARIABLES
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
     progressPeriods[0],
   );

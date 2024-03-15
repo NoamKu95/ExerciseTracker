@@ -66,7 +66,7 @@ const PastWorkoutDetailsScreen = () => {
 
   const renderCategoryTitle = (categoryName: string) => {
     return (
-      <View style={styles.sectionHeader}>
+      <View style={styles.sectionHeader} key={categoryName}>
         <BoldText children={categoryName} size={FontSizes.large} />
       </View>
     );
@@ -80,7 +80,12 @@ const PastWorkoutDetailsScreen = () => {
           <>
             {exercise.sets &&
               exercise.sets.map((set, index) =>
-                renderSetsRepsContent(set, index, exercise.sets!.length - 1),
+                renderSetsRepsContent(
+                  exercise.id,
+                  set,
+                  index,
+                  exercise.sets!.length - 1,
+                ),
               )}
           </>
         </TitledCard>
@@ -89,6 +94,7 @@ const PastWorkoutDetailsScreen = () => {
   };
 
   const renderSetsRepsContent = (
+    exerciseID: string,
     set: Set,
     index: number,
     lastIndex: number,
@@ -97,7 +103,7 @@ const PastWorkoutDetailsScreen = () => {
       <View>
         <OpenableRow
           text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
-          key={index}
+          key={`${exerciseID}-${index}`}
           isLast={index === lastIndex}>
           <View style={styles.rowInnerContentContainer}>
             <View style={styles.innerRow}>

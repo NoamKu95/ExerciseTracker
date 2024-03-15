@@ -26,6 +26,7 @@ const SplashScreen = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'Splash'>>();
+
   const {
     animatedLogoStyle,
     animatedImageStyle,
@@ -43,6 +44,7 @@ const SplashScreen = () => {
     );
   }, [initAnimation, dispatch]);
 
+  // ** HANDLE FUNCTIONS **
   const handleAppReady = (initStatus: AppInitReturnType) => {
     switch (initStatus) {
       case AppInitReturnType.USER_VERIFIED:
@@ -59,6 +61,7 @@ const SplashScreen = () => {
     }
   };
 
+  // ** RENDER FUNCTIONS **
   const renderLogoAndTitle = () => (
     <Animated.View style={[styles.logoAndTitle, animatedLogoStyle]}>
       <BoldText size={FontSizes.large}>

@@ -20,12 +20,12 @@ import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
 import {radiuses} from '../../constants/ui/radiuses';
 import {FontSizes} from '../../constants/ui/fonts';
+import {shadowStyles} from '../../constants/ui/shadows';
 // Redux
 import {useAppSelector} from '../../store/store';
 // Utils
 import {getFontFamily} from '../../utils/fontFamily';
 import {isIOS} from '../../utils/platformUtil';
-import {shadowStyles} from '../../constants/ui/shadows';
 
 interface AppTextInputProps {
   label: string;

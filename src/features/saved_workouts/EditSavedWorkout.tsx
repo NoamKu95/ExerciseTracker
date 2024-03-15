@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, SectionList, LogBox} from 'react-native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 // Components
 import {BoldText} from '../../components/Base/Texts';
 import {PrimaryButton, TextButton} from '../../components/Base/Buttons';
@@ -22,8 +23,6 @@ import {Exercise, Set} from '../../models/core/exercise';
 // Redux
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
-
-import {RouteProp, useRoute} from '@react-navigation/native';
 import {validateNumbersOnly} from '../../utils/validators';
 
 const EditSavedWorkoutScreen = () => {
@@ -107,7 +106,7 @@ const EditSavedWorkoutScreen = () => {
       <View>
         <OpenableRow
           text={`${i18n.t('screens.pastWorkoutDetails.set')} #${index + 1}`}
-          key={index}
+          key={`${exerciseID}-${index}`}
           isLast={index === lastIndex}>
           <View style={styles.rowInnerContentContainer}>
             <View style={styles.innerRow}>
