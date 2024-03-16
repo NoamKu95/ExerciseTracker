@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {RegularText} from '../../components/Base/Texts';
 // Components
 import {PrimaryButton} from '../../components/Base/Buttons';
@@ -119,7 +119,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScreenLayout screenTitle={`${greeting} ${userName}`}>
+    <ScrollScreenLayout screenTitle={`${greeting} ${userName}`}>
       <>
         {renderTexts()}
         {renderActionButton()}
@@ -127,7 +127,7 @@ const HomeScreen = () => {
         {renderFunFact()}
         {renderWorkoutCard()}
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

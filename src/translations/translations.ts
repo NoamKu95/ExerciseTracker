@@ -125,6 +125,7 @@ export interface Translation {
     editSavedWorkout: {
       title: string;
       addExercise: string;
+      addSet: string;
     };
     noInternet: {
       title: string;

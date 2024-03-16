@@ -11,7 +11,7 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 
-interface SaveTrainingModalProps {
+interface SaveWorkoutModalProps {
   isVisible: boolean;
   onActionButtonPress: () => void;
   onCloseButtonPress: () => void;
@@ -23,7 +23,7 @@ const SaveWorkoutModal = ({
   onActionButtonPress,
   onCloseButtonPress,
   isSaveTheWorkout,
-}: SaveTrainingModalProps) => {
+}: SaveWorkoutModalProps) => {
   const renderTopTexts = () => {
     return (
       <>

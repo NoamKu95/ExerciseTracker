@@ -1,5 +1,6 @@
 import React from 'react';
 import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 // Components
 import {BoldText} from './Texts';
 import {BackwardsButton, PrimaryButton} from './Buttons';
@@ -9,23 +10,12 @@ import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import {ButtonType} from '../../constants/enums';
+import {ScreenLayoutProps} from './ScreenLayout';
 // Utils
-import {getFlexDirection, getSelfAlign, hp, wp} from '../../utils/styleUtil';
+import {getFlexDirection, getSelfAlign, hp} from '../../utils/styleUtil';
 import {isIOS} from '../../utils/platformUtil';
 
-export interface ScreenLayoutProps {
-  children: JSX.Element;
-  screenTitle?: string;
-  isBackButton?: boolean;
-  onPress?: () => void;
-  isButtonDisabled?: boolean;
-  buttonText?: string;
-  isLoading?: boolean;
-  buttonIcon?: JSX.Element;
-  paddingHorizontal?: number;
-}
-
-const ScreenLayout = ({
+const ScrollScreenLayout = ({
   children,
   screenTitle,
   isBackButton = false,
@@ -61,7 +51,13 @@ const ScreenLayout = ({
       behavior={isIOS() ? 'padding' : undefined}
       style={styles.keyboardAvoidingView}>
       {screenTitle && renderHeader()}
-      <View style={[styles.container, {paddingHorizontal}]}>{children}</View>
+      <ScrollView
+        scrollEnabled={true}
+        contentContainerStyle={[styles.scrollViewContent, {paddingHorizontal}]}
+        showsVerticalScrollIndicator={false}
+        bounces={false}>
+        {children}
+      </ScrollView>
       {buttonText && onPress && (
         <View style={styles.buttonContainer}>
           <PrimaryButton
@@ -78,7 +74,7 @@ const ScreenLayout = ({
   );
 };
 
-export default ScreenLayout;
+export default ScrollScreenLayout;
 
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
@@ -87,15 +83,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.BACKGROUND,
   },
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: 'space-between',
-  },
-  container: {
-    paddingTop: spaces._24px,
+    paddingBottom: spaces._24px,
     gap: spaces._24px,
-    height: '100%',
-    backgroundColor: colors.BACKGROUND,
-    width: wp(100),
   },
   headerContainer: {
     paddingTop: hp(7),
@@ -107,7 +97,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   titleTextContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

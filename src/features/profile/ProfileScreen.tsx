@@ -13,7 +13,7 @@ import CardWithRows from '../../components/Cards/CardWithRows';
 import LanguageBottomSheet from '../../components/BottomSheets/LanguageBottomSheet';
 import GenderBottomSheet from '../../components/BottomSheets/GenderBottomSheet';
 import MeasurementBottomSheet from '../../components/BottomSheets/MeasurementBottomSheet';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 // Icons
 import EditIcon from '../../assets/icons/EditIcon';
 import CheckIcon from '../../assets/icons/CheckIcon';
@@ -261,7 +261,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <ScreenLayout screenTitle={i18n.t('screens.profile.title')}>
+    <ScrollScreenLayout screenTitle={i18n.t('screens.profile.title')}>
       <>
         {renderPersonalDetailsCard()}
         {renderMyDataCard()}
@@ -293,7 +293,7 @@ const ProfileScreen = () => {
           onSavePressed={handleMeasurementUnitChange}
         />
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

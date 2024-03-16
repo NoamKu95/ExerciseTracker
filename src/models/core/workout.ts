@@ -4,14 +4,14 @@ import {Exercise} from './exercise';
 export interface Workout {
   id: string;
   name: string;
-  date: Date;
+  date: string;
   exercises?: CategorizedExercises[];
 }
 
 // HISTORY WORKOUTS
 export interface CategorizedHistoryWorkouts {
-  categoryName: string; // title
-  workouts: HistoryWorkout[]; // data
+  categoryName: string;
+  data: HistoryWorkout[];
 }
 
 export interface CategorizedExercises {
@@ -28,8 +28,9 @@ export interface CategorizedSavedWorkouts {
   categoryName: string;
   workouts: SavedWorkout[];
 }
+
 export interface SavedWorkout extends Workout {
-  savingDate: Date;
+  savingDate: string;
 }
 
 // ------------------------------------------------------------------

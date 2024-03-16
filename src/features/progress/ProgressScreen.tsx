@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {RegularText} from '../../components/Base/Texts';
 import DropDown from './components/DropDown';
 import CardWithRows from '../../components/Cards/CardWithRows';
@@ -92,7 +92,7 @@ const ProgressScreen = () => {
   };
 
   return (
-    <ScreenLayout screenTitle={i18n.t('screens.progress.title')}>
+    <ScrollScreenLayout screenTitle={i18n.t('screens.progress.title')}>
       <>
         <View style={styles.textContainer}>
           <RegularText
@@ -119,7 +119,7 @@ const ProgressScreen = () => {
           onSavePressed={handleExerciseSelection}
         />
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

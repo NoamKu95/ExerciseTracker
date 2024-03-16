@@ -1,17 +1,21 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 // Constants
-import {savedWorkoutsMock} from '../../../mockData/savedWorkoutsMock';
 // Models
 import {
   CategorizedHistoryWorkouts,
+  SavedWorkout,
   Workout,
 } from '../../../models/core/workout';
-import {historyWorkoutsMock} from '../../../mockData/historyWorkoutsMock';
+import {
+  deleteSavedWorkout,
+  fetchSavedWorkouts,
+  fetchWorkoutHistory,
+} from './workoutActions';
 // Redux
 
 export interface WorkoutState {
-  savedWorkouts: Workout[];
   activeWorkout: Workout | null;
+  savedWorkouts: SavedWorkout[];
   pastWorkouts: CategorizedHistoryWorkouts[];
   page: number;
   didFinishFetchingAllHistory: boolean;
@@ -19,9 +23,9 @@ export interface WorkoutState {
 }
 
 const initialState: WorkoutState = {
-  savedWorkouts: savedWorkoutsMock, // TODO: - replace with []
   activeWorkout: null,
-  pastWorkouts: historyWorkoutsMock, // TODO: - replace with []
+  savedWorkouts: [],
+  pastWorkouts: [],
   page: 0,
   didFinishFetchingAllHistory: false,
   isLoading: false,
@@ -32,7 +36,49 @@ export const WorkoutSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder;
+    builder
+      // ** HISTORY WORKOUTS **
+      .addCase(fetchWorkoutHistory.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchWorkoutHistory.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        fetchWorkoutHistory.fulfilled,
+        (state, action: PayloadAction<CategorizedHistoryWorkouts[]>) => {
+          state.isLoading = false;
+          state.pastWorkouts = action.payload;
+        },
+      )
+      // ** SAVED WORKOUTS **
+      .addCase(fetchSavedWorkouts.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchSavedWorkouts.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        fetchSavedWorkouts.fulfilled,
+        (state, action: PayloadAction<SavedWorkout[]>) => {
+          state.isLoading = false;
+          state.savedWorkouts = action.payload;
+        },
+      )
+      .addCase(deleteSavedWorkout.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(deleteSavedWorkout.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(
+        deleteSavedWorkout.fulfilled,
+        (state, action: PayloadAction<SavedWorkout[]>) => {
+          state.isLoading = false;
+          state.savedWorkouts = action.payload;
+          console.log(action.payload);
+        },
+      );
   },
 });
 

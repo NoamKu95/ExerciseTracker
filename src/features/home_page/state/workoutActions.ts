@@ -1,12 +1,21 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {fetchWorkoutHistoryRepo} from '../../../repo/workoutRepo';
+// Models
 import {WorkoutHistoryPayload} from '../../../models/networkingObjects/payloads/workoutHistoryPayload';
+// Redux
+import {
+  deleteSavedWorkoutRepo,
+  fetchSavedWorkoutsRepo,
+  fetchWorkoutHistoryRepo,
+} from '../../../repo/workoutRepo';
+import {
+  CategorizedHistoryWorkouts,
+  SavedWorkout,
+} from '../../../models/core/workout';
 
-interface WorkoutHistoryResponse {}
-
+// ** HISTORY WORKOUTS **
 export const fetchWorkoutHistory = createAsyncThunk<
-  WorkoutHistoryResponse,
-  WorkoutHistoryPayload
+  CategorizedHistoryWorkouts[], // response
+  WorkoutHistoryPayload // payload
 >(
   'workout/fetchWorkoutHistory',
   async (payload: WorkoutHistoryPayload, thunkAPI) => {
@@ -17,3 +26,26 @@ export const fetchWorkoutHistory = createAsyncThunk<
     }
   },
 );
+
+// ** SAVED WORKOUTS **
+export const fetchSavedWorkouts = createAsyncThunk<
+  SavedWorkout[], // response
+  void // payload
+>('workout/fetchSavedWorkouts', async thunkAPI => {
+  try {
+    return await fetchSavedWorkoutsRepo();
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const deleteSavedWorkout = createAsyncThunk<
+  SavedWorkout[], // response
+  string // payload
+>('workout/deleteSavedWorkout', async workoutID => {
+  try {
+    return await deleteSavedWorkoutRepo(workoutID);
+  } catch (error) {
+    throw error;
+  }
+});

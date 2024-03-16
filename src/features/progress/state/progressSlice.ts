@@ -9,16 +9,16 @@ import {ExerciseResponse} from '../../../models/networkingObjects/responses/exer
 
 export interface WorkoutState {
   isLoading: boolean;
-  chosenExercise: ExerciseResponse;
-  chosenBodyArea: BodyArea;
-  exerciseData: ExerciseDayData[];
+  // chosenExercise: ExerciseResponse;
+  // chosenBodyArea: BodyArea;
+  // exerciseData: ExerciseDayData[];
 }
 
 const initialState: WorkoutState = {
   isLoading: false,
-  chosenExercise: defaultExercise,
-  chosenBodyArea: defaultBodyArea,
-  exerciseData: exerciseLastMonthData, // TODO: replace with []
+  // chosenExercise: defaultExercise,
+  // chosenBodyArea: defaultBodyArea,
+  // exerciseData: exerciseLastMonthData, // TODO: replace with []
 };
 
 export const ProgressSlice = createSlice({

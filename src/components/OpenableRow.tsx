@@ -15,10 +15,10 @@ import {getFlexDirection} from '../utils/styleUtil';
 interface OpenableRowProps {
   text: string;
   children: JSX.Element;
-  isLast: boolean;
+  isLast?: boolean;
 }
 
-const OpenableRow = ({text, children, isLast}: OpenableRowProps) => {
+const OpenableRow = ({text, children, isLast = false}: OpenableRowProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

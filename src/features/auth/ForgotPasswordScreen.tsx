@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 // Constants
 import i18n from '../../translations/i18n';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import AppTextInput from '../../components/Base/TextInput';
 // Icons
@@ -70,7 +70,7 @@ const ForgotPasswordScreen = () => {
   };
 
   return (
-    <ScreenLayout
+    <ScrollScreenLayout
       onPress={handleSendMailPress}
       isButtonDisabled={!isAllInputsValid || isLoading}
       buttonText={i18n.t('screens.forgotPassword.sendPassword')}
@@ -89,7 +89,7 @@ const ForgotPasswordScreen = () => {
         />
         {renderCheckInbox()}
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

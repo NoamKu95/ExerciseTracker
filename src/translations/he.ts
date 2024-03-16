@@ -131,6 +131,7 @@ const Hebrew: Translation = {
     editSavedWorkout: {
       title: 'עריכת אימון שמור',
       addExercise: 'הוספת תרגיל לאימון',
+      addSet: 'הוספת סט',
     },
     noInternet: {
       title: 'אופס, אין חיבור אינטרנט!',

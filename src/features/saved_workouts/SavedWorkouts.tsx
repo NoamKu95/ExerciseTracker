@@ -1,16 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
-import {View, StyleSheet, LogBox, Pressable} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import SwipeableFlatList from 'react-native-swipeable-list';
 // Components
 import {RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import Loader from '../../components/Base/Loader';
 import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
+import ScreenLayout from '../../components/Base/ScreenLayout';
 // Icons
 import EditIcon from '../../assets/icons/EditIcon';
+import OutlineHeartIcon from '../../assets/icons/OutlineHeartIcon';
 import TrashIcon from '../../assets/icons/TrashIcon';
 // UI
 import {colors} from '../../constants/ui/colors';
@@ -21,64 +23,94 @@ import {FontSizes} from '../../constants/ui/fonts';
 import {ProfileStackParamList} from '../../constants/screens';
 import i18n from '../../translations/i18n';
 // Models
-import {Workout} from '../../models/core/workout';
-import {Exercise} from '../../models/core/exercise';
+import {CategorizedExercises, Workout} from '../../models/core/workout';
+import SaveWorkoutModal from '../../components/Modals/SaveWorkoutModal';
+import {AppErrorTypes} from '../../models/error';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {
+  deleteSavedWorkout,
+  fetchSavedWorkouts,
+} from '../home_page/state/workoutActions';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
 // Utils
 import {getFlexDirection, wp} from '../../utils/styleUtil';
-import {formatDateToText} from '../../utils/timeUtil';
 
 const SavedWorkoutsScreen = () => {
-  // TODO: Remove when find solution
-  useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
-
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
       StackNavigationProp<ProfileStackParamList, 'Saved_Workouts'>
     >();
 
-  // ** RENDER FUNCTIONS **
+  // GLOBAL VARIABLES
+  const isLoading = useAppSelector(state => state.workout.isLoading);
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
+
+  // LOCAL VARIABLES
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [tappedWorkoutID, setTappedWorkoutID] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchSavedWorkouts()).catch(() =>
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      ),
+    );
+  }, [dispatch]);
+
+  // ** RENDER FUNCTIONS **
 
   const renderSavedWorkout = ({item}: {item: Workout}) => {
     return (
       <View style={{paddingEnd: spaces._24px}}>
         <TitledCard title={item.name} outerStyle={{paddingStart: spaces._24px}}>
-          <View style={{gap: spaces._10px}}>
-            <View style={{flexDirection: getFlexDirection(), gap: spaces._4px}}>
+          <>
+            <View style={{gap: spaces._10px}}>
+              <View
+                style={{flexDirection: getFlexDirection(), gap: spaces._4px}}>
+                <RegularText
+                  children={i18n.t('screens.savedWorkouts.savedAt')}
+                  size={FontSizes.regular}
+                  underline
+                />
+                <RegularText
+                  children={item.date}
+                  size={FontSizes.regular}
+                  color={colors.SECONDARY_TEXT}
+                />
+              </View>
               <RegularText
-                children={i18n.t('screens.savedWorkouts.savedAt')}
+                children={i18n.t('screens.savedWorkouts.exercises')}
                 size={FontSizes.regular}
                 underline
               />
-              <RegularText
-                children={formatDateToText(item.date)}
-                size={FontSizes.regular}
-                color={colors.SECONDARY_TEXT}
-              />
             </View>
-            <RegularText
-              children={i18n.t('screens.savedWorkouts.exercises')}
-              size={FontSizes.regular}
-              underline
-            />
-          </View>
-          {formatExercisesInWorkout(item.exercises)}
+            {item.exercises && formatExercisesInWorkout(item.exercises)}
+          </>
         </TitledCard>
       </View>
     );
   };
 
-  const renderHiddenButtons = (item: Workout) => {
+  const renderHiddenButtons = (index: number, item: Workout) => {
     return (
       <View style={styles.buttonsContainer}>
         <Pressable
           onPress={() => handleDeletePressed(item.id)}
           style={styles.btnContainer}>
           <TrashIcon color={colors.DARK_GRAY} />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            setTappedWorkoutID(item.id);
+            setIsSheetOpen(true);
+          }}
+          style={styles.btnContainer}>
+          <OutlineHeartIcon color={colors.DARK_GRAY} />
         </Pressable>
         <Pressable
           onPress={() => handleEditPressed(item.id)}
@@ -89,7 +121,10 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
-  const formatExercisesInWorkout = (exercises?: Exercise[]) => {
+  const formatExercisesInWorkout = (
+    categorizedExercises: CategorizedExercises[],
+  ) => {
+    const exercises = categorizedExercises.flatMap(category => category.data);
     return (
       exercises?.map((exercise, index) => (
         <View key={`${exercise.id}-${index}`} style={styles.exercisesTexts}>
@@ -99,9 +134,9 @@ const SavedWorkoutsScreen = () => {
           />
           {exercise.sets && exercise.sets!.length > 0 && (
             <RegularText
-              children={`(${i18n.t('screens.savedWorkouts.sets')} ${
-                exercise.sets!.length
-              })`}
+              children={`(${exercise.sets!.length} ${i18n.t(
+                'screens.savedWorkouts.sets',
+              )})`}
               size={FontSizes.regular}
               color={colors.SECONDARY_TEXT}
             />
@@ -111,13 +146,27 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
-  const handleDeletePressed = (workoutID: string) => {
-    console.log(workoutID);
-    // dispatch delete to BE with id
+  // ** HANDLE FUNCTIONS **
+  const handleEditPressed = (workoutID: string) => {
+    navigation.navigate('Edit_Saved_Workout', {workoutID});
   };
 
-  const handleEditPressed = (workoutID: string) => {
-    navigation.navigate('Past_Workout_Details', {workoutID});
+  const handleUnsavePressed = (workoutID: string) => {
+    console.log(workoutID);
+    // dispatch delete to BE with id
+    setTappedWorkoutID('');
+    setIsSheetOpen(false);
+  };
+
+  const handleDeletePressed = (workoutID: string) => {
+    dispatch(deleteSavedWorkout(workoutID)).catch(() =>
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      ),
+    );
   };
 
   return (
@@ -125,21 +174,38 @@ const SavedWorkoutsScreen = () => {
       screenTitle={i18n.t('screens.savedWorkouts.title')}
       isBackButton={true}
       paddingHorizontal={spaces._0px}>
-      <SwipeableFlatList
-        keyExtractor={(item: Workout) => item.id}
-        data={savedWorkouts}
-        renderItem={renderSavedWorkout}
-        maxSwipeDistance={wp(30)}
-        renderQuickActions={renderHiddenButtons}
-        contentContainerStyle={styles.contentContainerStyle}
-        shouldBounceOnMount={true}
-        ListEmptyComponent={
-          <EmptyStateComponent
-            text={i18n.t('screens.savedWorkouts.emptyState')}
+      <>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <SwipeableFlatList
+            keyExtractor={(item: Workout) => item.id}
+            data={savedWorkouts}
+            renderItem={renderSavedWorkout}
+            maxSwipeDistance={wp(50)}
+            renderQuickActions={({index, item}) =>
+              renderHiddenButtons(index, item)
+            }
+            contentContainerStyle={styles.contentContainerStyle}
+            shouldBounceOnMount={true}
+            ListEmptyComponent={
+              <EmptyStateComponent
+                text={i18n.t('screens.savedWorkouts.emptyState')}
+              />
+            }
+            showsVerticalScrollIndicator={false}
           />
-        }
-        showsVerticalScrollIndicator={false}
-      />
+        )}
+        <SaveWorkoutModal
+          isVisible={isSheetOpen}
+          onActionButtonPress={() => handleUnsavePressed(tappedWorkoutID)}
+          onCloseButtonPress={() => {
+            setTappedWorkoutID('');
+            setIsSheetOpen(false);
+          }}
+          isSaveTheWorkout={false}
+        />
+      </>
     </ScreenLayout>
   );
 };
