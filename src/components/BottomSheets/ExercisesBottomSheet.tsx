@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 // Components
 import {BoldText} from '../Base/Texts';
@@ -11,11 +11,12 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 import {bodyAreas} from '../../data/bodyAreas';
-import {exercises} from '../../mockData/exercises';
+import {exercises} from '../../data/exercises';
 // Models
 import {BodyArea} from '../../models/bodyArea';
 import {Exercise} from '../../models/core/exercise';
 // Utils
+import {findExerciseByName} from '../../utils/findItem';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 interface ExercisesBottomSheetProps {
@@ -33,10 +34,16 @@ const ExercisesBottomSheet = ({
   onClosePressed,
   onSavePressed,
 }: ExercisesBottomSheetProps) => {
-  // ** VARIABLES **
+  // GLOBAL VARIABLES
+  //LOCAL VARIABLES
   const [selectedArea, setSelectedArea] = useState<BodyArea>(currentArea);
   const [selectedExercise, setSelectedExercise] =
     useState<Exercise>(currentExercise);
+
+  useEffect(() => {
+    setSelectedExercise(currentExercise);
+    setSelectedArea(currentArea);
+  }, [currentExercise, currentArea]);
 
   // ** RENDER FUNCTIONS **
   const renderBodyAreasChips = () => {
@@ -59,10 +66,11 @@ const ExercisesBottomSheet = ({
     setSelectedArea(selection);
   };
 
-  const handleExerciseSelection = (exrcName: string) => {
-    console.log(exrcName);
-    // find the exercise by the exrcName
-    // setSelectedExercise(selection);
+  const handleExerciseSelection = (name: string) => {
+    let exercise = findExerciseByName(name);
+    if (exercise) {
+      setSelectedExercise(exercise);
+    }
   };
 
   return (

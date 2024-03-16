@@ -1,5 +1,5 @@
 // React & Libs
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 // UI
@@ -7,12 +7,11 @@ import {colors} from '../../../constants/ui/colors';
 // Constants
 import i18n from '../../../translations/i18n';
 // Models
-import {ExerciseDayData} from '../../../models/core/exercise';
+import {ExerciseDayData} from '../../../models/networkingObjects/responses/exerciseResponse';
 // Redux
 import {useAppSelector} from '../../../store/store';
 // Utils
 import {hp, wp} from '../../../utils/styleUtil';
-import {formatDateToText} from '../../../utils/timeUtil';
 
 interface DataLineGraphProps {
   graphData: ExerciseDayData[];
@@ -21,13 +20,12 @@ interface DataLineGraphProps {
 const LineGraph = ({graphData}: DataLineGraphProps) => {
   // VARIABLES
   const isRTL = useAppSelector(state => state.auth.isRTL);
-  const [chartWidth, setChartWidth] = useState(wp(100));
 
   const renderXAxisDates = () => {
     let dateLabels: string[] = [];
     for (let index = 0; index < graphData.length; index++) {
       if (index === 0 || index === graphData.length - 1) {
-        dateLabels.push(formatDateToText(graphData[index].date));
+        dateLabels.push(graphData[index].date);
       } else {
         dateLabels.push('•');
       }
@@ -37,12 +35,7 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
   };
 
   return (
-    <View
-      style={styles.container}
-      onLayout={event => {
-        const {width} = event.nativeEvent.layout;
-        setChartWidth(width);
-      }}>
+    <View style={styles.container}>
       <LineChart
         withShadow={true}
         withHorizontalLines={true}
@@ -57,7 +50,7 @@ const LineGraph = ({graphData}: DataLineGraphProps) => {
             },
           ],
         }}
-        width={chartWidth}
+        width={wp(75)}
         height={hp(25)}
         yAxisInterval={0.5}
         xLabelsOffset={4}

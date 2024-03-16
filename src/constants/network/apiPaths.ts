@@ -8,4 +8,5 @@ export const paths = {
   WORKOUT_HISTORY: 'workout/history',
   SAVED_WORKOUTS: 'workout/savedWorkouts',
   DELETE_SAVED_WORKOUT: 'workout/deleteSavedWorkout',
+  PROGRESS_DATA: 'exercise/progressData',
 };

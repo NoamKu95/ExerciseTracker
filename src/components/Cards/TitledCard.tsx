@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   titleContainer: {
-    width: '100%',
     paddingVertical: spaces._16px,
     paddingHorizontal: spaces._20px,
     borderTopRightRadius: radiuses._16px,

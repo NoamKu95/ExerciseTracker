@@ -38,13 +38,13 @@ import {getFlexDirection} from '../../utils/styleUtil';
 import {openEmail} from '../../utils/contactUtil';
 
 const ProfileScreen = () => {
+  const navigation =
+    useNavigation<StackNavigationProp<ProfileStackParamList, 'Main_Profile'>>();
+
   // ** STATE VARIABLES **
   const user = useAppSelector(state => state.auth.user);
   const appLang = useAppSelector(state => state.auth.language);
   const isLoading = useAppSelector(state => state.auth.isLoading);
-
-  const navigation =
-    useNavigation<StackNavigationProp<ProfileStackParamList, 'Main_Profile'>>();
 
   // ** LOCAL VARIABLES**
   const [isEditMode, setIsEditMode] = useState(false);
