@@ -11,12 +11,12 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 import {bodyAreas} from '../../data/bodyAreas';
+import {exercises} from '../../mockData/exercises';
 // Models
 import {BodyArea} from '../../models/bodyArea';
 import {Exercise} from '../../models/core/exercise';
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
-import {exercises} from '../../mockData/exercises';
 
 interface ExercisesBottomSheetProps {
   isVisible: boolean;
@@ -60,6 +60,7 @@ const ExercisesBottomSheet = ({
   };
 
   const handleExerciseSelection = (exrcName: string) => {
+    console.log(exrcName);
     // find the exercise by the exrcName
     // setSelectedExercise(selection);
   };

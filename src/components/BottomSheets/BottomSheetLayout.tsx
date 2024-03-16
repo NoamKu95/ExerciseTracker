@@ -13,23 +13,23 @@ import {FontSizes} from '../../constants/ui/fonts';
 // Constants
 import i18n from '../../translations/i18n';
 // Utils
-import {getFlexDirection, hp} from '../../utils/styleUtil';
+import {getFlexDirection} from '../../utils/styleUtil';
 import {isIOS} from '../../utils/platformUtil';
 
 interface BottomSheetLayoutProps {
   children: JSX.Element;
-  height?: number;
   handleSave: () => void;
   isVisible: boolean;
   onCloseSheetPressed: () => void;
+  padding?: number;
 }
 
 const BottomSheetLayout = ({
   children,
-  height = hp(50),
   handleSave,
   isVisible,
   onCloseSheetPressed,
+  padding = spaces._24px,
 }: BottomSheetLayoutProps) => {
   const renderActionButtons = () => {
     return (
@@ -54,9 +54,9 @@ const BottomSheetLayout = ({
       onSwipeComplete={onCloseSheetPressed}
       onBackdropPress={onCloseSheetPressed}>
       <KeyboardAvoidingView behavior={isIOS() ? 'padding' : 'height'}>
-        <View style={[styles.modalContent, {height}]}>
+        <View style={[styles.modalContent]}>
           {renderActionButtons()}
-          {children}
+          <View style={{padding}}>{children}</View>
         </View>
       </KeyboardAvoidingView>
     </Modal>
@@ -72,11 +72,12 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: colors.WHITE,
-    padding: spaces._24px,
     borderTopLeftRadius: radiuses._24px,
     borderTopRightRadius: radiuses._24px,
   },
   actionButtons: {
+    padding: spaces._24px,
+    paddingBottom: spaces._0px,
     flexDirection: getFlexDirection(),
     alignItems: 'center',
     justifyContent: 'space-between',

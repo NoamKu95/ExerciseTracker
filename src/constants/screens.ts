@@ -56,3 +56,25 @@ export const TabsScreens: {
   PROGRESS: 'Progress',
   PROFILE: 'Profile',
 };
+
+// PROFILE STACK
+export type ProfileStackParamList = {
+  Main_Profile: undefined;
+  Workout_History: undefined;
+  Past_Workout_Details: undefined;
+  Saved_Workouts: undefined;
+  Edit_Saved_Workout: undefined;
+};
+export const ProfileScreens: {
+  MAIN_PROFILE: keyof ProfileStackParamList;
+  WORKOUT_HISTORY: keyof ProfileStackParamList;
+  PAST_WORKOUT_DETAILS: {workoutID: string};
+  SAVED_WORKOUTS: keyof ProfileStackParamList;
+  EDIT_SAVED_WORKOUT: {workoutID: string};
+} = {
+  MAIN_PROFILE: 'Main_Profile',
+  WORKOUT_HISTORY: 'Workout_History',
+  PAST_WORKOUT_DETAILS: 'Past_Workout_Details',
+  SAVED_WORKOUTS: 'Saved_Workouts',
+  EDIT_SAVED_WORKOUT: 'Edit_Saved_Workout',
+};

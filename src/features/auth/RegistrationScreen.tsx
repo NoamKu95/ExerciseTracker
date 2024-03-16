@@ -7,10 +7,11 @@ import i18n from '../../translations/i18n';
 import {RootStackParamList, Screens} from '../../constants/screens';
 // Components
 import {resetTo} from '../../navigation/RootNavigation';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 // Icons
 import SparkleIcon from '../../assets/icons/SparkleIcon';
 // UI
@@ -28,13 +29,16 @@ import {
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {registerUser} from './state/authActions';
-import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const RegistrationScreen = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'Register'>>();
+
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.auth.isLoading);
+
+  // LOCAL VARIABLES
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +49,7 @@ const RegistrationScreen = () => {
     setIsAllInputsValid(validationResponse);
   }, [email, password, name]);
 
+  // ** HANDLE FUNCTIONS **
   const handleRegisterPress = () => {
     // TODO: delete when BE is available
     resetTo(Screens.ONBOARDING);
@@ -100,6 +105,7 @@ const RegistrationScreen = () => {
           onChangeText={setEmail}
           validateInput={validateEmail}
           errorText={i18n.t('errors.validation.invalidEmail')}
+          keyboardType="email-address"
         />
         <AppTextInput
           label={i18n.t('screens.register.password')}
@@ -134,7 +140,7 @@ const RegistrationScreen = () => {
   return (
     <>
       <LanguagePicker />
-      <ScreenLayout
+      <ScrollScreenLayout
         onPress={() => {
           handleRegisterPress();
         }}
@@ -147,7 +153,7 @@ const RegistrationScreen = () => {
           {renderDetailsTextFields()}
           {renderAlreadyRegistered()}
         </>
-      </ScreenLayout>
+      </ScrollScreenLayout>
     </>
   );
 };

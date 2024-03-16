@@ -14,6 +14,7 @@ export enum AppErrorTypes {
   INITIALIZATION = 'InitializationError',
   NETWORK_ERROR = 'NetworkError',
   LOCAL_STORAGE_ERROR = 'LocalStorageInteractionError',
+  FAILED_TO_OPEN_MAIL = 'EmailOpenFailure',
 }
 
 export interface ErrorData {

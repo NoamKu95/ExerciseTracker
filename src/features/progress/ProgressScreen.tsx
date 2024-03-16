@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
+import {RegularText} from '../../components/Base/Texts';
 import DropDown from './components/DropDown';
 import CardWithRows from '../../components/Cards/CardWithRows';
 import CardWithGraph from './components/CardWithGraph';
@@ -16,14 +16,14 @@ import i18n from '../../translations/i18n';
 import {progressPeriods} from '../../data/timePeriods';
 // Models
 import {Exercise} from '../../models/core/exercise';
-import {ExerciseResponse} from '../../models/networkingObjects/exerciseResponse';
 import {BodyArea} from '../../models/bodyArea';
 import {TimePeriod} from '../../models/timePeriod';
+import {ExerciseResponse} from '../../models/networkingObjects/responses/exerciseResponse';
 // Redux
 import {useAppSelector} from '../../store/store';
 
 const ProgressScreen = () => {
-  // VARIABLES
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.progress.isLoading);
   const currentExercise = useAppSelector<ExerciseResponse>(
     state => state.progress.chosenExercise,
@@ -32,6 +32,8 @@ const ProgressScreen = () => {
     state => state.progress.chosenBodyArea,
   );
   const exerciseData = useAppSelector(state => state.progress.exerciseData);
+
+  // LOCAL VARIABLES
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
     progressPeriods[0],
   );
@@ -42,22 +44,6 @@ const ProgressScreen = () => {
   }, [currentExercise]);
 
   // ** RENDER FUNCTIONS **
-  const renderTitles = () => {
-    return (
-      <View style={styles.textContainer}>
-        <BoldText
-          children={i18n.t('screens.progress.title')}
-          size={FontSizes.large}
-        />
-        <RegularText
-          children={i18n.t('screens.progress.subtitle')}
-          size={FontSizes.regular}
-          color={colors.SECONDARY_TEXT}
-        />
-      </View>
-    );
-  };
-
   const renderDropdown = () => {
     return (
       <DropDown
@@ -106,9 +92,15 @@ const ProgressScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScrollScreenLayout screenTitle={i18n.t('screens.progress.title')}>
       <>
-        {renderTitles()}
+        <View style={styles.textContainer}>
+          <RegularText
+            children={i18n.t('screens.progress.subtitle')}
+            size={FontSizes.regular}
+            color={colors.SECONDARY_TEXT}
+          />
+        </View>
         {renderDropdown()}
         {renderSummaryCard()}
         <CardWithGraph
@@ -127,7 +119,7 @@ const ProgressScreen = () => {
           onSavePressed={handleExerciseSelection}
         />
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

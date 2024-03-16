@@ -7,10 +7,11 @@ import i18n from '../../translations/i18n';
 import {RootStackParamList, Screens} from '../../constants/screens';
 import {ButtonType} from '../../constants/enums';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
+import LanguagePicker from '../../components/Pickers/LanguagePicker';
 // Icons
 import SparkleIcon from '../../assets/icons/SparkleIcon';
 // UI
@@ -28,13 +29,16 @@ import {
   validateEmail,
   validatePassword,
 } from '../../utils/validators';
-import LanguagePicker from '../../components/Pickers/LanguagePicker';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'Login'>>();
+
+  // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.auth.isLoading);
+
+  // LOCAL VARIABLES
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAllInputsValid, setIsAllInputsValid] = useState(false);
@@ -44,6 +48,7 @@ const LoginScreen = () => {
     setIsAllInputsValid(validationResponse);
   }, [email, password]);
 
+  // ** HANDLE FUNCTIONS **
   const handleLoginPress = () => {
     // TODO: delete when BE is available
     resetTo(Screens.TABS);
@@ -62,6 +67,7 @@ const LoginScreen = () => {
       );
   };
 
+  // ** RENDER FUNCTIONS **
   const renderTexts = () => {
     return (
       <View style={styles.textsContainer}>
@@ -115,7 +121,7 @@ const LoginScreen = () => {
   return (
     <>
       <LanguagePicker />
-      <ScreenLayout
+      <ScrollScreenLayout
         onPress={handleLoginPress}
         isButtonDisabled={!isAllInputsValid || isLoading}
         buttonText={i18n.t('screens.login.login')}
@@ -130,6 +136,7 @@ const LoginScreen = () => {
               onChangeText={setEmail}
               validateInput={validateEmail}
               errorText={i18n.t('errors.validation.invalidEmail')}
+              keyboardType="email-address"
             />
             <AppTextInput
               label={i18n.t('screens.register.password')}
@@ -143,7 +150,7 @@ const LoginScreen = () => {
           </View>
           {renderAlreadyRegistered()}
         </>
-      </ScreenLayout>
+      </ScrollScreenLayout>
     </>
   );
 };

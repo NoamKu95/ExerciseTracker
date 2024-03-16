@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {fetch} from '@react-native-community/netinfo';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {MediumText, RegularText} from '../../components/Base/Texts';
 // Icons
 import NoInternetIcon from '../../assets/icons/NoInternetIcon';
@@ -46,7 +46,7 @@ const NoInternetScreen = () => {
   };
 
   return (
-    <ScreenLayout
+    <ScrollScreenLayout
       buttonText={i18n.t('screens.noInternet.btnAction')}
       onPress={handleRetryPressed}>
       <>
@@ -68,7 +68,7 @@ const NoInternetScreen = () => {
           {renderStillNoConnectionMsg()}
         </View>
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

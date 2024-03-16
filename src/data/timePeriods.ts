@@ -1,26 +1,29 @@
-import {TimePeriod} from '../models/timePeriod';
+import {subDays} from 'date-fns';
+// Constants
 import i18n from '../translations/i18n';
-import {
-  generateTimePeriod,
-  getNowTimestamp,
-  getXDaysAgoTimestamp,
-} from '../utils/dateUtil';
+// Models
+import {TimePeriod} from '../models/timePeriod';
+// Utils
+import {generateTimePeriod} from '../utils/dateUtil';
 
 export const timePeriodsForFiltering: TimePeriod[] = [
   {
     name: i18n.t('times.last7Days'),
-    startTime: getXDaysAgoTimestamp(7),
-    endTime: getNowTimestamp(),
+    amountOfDays: 7,
+    startDate: subDays(new Date(), 7),
+    endDate: new Date(),
   },
   {
     name: i18n.t('times.last2Weeks'),
-    startTime: getXDaysAgoTimestamp(14),
-    endTime: getNowTimestamp(),
+    amountOfDays: 14,
+    startDate: subDays(new Date(), 14),
+    endDate: new Date(),
   },
   {
     name: i18n.t('times.lastMonth'),
-    startTime: getXDaysAgoTimestamp(30),
-    endTime: getNowTimestamp(),
+    amountOfDays: 30,
+    startDate: subDays(new Date(), 30),
+    endDate: new Date(),
   },
 ];
 

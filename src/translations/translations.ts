@@ -88,6 +88,44 @@ export interface Translation {
     };
     profile: {
       title: string;
+      personalDetails: string;
+      firstName: string;
+      lastName: string;
+      gender: string;
+      male: string;
+      female: string;
+      other: string;
+      settings: string;
+      language: string;
+      measureUnit: string;
+      contactUs: string;
+      emailSubject: string;
+      emailBody: string;
+      deleteUser: string;
+    };
+    workoutsHistory: {
+      title: string;
+      emptyStateText: string;
+      filter: string;
+    };
+    pastWorkoutDetails: {
+      title: string;
+      exercise: string;
+      weight: string;
+      reps: string;
+      set: string;
+    };
+    savedWorkouts: {
+      title: string;
+      savedAt: string;
+      exercises: string;
+      sets: string;
+      emptyState: string;
+    };
+    editSavedWorkout: {
+      title: string;
+      addExercise: string;
+      addSet: string;
     };
     noInternet: {
       title: string;
@@ -104,9 +142,15 @@ export interface Translation {
     filtering: {
       filterByPeriod: string;
       filterByDates: string;
+      chooseDate: string;
+      startDate: string;
+      till: string;
+      endDate: string;
       filterByExercise: string;
       savedExercise: string;
       unsavedExercise: string;
+      confirm: string;
+      cancel: string;
     };
     datePicker: {
       day: string;
@@ -130,6 +174,12 @@ export interface Translation {
       save: string;
     };
     today: string;
+    dayTimes: {
+      morning: string;
+      noon: string;
+      evening: string;
+      night: string;
+    };
   };
   times: {
     last7Days: string;
@@ -151,11 +201,15 @@ export interface Translation {
       unauthorizedError: string;
       tokenExpired: string;
     };
+    app: {
+      cantOpenEmail: string;
+    };
     validation: {
       invalidName: string;
       invalidEmail: string;
       invalidPassword: string;
       unmatchingPasswords: string;
+      mustNumbersOnly: string;
     };
   };
 }

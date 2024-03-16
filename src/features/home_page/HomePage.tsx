@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
-import {BoldText, RegularText} from '../../components/Base/Texts';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
+import {RegularText} from '../../components/Base/Texts';
 // Components
 import {PrimaryButton} from '../../components/Base/Buttons';
 import TitledCard from '../../components/Cards/TitledCard';
@@ -26,19 +26,18 @@ import {getGreetingAndMotivationByCurrentHour} from '../../utils/dateUtil';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 const HomeScreen = () => {
+  // GLOBAL VARIABLES
   const userName = useAppSelector(state => state.auth.user?.fullName) ?? '';
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
   const isActiveWorkout = useAppSelector(state => state.workout.activeWorkout);
+
+  // LOCAL VARIABLES
   const {greeting, motivation} = getGreetingAndMotivationByCurrentHour();
 
   // ** RENDER FUNCTIONS **
   const renderTexts = () => {
     return (
       <View style={styles.textContainer}>
-        <View style={styles.titleContainer}>
-          <BoldText children={greeting} size={FontSizes.large} />
-          <BoldText children={userName} size={FontSizes.large} />
-        </View>
         <RegularText children={motivation} size={FontSizes.regular} />
       </View>
     );
@@ -49,7 +48,7 @@ const HomeScreen = () => {
       <View style={styles.actionBtnContainer}>
         <PrimaryButton
           text={i18n.t('screens.home.btnAction')}
-          onPress={() => {}}
+          onPress={() => {}} // TODO
           icon={<SparkleIcon />}
         />
       </View>
@@ -120,7 +119,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScreenLayout>
+    <ScrollScreenLayout screenTitle={`${greeting} ${userName}`}>
       <>
         {renderTexts()}
         {renderActionButton()}
@@ -128,7 +127,7 @@ const HomeScreen = () => {
         {renderFunFact()}
         {renderWorkoutCard()}
       </>
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

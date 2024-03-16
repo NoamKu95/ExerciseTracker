@@ -19,9 +19,11 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import {isIOS} from '../utils/platformUtil';
+// UI
 import {colors} from '../constants/ui/colors';
 import {radiuses} from '../constants/ui/radiuses';
+// Utils
+import {isIOS} from '../utils/platformUtil';
 
 function isNumeric(str: string | unknown): boolean {
   if (typeof str === 'number') return true;
