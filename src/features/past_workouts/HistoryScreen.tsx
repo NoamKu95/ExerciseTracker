@@ -21,9 +21,11 @@ import {ProfileStackParamList} from '../../constants/screens';
 // Models
 import {HistoryWorkout} from '../../models/core/workout';
 import {FilteringObject} from '../../models/filtering';
+import {AppErrorTypes} from '../../models/error';
 // Redux
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {fetchWorkoutHistory} from '../home_page/state/workoutActions';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
 
@@ -45,7 +47,18 @@ const HistoryScreen = () => {
 
   // LOCAL VARIABLES
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
+  // const [isFetching, setIsFetching] = useState(false); // TODO: use in paging mechanism
+
+  useEffect(() => {
+    dispatch(fetchWorkoutHistory({page: page + 1, limit: 1})).catch(() =>
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      ),
+    );
+  }, [dispatch, page]);
 
   // ** RENDER FUNCTIONS **
   const renderFilterButton = () => {
@@ -64,7 +77,7 @@ const HistoryScreen = () => {
 
   const renderPeriodCard = (title: string, data: HistoryWorkout[]) => {
     return (
-      <View style={styles.cardContainer} key={title + data.length}>
+      <View style={styles.cardContainer} key={title}>
         <TitledCard title={title}>
           {data.map((workout, index) => {
             return (
@@ -72,34 +85,38 @@ const HistoryScreen = () => {
                 key={workout.id + index}
                 style={[
                   styles.rowContainer,
-                  index === 0 ? styles.firstRow : null,
-                  index === data.length - 1 ? styles.lastRow : null,
+                  index === 0 && styles.firstRow,
+                  index === data.length - 1 && styles.lastRow,
                 ]}
-                onPress={() =>
-                  navigation.navigate('Past_Workout_Details', {
-                    workoutID: workout.id,
-                  })
-                }>
-                <View style={styles.textsContainer}>
-                  <View style={styles.rowDateContainer}>
-                    <RegularText
-                      children={`${workout.date}, `}
-                      size={FontSizes.regular}
-                    />
-                    <RegularText
-                      children={`${i18n.t(`common.dayTimes.${workout.time}`)}`}
-                      size={FontSizes.regular}
-                      color={colors.GRAY}
-                    />
-                  </View>
-                  <BoldText children={workout.name} size={FontSizes.medium} />
-                </View>
-                <ChevronLeftIcon />
+                onPress={() => handleWorkoutTapped(workout.id)}>
+                {renderWorkoutRow(workout)}
               </Pressable>
             );
           })}
         </TitledCard>
       </View>
+    );
+  };
+
+  const renderWorkoutRow = (workout: HistoryWorkout) => {
+    return (
+      <>
+        <View style={styles.textsContainer}>
+          <View style={styles.rowDateContainer}>
+            <RegularText
+              children={`${workout.date}, `}
+              size={FontSizes.regular}
+            />
+            <RegularText
+              children={`${i18n.t(`common.dayTimes.${workout.time}`)}`}
+              size={FontSizes.regular}
+              color={colors.GRAY}
+            />
+          </View>
+          <BoldText children={workout.name} size={FontSizes.medium} />
+        </View>
+        <ChevronLeftIcon />
+      </>
     );
   };
 
@@ -110,22 +127,23 @@ const HistoryScreen = () => {
     setIsFilterSheetOpen(false);
   };
 
-  const handleWorkoutTapped = (exerciseID: string) => {
-    console.log(exerciseID);
-    // navigate
+  const handleWorkoutTapped = (workoutID: string) => {
+    navigation.navigate('Past_Workout_Details', {
+      workoutID,
+    });
   };
 
-  const fetchMoreHistoryData = () => {
-    if (!isLoading && !isFetching && !didFinishFetchingAllHistory) {
-      setIsFetching(true);
-      dispatch(
-        fetchWorkoutHistory({
-          page,
-          limit: 20,
-        }),
-      ).finally(() => setIsFetching(false));
-    }
-  };
+  // const fetchMoreHistoryData = () => {
+  //   if (!isLoading && !isFetching && !didFinishFetchingAllHistory) {
+  //     setIsFetching(true);
+  //     dispatch(
+  //       fetchWorkoutHistory({
+  //         page,
+  //         limit: 20,
+  //       }),
+  //     ).finally(() => setIsFetching(false));
+  //   }
+  // };
 
   return (
     <ScreenLayout
@@ -135,7 +153,9 @@ const HistoryScreen = () => {
         {renderFilterButton()}
         <FlatList
           data={pastWorkouts}
-          renderItem={({item}) => renderPeriodCard(item.title, item.data)}
+          renderItem={({item}) =>
+            renderPeriodCard(item.categoryName, item.data)
+          }
           keyExtractor={item => item.categoryName}
           onEndReachedThreshold={0.1}
           // onEndReached={fetchMoreHistoryData}

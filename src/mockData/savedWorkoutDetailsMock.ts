@@ -1,11 +1,11 @@
-import {subDays} from 'date-fns';
+import {format, subDays} from 'date-fns';
 import {SavedWorkout} from '../models/core/workout';
 
 export const savedWorkoutDetailsMock: SavedWorkout = {
   id: '23423r23',
   name: 'אימון חזה קליל',
-  date: subDays(new Date(), 4),
-  savingDate: new Date(),
+  date: format(subDays(new Date(), 4), 'dd.MM.yy'),
+  savingDate: format(new Date(), 'dd.MM.yy'),
   exercises: [
     // CategorizedExercises[]
     {

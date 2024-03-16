@@ -1,37 +1,40 @@
+import {format} from 'date-fns';
+// Constants
 import {DayPeriod} from '../constants/enums';
-import {HistoryExerciseSection} from '../models/ui/historyExerciseSection';
+// Models
+import {CategorizedHistoryWorkouts} from '../models/core/workout';
 
-export const historyWorkoutsMock: HistoryExerciseSection[] = [
+export const historyWorkoutsMock: CategorizedHistoryWorkouts[] = [
   {
-    title: 'השבוע',
+    categoryName: 'השבוע',
     data: [
       {
         id: '34rgsf34',
         name: 'אימון רגליים קליל',
-        date: '22.12.23',
+        date: format(new Date(27, 12, 2023), 'dd.MM.yy'),
         time: DayPeriod.EVENING,
       },
       {
         id: '35rgs64',
         name: 'אימון לגב קשה רצח',
-        date: '22.12.23',
+        date: format(new Date(22, 12, 2023), 'dd.MM.yy'),
         time: DayPeriod.MORNING,
       },
     ],
   },
   {
-    title: 'החודש',
+    categoryName: 'החודש',
     data: [
       {
-        id: '324f39f',
+        id: '59fsf934',
         name: 'אימון רגליים קליל',
-        date: '16.12.23',
+        date: format(new Date(16, 12, 2023), 'dd.MM.yy'),
         time: DayPeriod.MORNING,
       },
       {
         id: '35r5564',
         name: 'אימון חזה קליל',
-        date: '14.12.23',
+        date: format(new Date(14, 12, 2023), 'dd.MM.yy'),
         time: DayPeriod.NOON,
       },
     ],

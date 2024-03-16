@@ -3,8 +3,6 @@ import i18n from '../translations/i18n';
 import {DayPeriod} from '../constants/enums';
 import {TimePeriod} from '../models/timePeriod';
 
-// MARK: Timestamps
-
 const getDayPeriod = (hours: number): DayPeriod => {
   if (hours >= 4 && hours < 12) {
     return DayPeriod.MORNING;

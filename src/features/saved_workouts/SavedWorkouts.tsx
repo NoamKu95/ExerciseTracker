@@ -8,6 +8,7 @@ import SwipeableFlatList from 'react-native-swipeable-list';
 import {RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
 import ScreenLayout from '../../components/Base/ScreenLayout';
+import Loader from '../../components/Base/Loader';
 import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
 // Icons
 import EditIcon from '../../assets/icons/EditIcon';
@@ -24,12 +25,15 @@ import i18n from '../../translations/i18n';
 // Models
 import {Workout} from '../../models/core/workout';
 import {Exercise} from '../../models/core/exercise';
+import SaveWorkoutModal from '../../components/Modals/SaveWorkoutModal';
+import {AppErrorTypes} from '../../models/error';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {fetchSavedWorkouts} from '../home_page/state/workoutActions';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
 // Utils
 import {getFlexDirection, wp} from '../../utils/styleUtil';
 import {formatDateToText} from '../../utils/timeUtil';
-import SaveWorkoutModal from '../../components/Modals/SaveWorkoutModal';
 
 const SavedWorkoutsScreen = () => {
   // TODO: Remove when find solution
@@ -37,13 +41,29 @@ const SavedWorkoutsScreen = () => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
 
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
       StackNavigationProp<ProfileStackParamList, 'Saved_Workouts'>
     >();
 
+  // GLOBAL VARIABLES
+  const isLoading = useAppSelector(state => state.workout.isLoading);
+
+  // LOCAL VARIABLES
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [tappedWorkoutID, setTappedWorkoutID] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchSavedWorkouts()).catch(() =>
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      ),
+    );
+  }, [dispatch]);
 
   // ** RENDER FUNCTIONS **
   const savedWorkouts = useAppSelector(state => state.workout.savedWorkouts);
@@ -124,6 +144,7 @@ const SavedWorkoutsScreen = () => {
     );
   };
 
+  // ** HANDLE FUNCTIONS **
   const handleEditPressed = (workoutID: string) => {
     navigation.navigate('Edit_Saved_Workout', {workoutID});
   };
@@ -146,23 +167,27 @@ const SavedWorkoutsScreen = () => {
       isBackButton={true}
       paddingHorizontal={spaces._0px}>
       <>
-        <SwipeableFlatList
-          keyExtractor={(item: Workout) => item.id}
-          data={savedWorkouts}
-          renderItem={renderSavedWorkout}
-          maxSwipeDistance={wp(50)}
-          renderQuickActions={({index, item}) =>
-            renderHiddenButtons(index, item)
-          }
-          contentContainerStyle={styles.contentContainerStyle}
-          shouldBounceOnMount={true}
-          ListEmptyComponent={
-            <EmptyStateComponent
-              text={i18n.t('screens.savedWorkouts.emptyState')}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-        />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <SwipeableFlatList
+            keyExtractor={(item: Workout) => item.id}
+            data={savedWorkouts}
+            renderItem={renderSavedWorkout}
+            maxSwipeDistance={wp(50)}
+            renderQuickActions={({index, item}) =>
+              renderHiddenButtons(index, item)
+            }
+            contentContainerStyle={styles.contentContainerStyle}
+            shouldBounceOnMount={true}
+            ListEmptyComponent={
+              <EmptyStateComponent
+                text={i18n.t('screens.savedWorkouts.emptyState')}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+          />
+        )}
         <SaveWorkoutModal
           isVisible={isSheetOpen}
           onActionButtonPress={() => handleUnsavePressed(tappedWorkoutID)}
