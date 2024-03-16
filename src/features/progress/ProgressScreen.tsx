@@ -4,9 +4,11 @@ import {StyleSheet, View} from 'react-native';
 import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {RegularText} from '../../components/Base/Texts';
 import DropDown from './components/DropDown';
+import TitledCard from '../../components/Cards/TitledCard';
 import CardWithRows from '../../components/Cards/CardWithRows';
 import CardWithGraph from './components/CardWithGraph';
 import ExercisesBottomSheet from '../../components/BottomSheets/ExercisesBottomSheet';
+import Loader from '../../components/Base/Loader';
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
@@ -18,20 +20,25 @@ import {progressPeriods} from '../../data/timePeriods';
 import {Exercise} from '../../models/core/exercise';
 import {BodyArea} from '../../models/bodyArea';
 import {TimePeriod} from '../../models/timePeriod';
-import {ExerciseResponse} from '../../models/networkingObjects/responses/exerciseResponse';
+import {AppErrorTypes} from '../../models/error';
 // Redux
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {fetchProgressData} from './state/progressActions';
+import {setSelectedExercise} from './state/progressSlice';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
 
 const ProgressScreen = () => {
+  const dispatch = useAppDispatch();
+
   // GLOBAL VARIABLES
   const isLoading = useAppSelector(state => state.progress.isLoading);
-  const currentExercise = useAppSelector<ExerciseResponse>(
+  const selectedExercise = useAppSelector<Exercise>(
     state => state.progress.chosenExercise,
   );
-  const currentBodyArea = useAppSelector(
+  const selectedBodyArea = useAppSelector(
     state => state.progress.chosenBodyArea,
   );
-  const exerciseData = useAppSelector(state => state.progress.exerciseData);
+  const exerciseData = useAppSelector(state => state.progress.exerciseProgress);
 
   // LOCAL VARIABLES
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
@@ -40,14 +47,15 @@ const ProgressScreen = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
-    // dispatch - get data for selected exercise
-  }, [currentExercise]);
+    handleExerciseSelection(selectedBodyArea, selectedExercise);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ** RENDER FUNCTIONS **
   const renderDropdown = () => {
     return (
       <DropDown
-        value={currentExercise.name}
+        value={selectedExercise.name}
         onPress={() => {
           setIsSheetOpen(true);
         }}
@@ -56,24 +64,31 @@ const ProgressScreen = () => {
   };
 
   const renderSummaryCard = () => {
+    if (isLoading) {
+      return (
+        <TitledCard
+          title={i18n.t('screens.progress.summaryCard.title')}
+          children={<Loader customHeight={155} />}
+        />
+      );
+    }
+
     return (
       <CardWithRows
         title={i18n.t('screens.progress.summaryCard.title')}
         contentRows={[
           {
             text: i18n.t('screens.progress.summaryCard.lastWeight'),
-            infoText: `${currentExercise?.lastWeight} ${i18n.t('common.kg')}`,
+            infoText: `${exerciseData?.lastWeight} ${i18n.t('common.kg')}`,
             infoBgColor: colors.SECONDARY,
           },
           {
             text: i18n.t('screens.progress.summaryCard.avgWeight'),
-            infoText: `${currentExercise?.averageWeight} ${i18n.t(
-              'common.kg',
-            )}`,
+            infoText: `${exerciseData?.averageWeight} ${i18n.t('common.kg')}`,
           },
           {
             text: i18n.t('screens.progress.summaryCard.maxWeight'),
-            infoText: `${currentExercise?.maxWeight} ${i18n.t('common.kg')}`,
+            infoText: `${exerciseData?.maxWeight} ${i18n.t('common.kg')}`,
           },
         ]}
       />
@@ -87,8 +102,24 @@ const ProgressScreen = () => {
   };
 
   const handleExerciseSelection = (bodyArea: BodyArea, exercise: Exercise) => {
-    console.log(bodyArea, exercise);
-    // dispatch - get data for the new exercise
+    dispatch(
+      fetchProgressData({
+        exerciseID: exercise.id,
+        period: selectedPeriod,
+      }),
+    )
+      .then(() => {
+        dispatch(setSelectedExercise({exercise, bodyArea}));
+        setIsSheetOpen(false);
+      })
+      .catch(() => {
+        dispatch(
+          setError({
+            type: AppErrorTypes.NETWORK_ERROR,
+            message: '',
+          }),
+        );
+      });
   };
 
   return (
@@ -103,16 +134,18 @@ const ProgressScreen = () => {
         </View>
         {renderDropdown()}
         {renderSummaryCard()}
-        <CardWithGraph
-          graphData={exerciseData}
-          selectedTimePeriod={selectedPeriod}
-          handlePeriodChange={handleTimePeriodChange}
-          isLoading={isLoading}
-        />
+        {exerciseData && (
+          <CardWithGraph
+            graphData={exerciseData.graphData}
+            selectedTimePeriod={selectedPeriod}
+            handlePeriodChange={handleTimePeriodChange}
+            isLoading={isLoading}
+          />
+        )}
         <ExercisesBottomSheet
           isVisible={isSheetOpen}
-          currentArea={currentBodyArea}
-          currentExercise={currentExercise}
+          currentArea={selectedBodyArea}
+          currentExercise={selectedExercise}
           onClosePressed={() => {
             setIsSheetOpen(false);
           }}

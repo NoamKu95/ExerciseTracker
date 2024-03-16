@@ -1,15 +1,10 @@
+// Constants
+import {bodyAreas} from './bodyAreas';
+import {exercises} from './exercises';
+// Models
 import {BodyArea} from '../models/bodyArea';
-import {ExerciseResponse} from '../models/networkingObjects/responses/exerciseResponse';
+import {Exercise} from '../models/core/exercise';
 
-export const defaultExercise: ExerciseResponse = {
-  id: '4ft45t34',
-  name: 'דדליפט',
-  lastWeight: 0,
-  averageWeight: 0,
-  maxWeight: 0,
-};
+export const defaultExercise: Exercise = exercises[0];
 
-export const defaultBodyArea: BodyArea = {
-  id: '3423432',
-  name: 'גב',
-};
+export const defaultBodyArea: BodyArea = bodyAreas[0];

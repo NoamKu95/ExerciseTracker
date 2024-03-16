@@ -23,6 +23,7 @@ import {Exercise, Set} from '../../models/core/exercise';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setError} from '../errorHandling/state/errorHandlingSlice';
 // Utils
+import {findWorkoutInCategorizedHistory} from '../../utils/findItem';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 const PastWorkoutDetailsScreen = () => {
@@ -42,15 +43,10 @@ const PastWorkoutDetailsScreen = () => {
   );
 
   useEffect(() => {
-    let currentWorkout: HistoryWorkout | undefined;
-    for (const categorizedWorkouts of historyWorkouts) {
-      const workout = categorizedWorkouts.data.find(w => w.id === workoutID);
-      if (workout) {
-        currentWorkout = workout;
-        return;
-      }
-    }
-
+    let currentWorkout = findWorkoutInCategorizedHistory(
+      workoutID,
+      historyWorkouts,
+    );
     if (currentWorkout) {
       setPastWorkout(currentWorkout);
     } else {

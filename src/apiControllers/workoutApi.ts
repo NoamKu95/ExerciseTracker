@@ -7,6 +7,7 @@ import {CategorizedHistoryWorkouts, SavedWorkout} from '../models/core/workout';
 import {historyWorkoutsMock} from '../mockData/historyWorkoutsMock';
 import {savedWorkoutsMock} from '../mockData/savedWorkoutsMock';
 
+// ** HISTORY WORKOUTS **
 export const fetchWorkoutHistoryApi = async (
   page: number,
   limit: number,

@@ -17,6 +17,6 @@ export const exercises = [
   },
   {
     id: 'dg56eyeg',
-    name: 'ברמת עקבים',
+    name: 'הרמת עקבים',
   },
 ];
