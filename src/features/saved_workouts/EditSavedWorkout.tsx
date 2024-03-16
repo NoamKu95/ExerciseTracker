@@ -11,26 +11,27 @@ import {
 import AppTextInput from '../../components/Base/TextInput';
 import TitledCard from '../../components/Cards/TitledCard';
 import OpenableRow from '../../components/OpenableRow';
-import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
+import ScreenLayout from '../../components/Base/ScreenLayout';
 // Icons
 import PlusIcon from '../../assets/icons/PlusIcon';
 // UI
 import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
+import {renderCategoryTitle} from '../../utils/commonElements';
 import i18n from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
 import {savedWorkoutDetailsMock} from '../../mockData/savedWorkoutDetailsMock';
 // Models
 import {SavedWorkout} from '../../models/core/workout';
 import {Exercise, Set} from '../../models/core/exercise';
+import {AppErrorTypes} from '../../models/error';
 // Redux
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
 import {validateNumbersOnly} from '../../utils/validators';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setError} from '../errorHandling/state/errorHandlingSlice';
-import {AppErrorTypes} from '../../models/error';
 
 const EditSavedWorkoutScreen = () => {
   // GENERAL VARIABLES
@@ -74,23 +75,13 @@ const EditSavedWorkoutScreen = () => {
             onPress={handleSavePressed}
           />
         </View>
-        <View style={styles.actionBtn}>
-          <PrimaryButton
-            text={i18n.t('screens.editSavedWorkout.addExercise')}
-            onPress={() => {
-              setIsSheetOpen(true);
-            }}
-            icon={<PlusIcon />}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  const renderCategoryTitle = (categoryName: string) => {
-    return (
-      <View style={styles.sectionHeader}>
-        <BoldText children={categoryName} size={FontSizes.large} />
+        <PrimaryButton
+          text={i18n.t('screens.editSavedWorkout.addExercise')}
+          onPress={() => {
+            setIsSheetOpen(true);
+          }}
+          icon={<PlusIcon />}
+        />
       </View>
     );
   };
@@ -193,7 +184,7 @@ const EditSavedWorkoutScreen = () => {
   };
 
   return (
-    <ScrollScreenLayout
+    <ScreenLayout
       screenTitle={i18n.t('screens.editSavedWorkout.title')}
       isBackButton={true}>
       <SectionList
@@ -205,7 +196,7 @@ const EditSavedWorkoutScreen = () => {
         }
         renderItem={renderExercisesCard}
       />
-    </ScrollScreenLayout>
+    </ScreenLayout>
   );
 };
 
@@ -220,9 +211,6 @@ const styles = StyleSheet.create({
     flexDirection: getFlexDirection(),
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-  },
-  actionBtn: {
-    alignSelf: 'center',
   },
   sectionHeader: {
     paddingBottom: spaces._16px,

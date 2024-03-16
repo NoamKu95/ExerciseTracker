@@ -5,13 +5,14 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
 import OpenableRow from '../../components/OpenableRow';
-import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
+import ScreenLayout from '../../components/Base/ScreenLayout';
 // Icons
 // UI
 import {colors} from '../../constants/ui/colors';
 import {spaces} from '../../constants/ui/spaces';
 import {FontSizes} from '../../constants/ui/fonts';
 // Constants
+import {renderCategoryTitle} from '../../utils/commonElements';
 import i18n from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
 import {specificHistoryWorkout} from '../../mockData/historyWorkoutDetailsMock';
@@ -34,7 +35,7 @@ const PastWorkoutDetailsScreen = () => {
     workoutID: '',
   };
 
-  // GLOBAL VARIABLES
+  // STATE VARIABLES
   const historyWorkouts = useAppSelector(state => state.workout.pastWorkouts);
 
   // LOCAL VARIABLES
@@ -71,14 +72,6 @@ const PastWorkoutDetailsScreen = () => {
           size={FontSizes.regular}
           color={colors.SECONDARY_TEXT}
         />
-      </View>
-    );
-  };
-
-  const renderCategoryTitle = (categoryName: string) => {
-    return (
-      <View style={styles.sectionHeader} key={categoryName}>
-        <BoldText children={categoryName} size={FontSizes.large} />
       </View>
     );
   };
@@ -139,7 +132,7 @@ const PastWorkoutDetailsScreen = () => {
   };
 
   return (
-    <ScrollScreenLayout
+    <ScreenLayout
       screenTitle={i18n.t('screens.pastWorkoutDetails.title')}
       isBackButton={true}>
       <SectionList
@@ -151,7 +144,7 @@ const PastWorkoutDetailsScreen = () => {
         }
         renderItem={renderExercisesCard}
       />
-    </ScrollScreenLayout>
+    </ScreenLayout>
   );
 };
 

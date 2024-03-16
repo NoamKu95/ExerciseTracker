@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spaces._10px,
     borderRadius: radiuses._50px,
+    alignSelf: 'center',
   },
   backButtonContainer: {
     flexDirection: getFlexDirection(),

@@ -43,18 +43,6 @@ const HomeScreen = () => {
     );
   };
 
-  const renderActionButton = () => {
-    return (
-      <View style={styles.actionBtnContainer}>
-        <PrimaryButton
-          text={i18n.t('screens.home.btnAction')}
-          onPress={() => {}} // TODO
-          icon={<SparkleIcon />}
-        />
-      </View>
-    );
-  };
-
   const renderFunFact = () => {
     return (
       <TitledCard
@@ -122,7 +110,11 @@ const HomeScreen = () => {
     <ScrollScreenLayout screenTitle={`${greeting} ${userName}`}>
       <>
         {renderTexts()}
-        {renderActionButton()}
+        <PrimaryButton
+          text={i18n.t('screens.home.btnAction')}
+          onPress={() => {}} // TODO
+          icon={<SparkleIcon />}
+        />
         {renderActiveWorkout()}
         {renderFunFact()}
         {renderWorkoutCard()}
@@ -140,9 +132,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: getFlexDirection(),
     gap: spaces._8px,
-  },
-  actionBtnContainer: {
-    alignSelf: 'center',
   },
   cardContentContainer: {
     gap: spaces._8px,

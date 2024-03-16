@@ -14,7 +14,7 @@ interface EmptyStateProps {
 const EmptyStateComponent = ({text}: EmptyStateProps) => {
   return (
     <View style={styles.container}>
-      <BoldText children={text} size={FontSizes.large} />
+      <BoldText children={text} size={FontSizes.large} textAlign="center" />
       <Image source={emptyState} />
     </View>
   );

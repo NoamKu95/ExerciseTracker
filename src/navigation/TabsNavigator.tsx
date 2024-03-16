@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Components
 import TabItem from './components/TabItem';
 import HomeScreen from '../features/home_page/HomePage';
-import WorkoutScreen from '../features/workout/WorkoutScreen';
+import ActiveWorkoutScreen from '../features/workout/WorkoutScreen';
 import ProgressScreen from '../features/progress/ProgressScreen';
 import ProfileStack from './ProfileNavigator';
 // Icons
@@ -45,7 +45,7 @@ const TabsNavigator = () => {
       />
       <Tab.Screen
         name={TabsScreens.WORKOUT}
-        component={WorkoutScreen}
+        component={ActiveWorkoutScreen}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
