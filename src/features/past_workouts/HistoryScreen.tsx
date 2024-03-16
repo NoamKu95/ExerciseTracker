@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, LogBox, Pressable, StyleSheet, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
 import FilterExcHistoryBottomSheet from '../../components/BottomSheets/FilterExcHistoryBottomSheet';
 import EmptyStateComponent from '../../components/Base/EmptyStateComponent';
+import ScreenLayout from '../../components/Base/ScreenLayout';
 // Icons
 import FilterIcon from '../../assets/icons/FilterIcon';
 import ChevronLeftIcon from '../../assets/icons/ChevronLeftIcon';
@@ -30,11 +30,6 @@ import {setError} from '../errorHandling/state/errorHandlingSlice';
 import {getFlexDirection} from '../../utils/styleUtil';
 
 const HistoryScreen = () => {
-  // TODO: Remove when find solution
-  useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
-
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
@@ -152,6 +147,7 @@ const HistoryScreen = () => {
       <>
         {renderFilterButton()}
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={pastWorkouts}
           renderItem={({item}) =>
             renderPeriodCard(item.categoryName, item.data)

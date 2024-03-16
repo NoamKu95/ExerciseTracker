@@ -5,7 +5,7 @@ import {HistoryWorkout} from '../models/core/workout';
 export const specificHistoryWorkout: HistoryWorkout = {
   id: '23423r23',
   name: 'אימון חזה קליל',
-  date: format(subDays(new Date(), 4), 'DDMMYY'),
+  date: format(subDays(new Date(), 4), 'dd.MM.yy'),
   time: DayPeriod.MORNING,
   exercises: [
     // CategorizedExercises[]

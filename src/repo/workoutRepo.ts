@@ -24,4 +24,5 @@ export const deleteSavedWorkoutRepo = async (
   workoutID: string, // payload
 ): Promise<SavedWorkout[]> => {
   return await deleteSavedWorkoutApi(workoutID);
+  // return await fetchSavedWorkoutsRepo(); // TODO: uncomment once BE exists ; currently removing done in deleteSavedWorkoutApi
 };

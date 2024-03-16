@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SectionList, LogBox} from 'react-native';
+import {View, StyleSheet, SectionList} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 // Components
 import {BoldText} from '../../components/Base/Texts';
@@ -11,7 +11,7 @@ import {
 import AppTextInput from '../../components/Base/TextInput';
 import TitledCard from '../../components/Cards/TitledCard';
 import OpenableRow from '../../components/OpenableRow';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 // Icons
 import PlusIcon from '../../assets/icons/PlusIcon';
 // UI
@@ -28,27 +28,41 @@ import {Exercise, Set} from '../../models/core/exercise';
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
 import {validateNumbersOnly} from '../../utils/validators';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
+import {AppErrorTypes} from '../../models/error';
 
 const EditSavedWorkoutScreen = () => {
-  // TODO: Remove when find solution
-  useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
-
+  // GENERAL VARIABLES
+  const dispatch = useAppDispatch();
   const route =
     useRoute<RouteProp<ProfileStackParamList, 'Edit_Saved_Workout'>>();
   const {workoutID} = route.params ?? {
     workoutID: '',
   };
 
+  // GLOBAL VARIABLES
+  const workouts = useAppSelector(state => state.workout.savedWorkouts);
+
+  // LOCAL VARIABLES
   const [savedWorkout, setSavedWorkout] = useState<SavedWorkout>(
     savedWorkoutDetailsMock,
   );
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
-    // fetch data by workoutID and setSavedWorkout accordingly
-    // console.log(workoutID);
-  }, [workoutID]);
+    let currentWorkout = workouts.find(workout => workout.id === workoutID);
+    if (currentWorkout) {
+      setSavedWorkout(currentWorkout);
+    } else {
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      );
+    }
+  }, [dispatch, workoutID, workouts]);
 
   const renderHeader = () => {
     return (
@@ -63,7 +77,9 @@ const EditSavedWorkoutScreen = () => {
         <View style={styles.actionBtn}>
           <PrimaryButton
             text={i18n.t('screens.editSavedWorkout.addExercise')}
-            onPress={() => {}}
+            onPress={() => {
+              setIsSheetOpen(true);
+            }}
             icon={<PlusIcon />}
           />
         </View>
@@ -177,7 +193,7 @@ const EditSavedWorkoutScreen = () => {
   };
 
   return (
-    <ScreenLayout
+    <ScrollScreenLayout
       screenTitle={i18n.t('screens.editSavedWorkout.title')}
       isBackButton={true}>
       <SectionList
@@ -189,7 +205,7 @@ const EditSavedWorkoutScreen = () => {
         }
         renderItem={renderExercisesCard}
       />
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 // Components
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 // UI
 import {spaces} from '../../constants/ui/spaces';
@@ -80,7 +80,7 @@ const OnboardingScreen = () => {
 
   return (
     <>
-      <ScreenLayout
+      <ScrollScreenLayout
         onPress={() => {
           resetTo(Screens.TABS);
         }}
@@ -91,7 +91,7 @@ const OnboardingScreen = () => {
           {renderCarousel()}
           {/* {renderAnimations()} */}
         </>
-      </ScreenLayout>
+      </ScrollScreenLayout>
     </>
   );
 };

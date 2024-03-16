@@ -3,6 +3,7 @@ import axios from 'axios';
 import {paths} from '../constants/network/apiPaths';
 // Models
 import {CategorizedHistoryWorkouts, SavedWorkout} from '../models/core/workout';
+// Constants
 import {historyWorkoutsMock} from '../mockData/historyWorkoutsMock';
 import {savedWorkoutsMock} from '../mockData/savedWorkoutsMock';
 
@@ -23,5 +24,13 @@ export const fetchSavedWorkoutsApi = async (): Promise<SavedWorkout[]> => {
 export const deleteSavedWorkoutApi = async (
   workoutID: string,
 ): Promise<SavedWorkout[]> => {
-  return await axios.post(paths.DELETE_SAVED_WORKOUT, workoutID);
+  var mock = [...savedWorkoutsMock];
+  let workoutToRemoveIndex = mock.findIndex(
+    workout => workout.id === workoutID,
+  );
+  if (workoutToRemoveIndex !== -1) {
+    mock.splice(workoutToRemoveIndex, 1);
+  }
+  return mock;
+  // return await axios.post(paths.DELETE_SAVED_WORKOUT, workoutID);
 };

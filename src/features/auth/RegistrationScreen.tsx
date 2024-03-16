@@ -7,7 +7,7 @@ import i18n from '../../translations/i18n';
 import {RootStackParamList, Screens} from '../../constants/screens';
 // Components
 import {resetTo} from '../../navigation/RootNavigation';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import {TextButton} from '../../components/Base/Buttons';
 import AppTextInput from '../../components/Base/TextInput';
@@ -140,7 +140,7 @@ const RegistrationScreen = () => {
   return (
     <>
       <LanguagePicker />
-      <ScreenLayout
+      <ScrollScreenLayout
         onPress={() => {
           handleRegisterPress();
         }}
@@ -153,7 +153,7 @@ const RegistrationScreen = () => {
           {renderDetailsTextFields()}
           {renderAlreadyRegistered()}
         </>
-      </ScreenLayout>
+      </ScrollScreenLayout>
     </>
   );
 };

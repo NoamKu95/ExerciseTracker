@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SectionList, LogBox} from 'react-native';
+import {View, StyleSheet, SectionList} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 // Components
 import {BoldText, RegularText} from '../../components/Base/Texts';
 import TitledCard from '../../components/Cards/TitledCard';
 import OpenableRow from '../../components/OpenableRow';
-import ScreenLayout from '../../components/Base/ScreenLayout';
+import ScrollScreenLayout from '../../components/Base/ScrollScreenLayout';
 // Icons
 // UI
 import {colors} from '../../constants/ui/colors';
@@ -15,38 +15,53 @@ import {FontSizes} from '../../constants/ui/fonts';
 import i18n from '../../translations/i18n';
 import {ProfileStackParamList} from '../../constants/screens';
 import {specificHistoryWorkout} from '../../mockData/historyWorkoutDetailsMock';
+import {AppErrorTypes} from '../../models/error';
 // Models
 import {HistoryWorkout} from '../../models/core/workout';
 import {Exercise, Set} from '../../models/core/exercise';
 // Redux
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {setError} from '../errorHandling/state/errorHandlingSlice';
 // Utils
 import {getFlexDirection} from '../../utils/styleUtil';
-import {formatDateToText} from '../../utils/timeUtil';
 
 const PastWorkoutDetailsScreen = () => {
-  // TODO: Remove when find solution
-  useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
-
+  const dispatch = useAppDispatch();
   const route =
     useRoute<RouteProp<ProfileStackParamList, 'Past_Workout_Details'>>();
   const {workoutID} = route.params ?? {
     workoutID: '',
   };
 
+  // GLOBAL VARIABLES
+  const historyWorkouts = useAppSelector(state => state.workout.pastWorkouts);
+
+  // LOCAL VARIABLES
   const [pastWorkout, setPastWorkout] = useState<HistoryWorkout>(
     specificHistoryWorkout,
   );
 
-  // STATE VARIABLES
-
-  // LOCAL VARIABLES
-
   useEffect(() => {
-    // fetch data by workoutID and setPastWorkout accordingly
-    // console.log(workoutID);
-  }, [workoutID]);
+    let currentWorkout: HistoryWorkout | undefined;
+    for (const categorizedWorkouts of historyWorkouts) {
+      const workout = categorizedWorkouts.data.find(w => w.id === workoutID);
+      if (workout) {
+        currentWorkout = workout;
+        return;
+      }
+    }
+
+    if (currentWorkout) {
+      setPastWorkout(currentWorkout);
+    } else {
+      dispatch(
+        setError({
+          type: AppErrorTypes.NETWORK_ERROR,
+          message: '',
+        }),
+      );
+    }
+  }, [dispatch, historyWorkouts, workoutID]);
 
   // ** RENDER FUNCTIONS **
   const renderTitle = () => {
@@ -54,7 +69,7 @@ const PastWorkoutDetailsScreen = () => {
       <View style={styles.titleContainer}>
         <BoldText children={pastWorkout.name} size={FontSizes.large} />
         <RegularText
-          children={`, ${formatDateToText(pastWorkout.date)}, ${i18n.t(
+          children={`, ${pastWorkout.date}, ${i18n.t(
             'screens.pastWorkoutDetails.exercise',
           )} ${i18n.t(`common.dayTimes.${pastWorkout.time}`)}`}
           size={FontSizes.regular}
@@ -128,7 +143,7 @@ const PastWorkoutDetailsScreen = () => {
   };
 
   return (
-    <ScreenLayout
+    <ScrollScreenLayout
       screenTitle={i18n.t('screens.pastWorkoutDetails.title')}
       isBackButton={true}>
       <SectionList
@@ -140,7 +155,7 @@ const PastWorkoutDetailsScreen = () => {
         }
         renderItem={renderExercisesCard}
       />
-    </ScreenLayout>
+    </ScrollScreenLayout>
   );
 };
 
